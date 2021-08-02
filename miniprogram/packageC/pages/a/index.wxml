@@ -1,0 +1,104 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">确定培养联系人</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">发展对象应当有两名正式党员作入党介绍人。入党介绍人一般由培养联系人担任，也可由党组织指定。 入党介绍人的主要任务是： 
+（一）向发展对象解释党的纲领、章程，说明党员的条件、义务和权利； 
+（二）认真了解发展对象的入党动机、政治觉悟、道德品质、工作经历、现实表现等情
+况，如实向党组织汇报； 
+（三）指导发展对象填写《中国共产党入党志愿书》，并认真填写自己的意见； 
+（四）向支部大会负责地介绍发展对象的情况； 
+（五）发展对象批准为预备党员后，继续对其进行教育帮助。 
+    </text>
+	</view>
+
+	<view class="fileDiv" wx:if="{{(nowKey == 2 && nowStep >= 1) || nowKey > 2}}">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<view bindtap="previewFile" data-path="{{url}}" class="fileViewCell">
+				<!-- <image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image> -->
+				<text space decode wx:if="{{info}}" class="fileViewText">入党介绍人1 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.firstRecommendContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.firstRecommendContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.firstRecommendContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.firstRecommendContact[0].administrative_position}}
+    入党介绍人 2 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.secondRecommendContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.secondRecommendContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.secondRecommendContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.secondRecommendContact[0].administrative_position}}
+    </text>
+				<text wx:else space decode style="font-size:35rpx">获取信息中，请稍等..</text>
+			</view>
+			<view class="nextStep2">
+				<image wx:if="{{nowKey == 2 && nowStep == 1 && !MODE}}" bindtap="toUpForm" class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+				</image>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">指定入党介绍人</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+	<text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+	<view class="content">
+		<text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发展对象应当有两名正式党员作入党介绍人。入党介绍人一般由培养联系人担任，也可由党组织指定。 入党介绍人的主要任务是： 
+（一）向发展对象解释党的纲领、章程，说明党员的条件、义务和权利； 
+（二）认真了解发展对象的入党动机、政治觉悟、道德品质、工作经历、现实表现等情
+况，如实向党组织汇报； 
+（三）指导发展对象填写《中国共产党入党志愿书》，并认真填写自己的意见； 
+（四）向支部大会负责地介绍发展对象的情况； 
+（五）发展对象批准为预备党员后，继续对其进行教育帮助。 
+ </text>
+	</view>
+</view>
+
+<view class="cardList" wx:if="{{(nowKey == 2 && nowStep >= 1) || nowKey > 2}}">
+	<view style="margin:-5rpx auto -5rpx 15rpx">
+		<text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;">
+    </text>
+	</view>
+	<view class="content">
+		<text wx:if="{{info}}" space decode style="font-size:35rpx">入党介绍人1 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.firstRecommendContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.firstRecommendContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.firstRecommendContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.firstRecommendContact[0].administrative_position}}
+    入党介绍人 2 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.secondRecommendContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.secondRecommendContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.secondRecommendContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.secondRecommendContact[0].administrative_position}}
+ </text>
+		<text wx:else space decode style="font-size:35rpx">获取信息中，请稍等..</text>
+	</view>
+</view>
+
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+	<button wx:if="{{nowKey == 2 && nowStep == 1 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+		<text style="font-size: 110%;">下一步</text>
+	</button>
+</view> -->
+<!-- <view class="uploadStorage" bindtap="uploadStorage">
+  <text class="cuIcon-file weixinLogo"></text>
+  <text class="weixinTag">选择本地文件上传</text>
+</view> -->

@@ -1,0 +1,145 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": true,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "appid": "wxb5922ce236fc32c4",
+  "projectname": "%E5%85%9A%E5%BB%BA%E5%B0%8F%E5%8A%A9%E6%89%8B",
+  "libVersion": "2.11.1",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/nowStep/index",
+          "pathName": "pages/nowStep/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/nextStep/index",
+          "pathName": "pages/nextStep/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/news/index",
+          "pathName": "pages/news/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/about/index",
+          "pathName": "pages/about/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "packageA/pages/h/index",
+          "pathName": "packageA/pages/h/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "packageB/pages/b/index",
+          "pathName": "packageB/pages/b/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "packageC/pages/q/index",
+          "pathName": "packageC/pages/q/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 8,
+          "name": "packageE/pages/a/index",
+          "pathName": "packageE/pages/a/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/index",
+          "pathName": "pages/application/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "packageF/pages/a/index",
+          "pathName": "packageF/pages/a/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

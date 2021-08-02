@@ -1,0 +1,71 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">培养考察手册</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">{{((nowKey == 0 && nowStep <= 3) || nowKey >= 0)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《入党申请人培养考察手册》是入党的重要材料，请各位入党申请人于规定时间内认真填写电子版《入党申请人培养考察手册》并确认信息无误后提交审核':'考察手册已提交，待管理员审核中'}}
+    </text>
+	</view>
+
+	<view class="fileDiv" wx:if="{{nowKey == 0 && nowStep == 3}}">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<!-- box-shadow:0px 1px 0px #EBEBEB; -->
+			<view class="fileViewCell" wx:if="{{nowKey == 0 && nowStep == 3}}" bindtap="toForm">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/form_v.png"></image>
+				<text class="fileViewText">点击填写模板</text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 0 && nowStep == 3 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">培养考察手册</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">{{((nowKey == 0 && nowStep <= 3) || nowKey >= 0)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《入党申请人培养考察手册》是入党的重要材料，请各位入党申请人于规定时间内认真填写电子版《入党申请人培养考察手册》并确认信息无误后提交审核':'考察手册已提交，待管理员审核中'}}
+ </text>
+  </view>
+</view>
+
+<view class="cardList" wx:if="{{nowKey == 0 && nowStep == 3}}">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content">
+    <view class="fileListItem" bindtap="uploadWeixin"  wx:if="{{nowKey == 0 && nowStep == 3}}">
+      <text class="iconfont icon-list3 fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">点击填写模板
+      </text>
+    </view>
+
+  </view>
+</view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 0 && nowStep == 3 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->
+

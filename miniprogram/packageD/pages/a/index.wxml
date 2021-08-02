@@ -1,0 +1,51 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">编入党支部和党小组</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">党组织应当及时将上级党委批准的预备党员编入党支部和党小组，对预备党员继续进行教育和考察。
+    </text>
+	</view>
+
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 3 && nowStep == 1 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+
+
+
+
+<!-- <view class="top"></view>
+<view class="topText">编入党支部和党小组</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党组织应当及时将上级党委批准的预备党员编入党支部和党小组，对预备党员继续进行教育和考察。
+ </text>
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 3 && nowStep == 1 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

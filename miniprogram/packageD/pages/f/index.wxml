@@ -1,0 +1,54 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">征求社区意见</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">预备党员申请转正需要征求社区的意见，需要按社区要求填写相关文件，社区会将意见结果写入《预备党员培养考察手册》。 
+    </text>
+	</view>
+
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 3 && nowStep == 6 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">征求社区意见</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预备党员申请转正需要征求社区的意见，需要按社区要求填写相关文件，社区会将意见结果写入《预备党员培养考察手册》。 
+ </text>
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 3 && nowStep == 6 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

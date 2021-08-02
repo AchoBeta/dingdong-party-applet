@@ -1,0 +1,51 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">党支部派人进行谈话</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">在入党申请人中确定入党积极分子，采取群团组织推优方式产生人选。班级群团组织将推优名单上报党支部，党支部也可以对入党申请人进行推优。班级群团组织可采取个人演讲等方式进行推优。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党支部收集相关名单后，向二级群团组织和校级群团组织上报名单和相关情况，将二级群团组织和校级群团组织相关意见写入《入党申请人培养考察手册》并盖章。
+    </text>
+	</view>
+
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 0 && nowStep == 6 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+<!-- <view class="top"></view>
+<view class="topText">群团组织推优</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在入党申请人中确定入党积极分子，采取群团组织推优方式产生人选。班级群团组织将推优名单上报党支部，党支部也可以对入党申请人进行推优。班级群团组织可采取个人演讲等方式进行推优。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党支部收集相关名单后，向二级群团组织和校级群团组织上报名单和相关情况，将二级群团组织和校级群团组织相关意见写入《入党申请人培养考察手册》并盖章。
+ </text>
+  </view>
+</view>
+
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 0 && nowStep == 6 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view>
+ -->

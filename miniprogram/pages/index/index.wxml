@@ -1,0 +1,104 @@
+<!-- <view class="topText">{{process[rightLeftKey].name}}</view> -->
+<swiper style="height:{{windowHeight}}px;" circular bindchange="changeRightLeft" current="{{nowKey}}">
+  <block wx:for="{{process}}" wx:key="name" wx:for-index="rightLeftIDX">
+    <swiper-item current="{{nowKey}}">
+      <view class="top">
+        <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px"><text>{{process[rightLeftIDX].name}}</text></view>
+      </view>
+      <view class></view>
+      <swiper vertical style="height:{{windowHeight}}px" current="{{upDownKey}}" bindchange="changeUpDown">
+        <swiper-item class="head">
+          <view class="head3">
+            <!-- <view class="nextText">东莞理工学院网络空间安全学院学生党支部</view> -->
+          </view>
+          <view class="card">
+            <image class="cardPng" src="{{mainPngSrc + (rightLeftIDX + 1) + gender + '.png'}}" mode="aspectFit"></image>
+            <view class="cardBot"  style="font-weight:bold;"><text>所 属 党 支 部：xx 党 支 部（示例）</text></view>
+          </view>
+          <view class="shake">
+            左右滑动查看更多
+          </view>
+          <view class="allPro">总进度</view>
+          <progress wx:if="{{rightLeftKey>=nowKey}}" class="progressTip" percent="{{rightLeftKey==nowKey?nowStepKey / step[rightLeftKey].step.numStep * 100:0}}" border-radius="2.4%" stroke-width="20rpx" activeColor="#ffe7e7"></progress>
+          <progress wx:if="{{rightLeftKey<nowKey}}" class="progressTip" percent="100" border-radius="2.4%" stroke-width="20rpx" activeColor="#ffe7e7"></progress>
+          <view bindtap="{{rightLeftKey==nowKey?'toNowStep':''}}">
+            <image src="{{rightLeftIDX == nowKey?step[nowKey].step.url+nowStepKey+'.png':step[rightLeftIDX].step.url+'1.png'}}" 
+              mode="scaleToFill" 
+              class="nowCardTipPng" 
+              style="{{rightLeftIDX == nowKey?'':'filter: grayscale(85%)'}};">
+            </image>
+            <image 
+              wx:if="{{rightLeftIDX != nowKey}}" 
+              src="../../picture/lock.png" 
+              class="nowCardTipLock" mode="aspectFit">
+            </image>
+          </view>
+          <view class="toDown">下滑查看更多</view>
+        </swiper-item>
+        <swiper-item class="head2">
+          <scroll-view class="downScroll" scroll-y>
+            <block wx:for="{{step[rightLeftIDX].step.listStep}}" wx:key="*this" wx:for-index="stepIDX">
+              <view class="downCardTip" bindtap="downToStep" data-s="{{stepIDX}}" data-r="{{rightLeftKey}}" style="border-radius:20rpx">
+                <image wx:if="{{((stepIDX + 1) < nowStepKey && rightLeftIDX <= nowKey) || rightLeftIDX < nowKey }}" class="hasFinish" src="../../picture/finish.png" mode="aspectFit">
+                </image>
+                <image  mode="scaleToFill" wx:if="{{rightLeftIDX == nowKey}}" class="{{(stepIDX + 1) > nowStepKey?'downCardTipNoImg':'downCardTipHadImg'}}" style="{{(stepIDX + 1) < nowStepKey?'top: -84%':''}};" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                </image>
+                <image  mode="scaleToFill" lazy-load wx:if="{{rightLeftIDX > nowKey}}" class="downCardTipNoImg" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                </image>
+                <image  mode="scaleToFill" lazy-load wx:if="{{rightLeftIDX < nowKey}}" class="downCardTipHadImg" style="top: -84%" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                </image>
+                <!-- <image wx:if="{{stepIDX + 1 > nowStepKey}}" lazy-load
+                  class="downCardTipNoImg" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                </image> -->
+              </view>
+            </block>
+            <!-- <view class="downCardTip" bindtap="toNowStep">
+              <image class="downCardTipNowImg" src="../../picture/1.png">
+              </image>
+            </view>
+            <view class="downCardTip" bindtap="toBeforeStep">
+              <image class="downCardTipNoImg" src="../../picture/3.png">
+              </image>
+            </view>
+            <view class="downCardTip" bindtap="toBeforeStep">
+              <image class="downCardTipNoImg" src="../../picture/4.png">
+              </image>
+            </view> -->
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </swiper-item>
+  </block>
+  <!-- <swiper-item>
+    <swiper vertical style="height:{{windowHeight}}px" current="{{upDownKey}}" bindchange="changeUpDown">
+      <swiper-item class="head">
+        <view class="head3"></view>
+        <view class="card"></view>
+        <view class="cardTip"></view>
+        <view class="allPro">总进度</view>
+        <progress class="progressTip" percent="0" border-radius="2.4%" stroke-width="20rpx" activeColor="#e6fff2"></progress>
+        <view class="nowCardTip" style="background: #F0F0F0">
+        </view>
+        <view class="toDown">下滑查看更多</view>
+      </swiper-item>
+      <swiper-item class="head2">
+        <scroll-view class="downScroll" scroll-y>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+          <view class="downCardTipNo"></view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </swiper-item> -->
+</swiper>
+<view class="toRemindFixed" bindtap="toLogin" wx:if="{{!MODE}}">
+  <text class="toRemindIcon">登录</text>
+</view>
+

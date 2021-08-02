@@ -1,0 +1,74 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">预备党员培养考察手册</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">{{(nowKey == 3 && nowStep == 4)?'《预备党员培养考察手册》是入党的重要档案，请各位预备党员于规定时间内认真填写电子版《预备党员培养考察手册》并确认信息无误后提交审核。':'考察手册已提交，待管理员审核中'}}
+    </text>
+	</view>
+
+	<view class="fileDiv" wx:if="{{nowKey == 3 && nowStep == 4}}">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<view bindtap="toForm" class="fileViewCell">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/form_v.png"></image>
+				<text class="fileViewText">点击填写模板</text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 3 && nowStep == 4 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">预备党员培养考察手册</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">{{(nowKey == 3 && nowStep == 4)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《预备党员培养考察手册》是入党的重要档案，请各位预备党员于规定时间内认真填写电子版《预备党员培养考察手册》并确认信息无误后提交审核。':'考察手册已提交，待管理员审核中'}}
+ </text>
+  </view>
+</view>
+
+<view class="cardList" wx:if="{{(nowKey == 3 && nowStep == 4) || fileList}}">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content" wx:if="{{nowKey == 3 && nowStep == 4}}">
+    <view class="fileListItem" bindtap="uploadWeixin">
+      <text class="iconfont icon-list3 fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">点击填写模板
+      </text>
+    </view>
+
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 3 && nowStep == 4 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

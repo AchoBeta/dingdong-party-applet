@@ -1,0 +1,65 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">入党申请书</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">入党申请书是入党申请人向所在单位的党组织提出的一种重要书面材料，请于规定时间内认真完成电子版《入党申请书》并提交审核。 
+    </text>
+	</view>
+
+	<view class="fileDiv">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模板示例文件/入党申请人/入党申请书要求.doc" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">查看入党申请书要求</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模板示例文件/入党申请人/入党申请书模板.doc" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">获取入党申请书模板</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模板示例文件/入党申请人/入党申请书范例1.doc" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">获取入党申请书范例1</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模板示例文件/入党申请人/入党申请书范例2.doc" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">获取入党申请书范例2</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模板示例文件/入党申请人/入党申请书范例3.docx" class="fileViewCell" style="box-shadow:0px {{nowKey == 0 && nowStep == 1?1:0}}px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">获取入党申请书范例3</text>
+			</view>
+
+
+			<!-- box-shadow:0px 1px 0px #EBEBEB; -->
+			<view class="fileViewCell" wx:if="{{nowKey == 0 && nowStep == 1}}" bindtap="uploadWeixin">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/wechat_v.png"></image>
+				<text class="fileViewText">选择微信文件上传</text>
+			</view>
+
+			<block wx:if="{{fileList}}">
+				<view bindtap="previewFile" data-path="{{fileList[0].path}}" class="fileViewCell">
+					<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+					<text class="fileViewText">{{fileList[0].name}}</text>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 0 && nowStep == 1 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>

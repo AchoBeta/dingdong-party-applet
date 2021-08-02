@@ -1,0 +1,30 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">入党申请书</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+  <view class="textBack" style="height:{{textBack}}px"></view>
+  <view class="textView" id="the-textView" >
+    <text class="text22">入党申请书是入党申请人向所在单位的党组织提出的一种重要书面材料，请于规定时间内认真完成电子版《入党申请书》并提交审核。 
+    </text>
+  </view>
+  
+  <view class="fileDiv">
+    <view class="fileBackView1"></view>
+    <view class="fileBackView2"></view>
+    <view class="fileView">
+      <view class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+        <image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+        <text class="fileViewText">查看入党申请书要求</text>
+      </view>
+      <!-- box-shadow:0px 1px 0px #EBEBEB; -->
+      <view class="fileViewCell">
+        <image mode="aspectFit" class="fileViewIcon" src="../../../picture/wechat_v.png"></image>
+        <text class="fileViewText">获取入党申请书模板</text>
+      </view>
+    </view>
+  </view>
+</view>
+

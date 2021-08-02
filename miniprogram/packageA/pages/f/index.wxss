@@ -1,0 +1,160 @@
+/* pages/nowStep/index.wxss */
+
+.backImg{
+  background-image: var(--backIMG);
+  color: var(--white);
+  height: 55%;
+  width: 100%;
+  position: absolute;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  height: 12.3%;
+  background: #ff5c5d;
+}
+
+.toBack {
+  position: fixed;
+  top: 7%;
+  left: 2%;
+  z-index: 5;
+  font-size: 160%;
+  color: white;
+}
+
+.topText {
+  position: fixed;
+  top: 7%;
+  z-index: 5;
+  font-size: 150%;
+  text-align: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: white;
+}
+
+.textAreaMain {
+  position: fixed;
+  top: 18%;
+  z-index: 5;
+  font-size: 140%;
+  text-align: center;
+  left: 2%;
+  right: 2%;
+  width: 96%;
+  height: 10%;
+  background-color: #f0f0f0;
+  border-radius: 10rpx;
+}
+
+.uploadWeixin {
+  position: fixed;
+  top: 28%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 6%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: #45c98d;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.weixinLogo {
+  font-size: 170%;
+}
+
+.weixinTag {
+  font-size: 110%;
+}
+
+.uploadStorage{
+  position: fixed;
+  top: 35%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 6%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: #0081ff;
+  border: 3rpx solid;
+  border-color: #0081ff;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.uploadFile {
+  position: fixed;
+  top: 35%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 10%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: #45c98d;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.fileList{
+  position: fixed;
+  top: 67%;
+  z-index: 5;
+}
+
+.finalButton{
+  position: fixed;
+  bottom: 5%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+  margin: 4% auto 6% auto;
+  left: 0;
+  right: 0;
+  color: #45c98d;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.finalButtonHover{
+  position: fixed;
+  bottom: 5%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+  margin: 4% auto 6% auto;
+  left: 0;
+  right: 0;
+  color: #b8ffdf;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #45c98d;
+}

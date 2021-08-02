@@ -1,0 +1,14 @@
+<!--pages/login/index.wxml-->
+<image src="/picture/backIMG.png" style="position:fixed;z-index:-1;height:100%;width:100%" mode="widthFix" bindload="hiddd"></image>
+<form class="form1">
+  <input name="casid" class="inputN" bindblur="getCasid" type="number" placeholder="请输入学号" maxlength="12" placeholder-style="font-size:33rpx"></input>
+  <input name="name" class="inputN" bindblur="getName" placeholder="请输入姓名" placeholder-style="font-size:33rpx"></input>
+  <view style="width:600rpx;height:130rpx;margin:20rpx;padding:10rpx">
+    <button class="b1" style="width:100%;height:100%;background-color:transparent;border:4rpx #f2f2f2 solid;border-radius:15rpx" bindgetuserinfo="getInfo" open-type="getUserInfo">
+      <text style="font-size:40rpx;color:white">登 录</text>
+    </button>
+  </view>
+</form>
+<view style="position:fixed;z-index:1;bottom:2%;text-align:center;width:100%;height:60rpx" bindtap="toLLL">
+  <view style="color:#f2f2f2">暂不登录</view>
+</view>

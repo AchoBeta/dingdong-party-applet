@@ -1,0 +1,135 @@
+<!--pages/nowStep/index.wxml-->
+<view class="top"></view>
+<view class="topText">填写电子表单</view>
+<view></view>
+<view bindtap="toBack">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<form bindsubmit="form_submit">
+	<view>
+		<view class="formTitle">1</view>
+		<view>
+		</view>
+		<view class="cu-form-group margin-top">
+			<view class="titleMain">标题</view>
+			<input disabled value="《预备党员培养考察手册》"></input>
+		</view>
+		<view class="cu-form-group margin-top">
+			<view class="title">姓名</view>
+			<input disabled name="name" value="{{form_data.name}}"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">性别</view>
+			<input disabled name="gender" value="{{form_data.gender == 1?'男':''}}{{form_data.gender == 0?'女':''}}"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">出生日期</view>
+			<input disabled name="birth" value="{{form_data.birth}}"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">所在党支部</view>
+			<input disabled value="{{form_data.userBranch.branch_name}}"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">所在二级党组织</view>
+			<input disabled value="{{form_data.userBranch.second_branch}}"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">确定为发展对象时间</view>
+			<input disabled name="confirm_development_time" value="{{form_data.userBranch.apply_time}}"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">接收为预备党员时间</view>
+			<input disabled name="probationary_time" value="{{form_data.userBranch.activist_time}}"></input>
+		</view>
+
+
+    <view class="inputT">党支部半年考察意见</view>
+		<view class="cu-form-group margin-top">
+			<textarea maxlength="-1" auto-height name="branch_opinions_in_half_year" value="{{form_data.userBranch.investigation_in_half_year_activist}}"></textarea>
+		</view>
+
+
+    <view class="inputT">参加党支部教育培训及社会实践活动情况</view>
+		<view class="cu-form-group margin-top"  style="display:flex;flex-direction:column">
+			<!-- <textarea maxlength="-1" auto-height name="resume" value="{{form_data.act}}"></textarea> -->
+			<view class="cu-form-group">
+				<view class="title">活动时间：</view>
+				<input disabled name="activities_time1" placeholder="yy-mm-dd" value="{{form_data.activities[0].time}}"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动地点：</view>
+				<input disabled name="activity_address1" value="{{form_data.activities[0].activity_address}}"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动内容：</view>
+				<input disabled name="activity_content1" value="{{form_data.activities[0].activity_content}}"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">相关单位：</view>
+				<input disabled name="activity_organizer1" value="{{form_data.activities[0].activity_organizer}}"></input>
+			</view>
+		</view>
+		<view class="cu-form-group margin-top"  style="display:flex;flex-direction:column">
+			<!-- <textarea maxlength="-1" auto-height name="resume" value="{{form_data.act}}"></textarea> -->
+			<view class="cu-form-group">
+				<view class="title">活动时间：</view>
+				<input disabled name="activities_time2" placeholder="yy-mm-dd" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动地点：</view>
+				<input disabled name="activity_address2" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动内容：</view>
+				<input disabled name="activity_content2" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">相关单位：</view>
+				<input disabled name="activity_organizer2"></input>
+			</view>
+		</view>
+		<view class="cu-form-group margin-top"  style="display:flex;flex-direction:column">
+			<!-- <textarea maxlength="-1" auto-height name="resume" value="{{form_data.act}}"></textarea> -->
+			<view class="cu-form-group">
+				<view class="title">活动时间：</view>
+				<input disabled name="activities_time3" placeholder="yy-mm-dd" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动地点：</view>
+				<input disabled name="activity_address3" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动内容：</view>
+				<input disabled name="activity_content3" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">相关单位：</view>
+				<input disabled name="activity_organizer3"></input>
+			</view>
+		</view>
+		<view class="cu-form-group margin-top"  style="display:flex;flex-direction:column">
+			<!-- <textarea maxlength="-1" auto-height name="resume" value="{{form_data.act}}"></textarea> -->
+			<view class="cu-form-group">
+				<view class="title">活动时间：</view>
+				<input disabled name="activities_time4" placeholder="yy-mm-dd" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动地点：</view>
+				<input disabled name="activity_address4" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">活动内容：</view>
+				<input disabled name="activity_content4" ></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">相关单位：</view>
+				<input disabled name="activity_organizer4"></input>
+			</view>
+		</view>
+
+	</view>
+	<button form-type="submit" hover-class="finalButtonHover" style="height: 50px;" class="finalButton">
+		<text style="font-size: 110%;">提交</text>
+	</button>
+</form>

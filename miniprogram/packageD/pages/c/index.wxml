@@ -1,0 +1,62 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">继续考察教育</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">党组织应当通过党的组织生活、听取本人汇报、个别谈心、集中培训、实践锻炼等方式，对预备党员进行教育和考察。如党小组会、党课、党日活动等
+    </text>
+	</view>
+
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 3 && nowStep == 3 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+
+<!-- <view class="top"></view>
+<view class="topText">继续考察教育</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党组织应当通过党的组织生活、听取本人汇报、个别谈心、集中培训、实践锻炼等方式，对预备党员进行教育和考察。如党小组会、党课、党日活动等
+ </text>
+  </view>
+</view> -->
+
+<!-- <view class="cardList" wx:if="{{(nowKey == 3 && nowStep == 3) || fileList}}">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content" wx:if="{{nowKey == 3 && nowStep == 3}}">
+    <view class="fileListItem" bindtap="uploadWeixin">
+      <text class="iconfont icon-list3 fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">点击填写模板
+      </text>
+    </view>
+
+  </view>
+</view> -->
+
+<!-- <view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 3 && nowStep == 3 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

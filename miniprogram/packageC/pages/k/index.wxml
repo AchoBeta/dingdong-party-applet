@@ -1,0 +1,53 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">支部委员会审查</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">基层党委对发展对象的条件、培养教育情况等进行审查，根据需要听取执纪执法等相关部门的意见。审查结果以书面形式通知党支部，并向审查合格的发展对象发放《中国共产党入党志愿书》。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发展对象未来三个月内将离开工作、学习单位的，一般不办理接收预备党员的手续。
+    </text>
+	</view>
+
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 2 && nowStep == 11 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+
+
+
+
+<!-- <view class="top"></view>
+<view class="topText">支部委员会审查</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基层党委对发展对象的条件、培养教育情况等进行审查，根据需要听取执纪执法等相关部门的意见。审查结果以书面形式通知党支部，并向审查合格的发展对象发放《中国共产党入党志愿书》。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发展对象未来三个月内将离开工作、学习单位的，一般不办理接收预备党员的手续。
+ </text>
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 2 && nowStep == 11 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

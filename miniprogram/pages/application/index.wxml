@@ -1,0 +1,25 @@
+<!--pages/application/index.wxml-->
+<view>
+	<image style="height:100%;width:100%; z-index: -1;position: fixed;" src="/picture/mineTop.png" mode='widthFix'>
+	</image>
+	<view class="paper" style="background-color:#fffbed">
+    <image bindtap="getOpensourceFile" mode="widthFix" style="width:100%;position:relative;z-index:0" src="/picture/openNotice.png"></image>
+		<button open-type="contact" style="z-index:1;position:absolute;opacity:0;bottom:90rpx;width:100%;height:200rpx"></button>
+    <!-- <view class="ttext">
+      <text>      为响应国家号召，助推基层党建的信息化，为党建机关的互联网化尽一份微薄之力，AchoBeta团队现决定将“叮咚党建”项目进行开源，所有组织或个人都可永久免费使用本项目源代码。\n</text><text>      叮咚党建的开源范围囊括小程序端、管理员后台的源代码以及所有的UI素材。我们承诺后续将继续对代码进行维护并开发新功能，且会在第一时间进行推送更新，欢迎广大党建相关工作者下载并使用。\n</text><text>      如有需要请联系邮箱：AchoBeta@qq.com或直接与我们的客服联系，我们将为您免费提供技术协助。\n</text><text>      技术开源，信息连线，我们是叮咚党建，你入党工作的红色助手。</text>
+		</view>
+		<view class="fileView" bindtap="getOpensourceFile">
+			<text style="color:#ff5c5d;font-size:40rpx">叮咚党建开源公告.pdf</text>
+		</view>
+		<view class="fileViewBut">
+			<button open-type="contact" style="color:#ff5c5d;font-size:32rpx;">点击联系客服</button>
+		</view> -->
+		<view class="toBackk" bindtap="toBack">
+			<text class="cuIcon-back" style="font-size: 180%;color:#ff8e8f;"></text>
+		</view>
+	</view>
+
+</view>
+<!-- <view class="toBack" bindtap="toBack">
+	<text class="cuIcon-back" style="font-size: 120%;"></text>
+</view> -->

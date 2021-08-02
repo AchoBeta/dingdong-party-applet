@@ -1,0 +1,11 @@
+page{
+  height: auto;
+}
+.backImg{
+  background-image: var(--backIMG);
+  color: var(--white);
+  height: 80%;
+  width: 100%;
+  position: absolute;
+}
+

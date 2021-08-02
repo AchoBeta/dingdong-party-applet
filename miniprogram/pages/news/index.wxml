@@ -1,0 +1,63 @@
+<!--pages/news/index.wxml-->
+<!-- <cu-custom style="background-color: #f2f2f2">
+  <view slot="content" class="text-black"></view>
+</cu-custom> -->
+<!-- <view class="topTitleText">党建</view> -->
+<view class="TOP">
+  <view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
+  <view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop"><text>党 建 动 态</text></view>
+</view>
+<view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view>
+<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view>
+<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{swiperList}}" wx:key="*this" >
+    <view bindtap="swiperImg" data-src="{{item.src}}">
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}" mode="widthFix"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </view>
+  </swiper-item>
+</swiper>
+<view class="threeTip">
+  <view class="DDD" style="width:33%;height:100%;">
+    <image  src="/picture/D.png" style="height:35%;width:35%;margin:0 0 10rpx 0" mode="aspectFit"></image>
+    <text>党建动态</text>
+  </view>
+  <view class="DDD" style="width:33%;height:100%;border-left: 5rpx solid #ededed;border-right: 5rpx solid #ededed;">
+    <image  src="/picture/J.png" style="height:35%;width:35%;margin:0 0 10rpx 0" mode="aspectFit"></image>
+    <text>基层党建</text>
+  </view>
+  <view class="DDD" style="width:33%;height:100%;">
+    <image  src="/picture/L.png" style="height:35%;width:35%;margin:0 0 10rpx 0" mode="aspectFit"></image>
+    <text>理论学习</text>
+  </view>
+</view>
+<view class="newList">
+  <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/1.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">【众志成城阻击疫情】校领导连线慰问湖北籍师生</view>
+  </view>
+  <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/2.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">【众志成城阻击疫情】学校召开党委会学习贯彻习近平总书记对防控新冠肺炎疫情的重要讲话精神</view>
+  </view>
+  <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/3.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">学校召开2019年度二级党组织书记抓党建工作述职评议会</view>
+  </view>
+  <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/4.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">【主题教育】二级党组织高质量完成专题民主生活会</view>
+  </view>
+  <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/5.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">【主题教育】学校领导班子召开“不忘初心、牢记使命”专题民主生活会</view>
+  </view>
+  <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/6.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">【主题教育】马宏伟讲主题教育专题党课： 发扬斗争精神 勇于担当作为 全面推进 新型高水平理工科大学</view>
+  </view>
+    <view class="newItem">
+    <image style="margin:0 0 0 20rpx;height:90%;width:30%;" mode="aspectFit" src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/newsList/7.jpg"></image>
+    <view style="margin:0 0 0 20rpx;height:90%;width:60%;">【主题教育】盯紧师生成长发展问题 立行立改见实效</view>
+  </view>
+</view>

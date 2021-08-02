@@ -1,0 +1,51 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">提交上级党委审批</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">党委主要审议发展对象是否具备党员条件、入党手续是否完备。发展对象符合党员条件、入党手续完备的，批准其为预备党员。党委审批意见写入《中国共产党入党志愿书》。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党委对党支部上报的接收预备党员的决议，应当在三个月内审批，并报上级党委组织部门备案。如遇特殊情况可适当延长审批时间，但不得超过六个月。
+    </text>
+	</view>
+
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 2 && nowStep == 16 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">提交上级党委审批</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党委主要审议发展对象是否具备党员条件、入党手续是否完备。发展对象符合党员条件、入党手续完备的，批准其为预备党员。党委审批意见写入《中国共产党入党志愿书》。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党委对党支部上报的接收预备党员的决议，应当在三个月内审批，并报上级党委组织部门备案。如遇特殊情况可适当延长审批时间，但不得超过六个月。
+ </text>
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 2 && nowStep == 16 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

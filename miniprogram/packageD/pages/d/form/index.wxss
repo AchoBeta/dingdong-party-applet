@@ -1,0 +1,102 @@
+page {
+  background: #f0f0f0;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  height: 12.3%;
+  background: #ff5c5d;
+}
+
+.toBack {
+  position: fixed;
+  top: 7%;
+  left: 2%;
+  z-index: 5;
+  font-size: 160%;
+  color: white;
+}
+
+.topText {
+  position: fixed;
+  top: 7%;
+  z-index: 5;
+  font-size: 150%;
+  text-align: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: white;
+}
+
+.form{
+  position: fixed;
+  top: 13%;
+  z-index: 5;
+  width: 100%;
+  color: black
+}
+
+.formTitle{
+  margin: 70rpx auto;
+  font-size: 150%;
+  color: black;
+}
+
+.inputT{
+  margin: 4% auto 2% 4%;
+  font-size: 120%;
+  color: black
+}
+
+.inpitM{
+  margin: 2% 3% 2% 3%;
+  font-size: 160%;
+  height: 80rpx;
+  background-color: white
+}
+
+.cu-form-group .title {
+  min-width: calc(7em + 30rpx);
+}
+
+.cu-form-group .titleMain {
+  min-width: calc(4em + 30rpx);
+}
+
+.cu-form-group .titleNext {
+  min-width: calc(3em + 30rpx);
+}
+
+.finalButton{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+  margin: 4% auto 6% auto;
+  left: 0;
+  right: 0;
+  color: #45c98d;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.finalButtonHover{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+  margin: 4% auto 6% auto;
+  left: 0;
+  right: 0;
+  color: #b8ffdf;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #45c98d;
+}

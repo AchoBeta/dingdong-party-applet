@@ -1,0 +1,31 @@
+/* pages/login/index.wxss */
+Page{
+  height: 100%;
+  width: 100%;
+  background-color: #f14c44;
+}
+.form1{
+  position:fixed;
+  z-index:1;
+  width:100%;
+  height:auto;
+  top:55%;
+  
+  display:flex;
+  flex-direction:column;
+  align-items:center
+}
+.inputN{
+  width:600rpx;
+  background-color:#f2f2f2;
+  height:100rpx;
+  margin:20rpx;
+  border-radius:15rpx;
+  padding-left: 30rpx;
+}
+
+.b1{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}

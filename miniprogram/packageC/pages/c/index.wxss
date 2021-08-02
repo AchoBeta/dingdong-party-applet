@@ -1,0 +1,8 @@
+/* packageC/pages/c/index.wxss */
+.backImg{
+  background-image: var(--backIMG);
+  color: var(--white);
+  height: 39%;
+  width: 100%;
+  position: absolute;
+}

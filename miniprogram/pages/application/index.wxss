@@ -1,0 +1,65 @@
+/* pages/application/index.wxss */
+.paper{
+  background-color: white;
+  position: relative;
+  z-index: 9;
+  top: 130rpx;
+  height: auto;
+  right: 4%;
+  left: 4%;
+  width: 92%;
+  border-radius: 15rpx;
+  margin-bottom: 150rpx;
+  -moz-box-shadow:0px 0px 4px #9C9C9C; 
+  -webkit-box-shadow:0px 0px 4px #9C9C9C; 
+  box-shadow:0px 2px 7px #9C9C9C;
+}
+.ttext{
+  margin: 60rpx 40rpx 60rpx 40rpx;
+  color: #ff5c5d;
+  font-size:38rpx;
+}
+.ttext text{
+  white-space:pre-wrap;
+  text-align: center;
+  text-indent:100rpx;
+}
+.fileView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 4% 0 4%;
+  width: 92%;
+  height: 160rpx;
+  border-top: 2rpx solid #9C9C9C;
+}
+.fileViewBut{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:-4% 4% 0 4%;
+  width: 92%;
+  height: 160rpx;
+}
+
+.toBack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+  width: 100rpx;
+  height: 100rpx;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-color: #ff5c5d;
+  color: white;
+}
+
+.toBackk{
+  width:100%;
+  position:relative;
+  height:90rpx;
+  display: flex;
+  justify-content: center;
+}

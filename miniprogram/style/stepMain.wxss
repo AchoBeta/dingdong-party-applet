@@ -1,0 +1,207 @@
+/* pages/nowStep/index.wxss */
+
+
+
+.top {
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  height: 12.3%;
+  background: #ff5c5d;
+}
+
+.topDown{
+  width: 100%;
+  height: 12.3%;
+}
+
+.toBack {
+  position: fixed;
+  top: 7%;
+  left: 2%;
+  z-index: 5;
+  font-size: 160%;
+  color: white;
+}
+
+.topText {
+  position: fixed;
+  top: 7%;
+  z-index: 5;
+  font-size: 150%;
+  text-align: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: white;
+}
+
+.cardList{
+  width: 94%;
+  height: auto;
+  padding: 5rpx 5rpx 5rpx 5rpx;
+  margin: 40rpx 3% 20rpx 3%;
+  border-radius: 20rpx;
+  background-color: #d0d0d0;
+}
+
+.cardList .content{
+    display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 30rpx;
+  border-radius: 0rpx 0rpx 20rpx 20rpx;
+  background-color: #eeeeee;
+}
+
+.cardList .fileListItem{
+  width:100%;
+  height:100rpx;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.textAreaMain {
+  top: 18%;
+  font-size: 140%;
+  text-align: center;
+  margin: 40rpx 2% auto 2%;
+  width: 96%;
+  height: 10%;
+  background-color: #f0f0f0;
+  border-radius: 10rpx;
+}
+
+.textAreaMain2{
+  position: fixed;
+  top: 60%;
+  z-index: 5;
+  font-size: 140%;
+  text-align: center;
+  left: 2%;
+  right: 2%;
+  width: 96%;
+  height: 10%;
+  background-color: #f0f0f0;
+  border-radius: 10rpx;
+}
+
+
+.uploadWeixin {
+  position: fixed;
+  top: 28%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 6%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: #45c98d;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.cardList .fileLogo {
+  font-size: 170%;
+  margin: 10rpx;
+}
+
+.cardList .fileTag {
+  font-size: 35rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.cardList .Line{
+  width:100%;
+  height:5rpx;
+  background-color:#d0d0d0;
+  margin:20rpx auto 20rpx auto
+}
+
+.uploadStorage{
+  position: fixed;
+  top: 35%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 6%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: #0081ff;
+  border: 3rpx solid;
+  border-color: #0081ff;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.uploadFile {
+  position: fixed;
+  top: 35%;
+  z-index: 5;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 10%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: #45c98d;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+}
+
+.fileList{
+  position: fixed;
+  top: 67%;
+  z-index: 5;
+}
+
+.finalButton{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+  margin: 6% auto 6% auto;
+  left: 0;
+  right: 0;
+  color: #ff5c5d;
+  border: 3rpx solid;
+  border-color: #ff5c5d;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+
+}
+
+.finalButtonHover{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 200%;
+  margin: 6% auto 6% auto;
+  left: 0;
+  right: 0;
+  color: #b8ffdf;
+  border: 3rpx solid;
+  border-color: #45c98d;
+  border-radius: 10rpx;
+  background-color: #45c98d;
+}

@@ -1,0 +1,113 @@
+<!--pages/nowStep/index.wxml-->
+<view class="top"></view>
+<view class="topText">填写电子表单</view>
+<view></view>
+<view bindtap="toBack">
+  <text class="cuIcon-back toBack"></text>
+</view>
+<form bindsubmit="form_submit">
+<view>
+  <view class="formTitle">1</view>
+  <view>
+  </view>
+  <view class="cu-form-group margin-top">
+    <view class="titleMain">标题</view>
+    <input disabled value="《入党申请人培养考察手册》"></input>
+  </view>  
+  <view class="cu-form-group margin-top">
+    <view class="title">姓名</view>
+    <input disabled name="name" value="{{form_data.name}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <input disabled name="gender" value="{{form_data.gender == 1?'男':'女'}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">民族</view>
+    <input disabled name="nation" value="{{form_data.nation}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">籍贯</view>
+    <input disabled name="origin" value="{{form_data.origin}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">出生年份</view>
+    <input disabled name="birth" value="{{form_data.birth}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">学号</view>
+    <input disabled name="casid" value="{{form_data.casid}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">专业</view>
+    <input disabled name="major" value="{{form_data.major}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">年级</view>
+    <input disabled name="grade" value="{{form_data.grade}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">专业班级</view>
+    <input disabled name="class" value="{{form_data.class}}"></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">入团时间</view>
+    <input disabled name="join_league_time" value="{{form_data.join_league_time}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">申请入党时间</view>
+    <input disabled value="2016/9/1"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在单位</view>
+    <input disabled name="institute" value="{{form_data.institute}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在党支部</view>
+    <input disabled value="网络空间安全学院学生党支部"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在二级党组织</view>
+    <input disabled value="网络空间安全学院党委"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">联系方式</view>
+    <input name="mobile" value="{{form_data.mobile}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">学生社区</view>
+    <input name="dormitory_area" value="{{form_data.dormitory_area}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">宿舍号</view>
+    <input name="dormitory_no" value="{{form_data.dormitory_no}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">电子邮箱</view>
+    <input name="email" value="{{form_data.email}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">身份证号码</view>
+    <input name="id_card" value="{{form_data.id_card}}"></input>
+  </view>
+  <view class="cu-form-group align-start">
+		<view class="title">现居住地</view>
+		<textarea maxlength="-1" style="height:3em" name="family_address" value="{{form_data.family_address}}"></textarea>
+	</view>
+
+  <view class="inputT">简历</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height name="resume" value="{{form_data.resume}}"></textarea>
+	</view>
+  <view class="inputT">群团组织推荐入党积极分子意见</view>
+  <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height value="示例：\n经××党支部（××党小组）党员讨论酝酿推荐，认为该同志……（思想、作风、学习、工作等主要表现情况，对党的认识、政治觉悟等方面的基本情况），已具备入党积极分子条件，同意推荐张三同志为入党积极分子。"></textarea>
+	</view>
+
+</view>
+  <!--bindtap="toUpForm"-->
+  <button form-type="submit"  hover-class="finalButtonHover" style="height: 50px;" class="finalButton">
+    <text style="font-size: 110%;">提交</text>
+  </button>
+</form>

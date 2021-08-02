@@ -1,0 +1,103 @@
+<!--pages/nowStep/index.wxml-->
+<view class="top"></view>
+<view class="topText">填写电子表单</view>
+<view></view>
+<view bindtap="toBack">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view>
+  <view class="formTitle">1</view>
+  <view>
+  </view>
+  <view class="cu-form-group margin-top">
+    <view class="titleMain">标题</view>
+    <input disabled value="《入党申请人培养考察手册》"></input>
+  </view>  
+  <view class="cu-form-group margin-top">
+    <view class="title">姓名</view>
+    <input disabled value="唐鼎钧"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <input disabled value="男"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">民族</view>
+    <input disabled value="汉族"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">出生年份</view>
+    <input disabled value="1999/01/01"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">学号</view>
+    <input disabled value="201801010101"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">年级</view>
+    <input disabled value="2018级"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">专业班级</view>
+    <input disabled value="软件工程2班"></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">入团时间</view>
+    <input disabled value="2014/09/01"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">申请入党时间</view>
+    <input disabled value="2018/10/01"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在单位</view>
+    <input disabled value="网络空间安全学院"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在党支部</view>
+    <input disabled value="网络空间安全学院学生党支部"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在二级党组织</view>
+    <input disabled value="网络空间安全学院党委"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">联系方式</view>
+    <input value="136xxxxxxxx"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">学生社区</view>
+    <input value="莞博社区"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">宿舍号</view>
+    <input value="21314"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">电子邮箱</view>
+    <input value="test@qq.com"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">身份证号码</view>
+    <input value="440xxxxxxxxxxxxxxx"></input>
+  </view>
+  <view class="cu-form-group align-start">
+		<view class="title">现居住地</view>
+		<textarea maxlength="-1" style="height:3em" value="广东省××市××区××路××小区××栋××楼××室"></textarea>
+	</view>
+
+  <view class="inputT">简历</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height value="示例：\n19××年9月至19××年7月，××××小学学习；\n19××年9月至20××年7月，××××中学学习；\n20××年9月至20××年7月，××××大学××学院××专业学习；\n20××年7月至20××年×月，××××单位工作，任××职务；"></textarea>
+	</view>
+  <view class="inputT">群团组织推荐入党积极分子意见</view>
+  <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height value="示例：\n经××党支部（××党小组）党员讨论酝酿推荐，认为该同志……（思想、作风、学习、工作等主要表现情况，对党的认识、政治觉悟等方面的基本情况），已具备入党积极分子条件，同意推荐张三同志为入党积极分子。"></textarea>
+	</view>
+
+</view>
+  <button bindtap="toUpForm" hover-class="finalButtonHover" style="height: 50px;" class="finalButton">
+    <text style="font-size: 110%;">提交</text>
+  </button>

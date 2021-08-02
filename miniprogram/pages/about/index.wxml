@@ -1,0 +1,105 @@
+<view class="TOP">
+	<view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
+	<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop"><text>个人中心</text></view>
+</view>
+<view class="top-bg">
+	<image style="height:{{topKKK * 0.375}}px;width:100%;top:{{topKKK * 0.025}}px" src="/picture/mineTop.png" mode='widthFix'> </image>
+	<!-- <image src="cloud://studentdata-ypct0.7374-studentdata-ypct0-1301212128/wave.gif" mode="scaleToFill" class="gif-wave" style="background-color:transparent"></image> -->
+</view>
+
+
+<view class="Icon">
+	<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
+		<image src="../../picture/myIcon.png" class="img"></image>
+		<text class="imgText">请登录~</text>
+	</button>
+	<view wx:else class="userImg">
+		<image bindtap="bindViewTap" class="userIcon" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+		<text class="username">{{userInfo.nickName}}</text>
+	</view>
+	<!-- <image src="cloud://studentdata-ypct0.7374-studentdata-ypct0-1301212128/wave.gif" mode="scaleToFill" class="gif-wave" style="background-color:transparent"></image> -->
+</view>
+
+<view class="user">
+	<view class="topText">
+		<text>所属党支部： XX党支部 （实例）</text>
+	</view>
+	<view class="Info">
+		<view class="InfoCell" style="margin-right: 70rpx">
+			<view style="display:flex;align-items:center">
+				<image src="../../picture/name.png" class="smallImg"></image>
+				<label>姓名</label>
+			</view>
+			<text class="infoText">{{name}}</text>
+		</view>
+
+		<view class="InfoCell">
+			<view style="display:flex;align-items:center">
+				<image src="../../picture/studentId.png" class="smallImg"></image>
+				<label>学号</label>
+			</view>
+			<text class="infoText">{{casid}}</text>
+		</view>
+
+	</view>
+	<view class="Info">
+		<view class="InfoCell">
+			<view style="display:flex;align-items:center">
+				<image src="../../picture/class.png" class="smallImg"></image>
+				<label>班级</label>
+			</view>
+			<text class="infoText">{{class}}</text>
+		</view>
+
+		<view class="InfoCell">
+			<view style="display:flex;align-items:center">
+				<image src="../../picture/status.png" class="smallImg"></image>
+				<label>身份</label>
+			</view>
+			<text class="infoText">{{keyName}}</text>
+		</view>
+
+	</view>
+</view>
+
+
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl radius bg-white application" style="top: 590rpx">
+	<view class="cu-item" style="background-color:#ffffff" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/入党申请书.pdf">
+		<view class="content" hover-class="cyans">
+			<!-- <text class="cuIcon-file text-yellow"></text> -->
+			<image src="../../picture/book.png"></image>
+			<text class="text-grey">入党申请书(示例)</text>
+		</view>
+	</view>
+	<!-- <view class="cu-item" style="background-color:#ffffff" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20-入党申请人培养考察手册（参考样本）.pdf">
+      <view class="content"  hover-class="none">
+        <text class="cuIcon-file text-red"></text>
+        <text class="text-grey">入党申请人考察手册</text>
+      </view>
+    </view> -->
+	<view class="cu-item" bindtap="Login" style="background-color:#ffffff">
+		<button class="cu-btn content">
+			<!-- <text class="cuIcon-link text-cyan"></text> -->
+			<image src="../../picture/bind.png"></image>
+			<text class="text-grey">用户绑定</text>
+		</button>
+	</view>
+
+	<view class="cu-item" style="background-color:#ffffff" bindtap="toApplication">
+		<button class="cu-btn content" open-type="">
+			<!-- <text class="cuIcon-command text-cyan"></text> -->
+			<image src="../../picture/join.png"></image>
+			<text class="text-grey">申请入驻</text>
+		</button>
+	</view>
+
+	<view class="cu-item " style="background-color:#ffffff">
+		<button class="cu-btn content" open-type="feedback">
+			<!-- <text class="cuIcon-writefill text-cyan"></text> -->
+			<image src="../../picture/back.png"></image>
+			<text class="text-grey">意见反馈</text>
+		</button>
+	</view>
+
+</view>
+<view class="cu-tabbar-height"></view>

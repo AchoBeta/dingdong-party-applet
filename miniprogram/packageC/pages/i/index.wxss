@@ -1,0 +1,8 @@
+
+.backImg{
+  background-image: var(--backIMG);
+  color: var(--white);
+  height: 41%;
+  width: 100%;
+  position: absolute;
+}

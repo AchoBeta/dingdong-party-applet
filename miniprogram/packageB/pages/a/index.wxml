@@ -1,0 +1,100 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">确定培养联系人</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">党支部需要指定一至两名正式党员作入党积极分子的培养联系人。培养联系人的主要任务是
+    （一）向入党积极分子介绍党的基本知识； 
+    （二）了解入党积极分子的政治觉悟、道德品质、现实表现和家庭情况等，做好培养教育工作，引导入党积极分子端正入党动机； 
+    （三）及时向党支部汇报入党积极分子情况； 
+    （四）向党支部提出能否将入党积极分子列为发展对象的意见
+    </text>
+	</view>
+
+	<view class="fileDiv" wx:if="{{nowKey >= 1 && nowStep >= 1 || nowKey > 1}}">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<view bindtap="previewFile" data-path="{{url}}" class="fileViewCell">
+				<!-- <image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image> -->
+				<text space decode wx:if="{{info}}" class="fileViewText">培养联系人1 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.firstDevelopContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.firstDevelopContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.firstDevelopContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.firstDevelopContact[0].administrative_position}}
+    培养联系人 2 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.secondDevelopContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.secondDevelopContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.secondDevelopContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.secondDevelopContact[0].administrative_position}}</text>
+				<text wx:else space decode style="font-size:35rpx">获取信息中，请稍等..</text>
+			</view>
+			<view class="nextStep2">
+				<image wx:if="{{nowKey == 1 && nowStep == 1 && !MODE}}" bindtap="toUpForm" class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+				</image>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+
+
+
+
+
+<!-- <view class="top"></view>
+<view class="topText">确定培养联系人</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+<text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党支部需要指定一至两名正式党员作入党积极分子的培养联系人。培养联系人的主要任务是
+    （一）向入党积极分子介绍党的基本知识； 
+    （二）了解入党积极分子的政治觉悟、道德品质、现实表现和家庭情况等，做好培养教育工作，引导入党积极分子端正入党动机； 
+    （三）及时向党支部汇报入党积极分子情况； 
+    （四）向党支部提出能否将入党积极分子列为发展对象的意见
+ </text>
+  </view>
+</view>
+
+<view class="cardList"  wx:if="{{nowKey >= 1 && nowStep >= 1}}">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content">
+    <text wx:if="{{info}}" space decode style="font-size:35rpx">培养联系人1 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.firstDevelopContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.firstDevelopContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.firstDevelopContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.firstDevelopContact[0].administrative_position}}
+    培养联系人 2 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名：{{info.secondDevelopContact[0].name}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党龄：{{info.secondDevelopContact[0].party_age}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;党内职务：{{info.secondDevelopContact[0].party_positions}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行政职务：{{info.secondDevelopContact[0].administrative_position}}
+ </text>
+    <text wx:else space decode style="font-size:35rpx">获取信息中，请稍等..</text>
+  </view>
+</view> -->
+
+<!-- <view class="textAreaMain">
+  <view>
+    党支部需要指定一至两名正式党员作入党积极分子的培养联系人。 培养联系人的主要任务是： （一）向入党积极分子介绍党的基本知识； （二）了解入党积极分子的政治觉悟、道德品质、现实表现和家庭情况等，做好培养教 育工作，引导入党积极分子端正入党动机； （三）及时向党支部汇报入党积极分子情况； （四）向党支部提出能否将入党积极分子列为发展对象的意见
+  </view>
+
+</view>-->
+<!-- <view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 1 && nowStep == 1 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

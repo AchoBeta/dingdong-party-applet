@@ -1,0 +1,259 @@
+/* pages/about/index.wxss
+page{
+  background-color: white
+}
+
+
+.top {
+  position: fixed;
+  top: 0;
+  z-index: 6;
+  width: 100%;
+  height: 20%;
+  background: #ff5c5d;
+}
+
+.topText {
+  position: fixed;
+  z-index: 7;
+  font-size: 150%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: white;
+  word-spacing: -5rpx;
+}
+
+.card {
+  position: fixed;
+  border-radius: 20rpx;
+  top: 13%;
+  left: 3%;
+  z-index: 7;
+  background: #fffbed;
+  width: 94%;
+  height: 20%;
+}
+
+.noLogoBut{
+  position: fixed;
+  z-index: 8;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 16%;
+}
+
+.logoUse{
+  position: fixed;
+  z-index: 8;
+  left: 8%;
+  top: 16%;
+}
+
+.logoImg{
+  border: 6rpx solid #ffffff
+}
+
+.topName{
+  position: fixed;
+  z-index: 8;
+  left: 30%;
+  top: 16%;
+  font-weight: 600;
+} */
+/* pages/about/index.wxss */
+/**index.wxss**/
+page{
+  background-color: white
+}
+.TOP{
+  position: fixed;
+  z-index: 999;
+  top:0;
+  width: 100%;
+  height: auto;
+}
+.toptop{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight:500;
+  font-size: 150%;
+  color: white;
+  word-spacing: -5rpx;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button::after {
+  border: none;
+}
+
+
+.InfoBtn{
+  position: absolute;
+  left: 1%;
+  top: 15%;
+}
+
+.userImg{
+  position: absolute;
+  width: 200px;
+  top: 15%;
+}
+
+.userIcon{
+  overflow: hidden;
+  display: block;
+  margin-left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 1%;
+  bottom: 0;
+  left: 3%;
+}
+
+.img {
+  overflow: hidden;
+  display: block;
+  margin-left: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0%;
+}
+
+.imgText{
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  left: 40%;
+  top: 20%;
+}
+.username{
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  margin-top: 5px;
+  left: 45%;
+}
+
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+.gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}
+
+.topTTT{
+  position: absolute;
+  bottom: 8%;
+  height: 12%;
+  width: 100%;
+  border-radius: 0 0 20rpx 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120%;
+  font-weight: bold;
+  /* font-family: 'FZHei-B01'; */
+  color: #e26d6e;
+  word-spacing: -5rpx;
+}
+
+
+.top-bg{
+  position: relative;
+  margin-top: 10%;
+}
+
+.user{
+  background-color: white;
+  position: absolute;
+  height: 250rpx;
+  width: 94%;
+  top: 340rpx;
+  left: 3%;
+  border:2rpx solid #cccccc;
+  border-radius: 16rpx;
+
+}
+
+.topText{
+  font-size: 36rpx;
+  text-align: center;
+  position: relative;
+  color: #f25657;
+  margin-bottom: 30rpx;
+}
+
+.Info{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.InfoCell{
+  width:auto;
+  display: flex;
+  flex-direction: row;
+  align-items:center
+}
+
+label{
+  color: #f25657;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.infoText{
+  margin-right: 20rpx;
+  margin-left: 10rpx;
+}
+
+.smallImg{
+  width: 56rpx;
+  height: 56rpx;
+  margin-right: -20rpx;
+}
+
+
+.application{
+  position: absolute;
+  top: 40%;
+  width: 95%;
+  left: 0;
+  right: 0;
+}

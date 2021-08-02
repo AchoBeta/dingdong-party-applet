@@ -1,0 +1,81 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">培养考察手册</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">领取纸质版《入党申请人培养考察手册》后，将审核完毕的电子版《入党申请人培养考察手册》的相关信息填入纸质版《入党申请人培养考察手册》中，于规定时间上交党支部。（未填写时下列文件显示样本）
+    </text>
+	</view>
+
+	<view class="fileDiv">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<view bindtap="previewFile" data-path="{{url}}" class="fileViewCell">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">查看入党申请书要求</text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 0 && nowStep == 4 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">培养考察手册</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领取纸质版《入党申请人培养考察手册》后，将审核完毕的电子版《入党申请人培养考察手册》的相关信息填入纸质版《入党申请人培养考察手册》中，于规定时间上交党支部。（未填写时下列文件显示样本）
+ </text>
+  </view>
+</view>
+
+<view class="cardList">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content">
+    <block>
+      <view class="fileListItem" bindtap="previewFile" data-path="{{url}}">
+        <text class="iconfont icon-wenjian fileLogo" style="color:#FFBE00"></text>
+        <text class="fileTag">入党申请人培养考察手册
+      </text>
+      </view>
+    </block>
+
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+  <button wx:if="{{nowKey == 0 && nowStep == 4 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+    <text style="font-size: 110%;">下一步</text>
+  </button>
+</view> -->
+<!-- <view class="uploadStorage" bindtap="uploadStorage">
+  <text class="cuIcon-file weixinLogo"></text>
+  <text class="weixinTag">选择本地文件上传</text>
+</view> -->
+
+
+
+

@@ -1,0 +1,76 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">党校培训考试</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">未通过党校培训考试的，除极个别特殊情况外，不能发展入党。（没有成绩则为未考试）
+    </text>
+	</view>
+
+	<view class="fileDiv" wx:if="{{fileList}}">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<block wx:if="{{fileList}}">
+				<view class="fileViewCell">
+					<text space decode class="fileViewText">成绩：{{score.score}} 
+是否通过：{{score.status}} </text>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>
+
+<view class="nextStep">
+	<image wx:if="{{nowKey == 2 && nowStep == 5 && !MODE}}"
+	bindtap="toUpForm"
+	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	</image>
+</view>
+
+
+
+
+<!-- 
+<view class="top"></view>
+<view class="topText">党校培训考试</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+<text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未通过党校培训考试的，除极个别特殊情况外，不能发展入党。（没有成绩则为未考试）
+ </text>
+  </view>
+</view>
+
+<view class="cardList" wx:if="{{!(nowKey == 1 && nowStep == 5)}}">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content">
+    <text space decode style="font-size:35rpx">成绩：{{score.score}} 
+是否通过：{{score.status}} 
+ </text>
+  </view>
+</view>
+
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 2 && nowStep == 5 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->
+<!-- <view class="uploadStorage" bindtap="uploadStorage">
+  <text class="cuIcon-file weixinLogo"></text>
+  <text class="weixinTag">选择本地文件上传</text>
+</view> -->

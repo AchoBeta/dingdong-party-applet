@@ -1,0 +1,90 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">支部大会讨论</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">经基层党委预审合格的发展对象，由支部委员会提交支部大会讨论。召开讨论接收预备党员的支部大会，有表决权的到会人数必须超过应到会有表决权人数的半数。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论接收预备党员的主要程序是： 
+（一）发展对象汇报对党的认识、入党动机、本人履历、家庭和主要社会关系情况，以及需向党组织说明的问题；
+（二）入党介绍人介绍发展对象有关情况，并对其能否入党表明意见；
+（三）支部委员会报告对发展对象的审查情况；
+（四）与会党员对发展对象能否入党进行充分讨论，并采取无记名投票方式进行表决。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞成人数超过应到会有表决权的正式党员的半数，才能通过接收预备党员的决议。因故不能到会的有表决权的正式党员，在支部大会召开前正式向党支部提出书面意见的，应当统计在票数内。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论两个以上的发展对象入党时，必须逐个讨论和表决。 
+    </text>
+	</view>
+
+	<view class="fileDiv" wx:if="{{fileList}}" wx:if="{{nowKey >= 2 || (nowKey == 2 && nowStep >= 14)}}">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<block>
+				<view bindtap="previewFile" class="fileViewCell">
+					<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+					<text class="fileViewText">支部大会相关文件.pdf</text>
+				</view>
+			</block>
+			<view class="nextStep2">
+				<image wx:if="{{nowKey == 2 && nowStep == 14 && !MODE}}" bindtap="toUpForm" class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+				</image>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+
+
+
+
+
+
+
+<!-- <view class="top"></view>
+<view class="topText">支部大会讨论</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经基层党委预审合格的发展对象，由支部委员会提交支部大会讨论。召开讨论接收预备党员的支部大会，有表决权的到会人数必须超过应到会有表决权人数的半数。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论接收预备党员的主要程序是： 
+（一）发展对象汇报对党的认识、入党动机、本人履历、家庭和主要社会关系情况，以及需向党组织说明的问题；
+（二）入党介绍人介绍发展对象有关情况，并对其能否入党表明意见；
+（三）支部委员会报告对发展对象的审查情况；
+（四）与会党员对发展对象能否入党进行充分讨论，并采取无记名投票方式进行表决。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞成人数超过应到会有表决权的正式党员的半数，才能通过接收预备党员的决议。因故不能到会的有表决权的正式党员，在支部大会召开前正式向党支部提出书面意见的，应当统计在票数内。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论两个以上的发展对象入党时，必须逐个讨论和表决。 
+ </text>
+  </view>
+</view>
+
+<view class="cardList" wx:if="{{fileList}}">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+<view class="content" wx:if="{{nowKey >= 2 || (nowKey == 2 && nowStep >= 14)}}">
+    <block>
+      <view class="fileListItem" bindtap="previewFile">
+        <text class="iconfont icon-wenjian fileLogo" style="color:#FFBE00"></text>
+        <text class="fileTag">支部大会相关文件.pdf
+      </text>
+      </view>
+    </block>
+  </view>
+</view>
+
+<view style="width:100%;height:{{saveView}}px"></view>
+<view id="finalBtn">
+<button wx:if="{{nowKey == 2 && nowStep == 14 && !MODE}}" bindtap="toUpForm" hover-class="finalButtonHover" style="height: 100rpx;" class="finalButton">
+  <text style="font-size: 110%;">下一步</text>
+</button>
+</view> -->

@@ -1,0 +1,98 @@
+<!--pages/nowStep/index.wxml-->
+<view class="top"></view>
+<view class="topText">填写电子表单</view>
+<view></view>
+<view bindtap="toBack">
+  <text class="cuIcon-back toBack"></text>
+</view>
+<form bindsubmit="form_submit">
+<view>
+  <view class="formTitle">1</view>
+  <view>
+  </view>
+  <view class="cu-form-group margin-top">
+    <view class="titleMain">标题</view>
+    <input disabled value="《中国共产党入党志愿书》"></input>
+  </view>  
+  <view class="cu-form-group margin-top">
+    <view class="title">姓名</view>
+    <input disabled name="name" value="{{form_data.name}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <input disabled name="gender" value="{{form_data.gender == 1?'男':'女'}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">民族</view>
+    <input disabled name="nation" value="{{form_data.nation}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">籍贯</view>
+    <input disabled name="birthplace" value="{{form_data.origin}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">出生年份</view>
+    <input disabled name="birth" value="{{form_data.birth}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">学号</view>
+    <input disabled name="casid" value="{{form_data.casid}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">特长</view>
+    <input name="expertise"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">学历</view>
+    <input name="education"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">现居住地</view>
+    <input name="current_habitation"></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">所在党支部</view>
+    <input disabled value="{{form_data.userBranch.branch_name}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">所在二级党组织</view>
+    <input disabled value="{{form_data.userBranch.second_branch}}"></input>
+  </view>
+  <view class="cu-form-group align-start">
+		<view class="title">职位</view>
+		<textarea maxlength="-1" style="height:3em" name="duty" placeholder="学院名+年级+专业+班级+姓名+职业。如网络空间安全学院18级网络工程1班张三学生"></textarea>
+	</view>
+
+  <view class="inputT">入党志愿</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height name="aspiration"></textarea>
+	</view>
+
+  <view class="inputT">经历</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height name="experience"></textarea>
+	</view>
+
+  <view class="inputT">家庭主要成员情况、主要社会关系情况</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height name="family_members"></textarea>
+	</view>
+
+  <view class="inputT">需向党组织说明的问题</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height name="problem_to_party	"></textarea>
+	</view>
+
+  <view class="inputT">入党介绍人意见</view>
+    <view class="cu-form-group margin-top">
+		<textarea maxlength="-1" auto-height name="introduce_opinion_for_application"></textarea>
+	</view>
+
+
+</view>
+  <!--bindtap="toUpForm"-->
+  <button form-type="submit"  hover-class="finalButtonHover" style="height: 50px;" class="finalButton">
+    <text style="font-size: 110%;">提交</text>
+  </button>
+</form>

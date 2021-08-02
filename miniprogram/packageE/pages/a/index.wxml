@@ -1,0 +1,116 @@
+<view class="backImg"></view>
+<view class="top2"></view>
+<view class="topText">材料归档</view>
+<view bindtap="backNav">
+	<text class="cuIcon-back toBack"></text>
+</view>
+<view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
+	<view class="textBack" style="height:{{textBack}}px"></view>
+	<view class="textView" id="the-textView">
+		<text space decode class="text22">你已完成整个入党流程，材料均已归档，以下是你的电子版入党材料。
+    </text>
+	</view>
+
+	<view class="fileDiv">
+		<view class="fileBackView1"></view>
+		<view class="fileBackView2"></view>
+		<view class="fileView">
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/入党申请书.docx" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">入党申请书.docx</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/预备党员培养考察手册.docx" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">预备党员培养考察手册.docx</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/中国共产党入党志愿书（部分）.doc" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">中国共产党入党志愿书（部分）.doc</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/转正申请书.docx" class="fileViewCell" style="box-shadow:0px 1px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">转正申请书.docx</text>
+			</view>
+
+			<view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/思想汇报.docx" class="fileViewCell" style="box-shadow:0px {{nowKey == 0 && nowStep == 1?1:0}}px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">思想汇报.docx</text>
+			</view>
+
+      <view bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/自传.docx" class="fileViewCell" style="box-shadow:0px {{nowKey == 0 && nowStep == 1?1:0}}px 0px #EBEBEB;">
+				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+				<text class="fileViewText">自传.docx</text>
+			</view>
+      
+		</view>
+	</view>
+</view>
+
+
+
+
+<!-- 
+
+<view class="top"></view>
+<view class="topText">材料归档</view>
+<view bindtap="backNav">
+  <text class="cuIcon-back toBack"></text>
+</view>
+
+<view class="topDown" style="height:{{winHeight * 0.123}}px">123</view>
+<view class="cardList">
+
+  <text class="iconfont icon-mokuaibiaotiicon" style="color:#ff5c5d;font-size:50rpx;margin-left:15rpx"></text>
+  <view class="content">
+    <text space decode style="font-size:35rpx">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你已完成整个入党流程，材料均已归档，以下是你的电子版入党材料。
+ </text>
+  </view>
+</view>
+
+<view class="cardList">
+  <view style="margin:-5rpx auto -5rpx 15rpx">
+    <text class="iconfont icon-List" style="color:#ff5c5d;font-size:60rpx;"></text>
+  </view>
+  <view class="content">
+    <view class="fileListItem" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/入党申请书.docx">
+      <text class="iconfont icon-Filesandfolders fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">入党申请书.docx
+      </text>
+    </view>
+
+    <view class="Line"></view>
+
+    <view class="fileListItem" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/预备党员培养考察手册.docx">
+      <text class="iconfont icon-Filesandfolders fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">预备党员培养考察手册.docx
+      </text>
+    </view>
+    <view class="Line"></view>
+    <view class="fileListItem" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/中国共产党入党志愿书（部分）.doc">
+      <text class="iconfont icon-Filesandfolders fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">中国共产党入党志愿书（部分）.doc
+      </text>
+    </view>
+    <view class="Line"></view>
+    <view class="fileListItem" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/转正申请书.docx">
+      <text class="iconfont icon-Filesandfolders fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">转正申请书.docx
+      </text>
+    </view>
+    <view class="Line"></view>
+    <view class="fileListItem" bindtap="previewFile" data-path="	cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/思想汇报.docx">
+      <text class="iconfont icon-Filesandfolders fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">思想汇报.docx
+      </text>
+    </view>
+        <view class="Line"></view>
+    <view class="fileListItem" bindtap="previewFile" data-path="	cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/模拟数据/自传.docx">
+      <text class="iconfont icon-Filesandfolders fileLogo" style="color:#10AEFF"></text>
+      <text class="fileTag">自传.docx
+      </text>
+    </view>
+  </view>
+</view> -->
