@@ -21,7 +21,7 @@ Page({
     waitMain: 0,
     mainPngSrc: "cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405mainStepPic/",
     gender: '1',
-    MODE:undefined
+    MODE: undefined
   },
 
   /**
@@ -39,82 +39,88 @@ Page({
       wx.request({
         url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/bind/check',
         method: "GET",
-        header: { Authorization: token },
+        header: {
+          Authorization: token
+        },
         success(getR) {
           console.log(getR)
           if (getR.data.code != "401") {
             app.globalData.MODES = true
             that.setData({
-              MODE:true
+              MODE: true
             })
             wx.request({
               url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/person/info',
               method: "GET",
-              header: { Authorization: wx.getStorageSync('Authorization') },
+              header: {
+                Authorization: wx.getStorageSync('Authorization')
+              },
               success(res) {
                 console.log(res)
                 app.globalData.name = res.data.name,
-                app.globalData.casid = res.data.casid,
-                app.globalData.class = res.data.class,
-                app.globalData.keyName = res.data.role,
-                app.globalData.branch_name = res.data.branch_name
-                api.request.get("https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/stage", {}, { Authorization: token })
-                .then(e => {
-                  key = e.data.id - 1
-                  step = e.data.order
-                  //20210414修改
-                  try{
-                    if(typeof key === 'undefined' || typeof step === 'undefined'){
-                      key = 3
-                      step = 11
+                  app.globalData.casid = res.data.casid,
+                  app.globalData.class = res.data.class,
+                  app.globalData.keyName = res.data.role,
+                  app.globalData.branch_name = res.data.branch_name
+                api.request.get("https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/stage", {}, {
+                    Authorization: token
+                  })
+                  .then(e => {
+                    key = e.data.id - 1
+                    step = e.data.order
+                    //20210414修改
+                    try {
+                      if (typeof key === 'undefined' || typeof step === 'undefined') {
+                        key = 3
+                        step = 11
+                      }
+                      that.setData({
+                        nowKey: key,
+                        nowStepKey: step
+                      })
+                      app.globalData.nowKey = key
+                      app.globalData.nowStep = step
+                    } catch {
+                      that.setData({
+                        nowKey: 3,
+                        nowStepKey: 11
+                      })
+                      app.globalData.nowKey = 3
+                      app.globalData.nowStep = 11
                     }
-                    that.setData({
-                      nowKey: key,
-                      nowStepKey: step
-                    })
-                    app.globalData.nowKey = key
-                    app.globalData.nowStep = step
-                  }
-                  catch{
+
+
+                    wx.hideLoading()
+
+                  }).catch((res) => {
                     that.setData({
                       nowKey: 3,
                       nowStepKey: 11
                     })
-                    app.globalData.nowKey = 3
-                  app.globalData.nowStep = 11
-                  }
-                  
-                  
-                  wx.hideLoading()
-                  
-                }).catch((res)=>{
-                  that.setData({
-                    nowKey: 3,
-                    nowStepKey: 11
                   })
-                })
               },
-              fail(res){
+              fail(res) {
                 wx.showModal({
-                  title:"提示",
-                  content:"网络错误，请重试"
+                  title: "提示",
+                  content: "网络错误，请重试"
                 })
               }
             })
           } else {
             wx.showToast({
               title: '您未登录',
-              icon:"none"
+              icon: "none"
             })
             app.globalData.MODES = false
             that.setData({
-              MODE:false
+              MODE: false
             })
           }
-        }, fail(getR) {
+        },
+        fail(getR) {
           console.log(getR)
           wx.hideLoading({
-            complete: (res) => { },
+            complete: (res) => {},
           })
         }
       })
@@ -139,7 +145,7 @@ Page({
     /**
      * 测试状态刷新动态效果
      */
-    if(this.data.nowKey != app.globalData.nowKey){
+    if (this.data.nowKey != app.globalData.nowKey) {
       this.setData({
         nowKey: app.globalData.nowKey,
         nowStepKey: app.globalData.nowStep,
@@ -176,7 +182,7 @@ Page({
       upDownKey: e.detail.current
     })
   },
-  toLogin(e){
+  toLogin(e) {
     wx.reLaunch({
       url: '/pages/login/index',
     })

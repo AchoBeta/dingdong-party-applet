@@ -1,0 +1,140 @@
+/* pages/activityDetail/index.wxss */
+page {
+  background-color: white
+}
+view, scroll-view, swiper, button, input, textarea, label, navigator, image {
+  box-sizing: content-box !important;
+}
+
+.TOP {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+.toptop {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  font-weight: 500;
+  font-size: 150%;
+  color: white;
+  /* word-spacing: -5rpx; */
+}
+.topBack{
+  width:60rpx;
+  /* height:50rpx; */
+  margin-left: 40rpx;
+  margin-right: 180rpx;
+}
+
+.main_container{
+  margin:20rpx 20rpx;
+  border:2rpx solid #ff5c5d;
+  border-radius: 15rpx;
+}
+
+.detail-msg {
+  width: 90%;
+  margin-top: 20rpx;
+  /* margin-left: 25rpx; */
+  /* padding-left: 10rpx; */
+  background-color: rgb(255, 255, 255);
+}
+.detail-msg__list {
+  margin-right: 10rpx;
+  height: 80rpx;
+  /* border-bottom: 1px solid #eeeeee; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+.detail-msg__intro {
+  margin-right: 10rpx;
+  height: auto;
+  min-height: 80rpx;
+  /* border-bottom: 1px solid #eeeeee; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.detail-msg__intro image {
+  position: absolute;
+  margin-right: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+.msg__intro {
+  padding-left: 80rpx;
+  /* padding-right: 20rpx; */
+}
+.detail-msg .detail-msg__list image {
+  width: 50rpx;
+  height: 50rpx;
+  padding-right: 30rpx;
+}
+
+.introduction{
+  margin-top:20rpx;
+  margin-bottom:50rpx;
+}
+.tag {
+  font-size: 24rpx;
+  vertical-align: middle;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0rpx 16rpx;
+  height: 48rpx;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  white-space: nowrap;
+  background-color: #E9837F;
+  color: var(--white);
+  border-radius: 6rpx;
+  margin-left: 30rpx;
+}
+.textContainer{
+  margin-top:10rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  height:auto;
+}
+.activityContent{
+  /* margin-top:50rpx; */
+  margin-bottom:50rpx;
+}
+.requirement{
+  margin-bottom:20rpx;
+}
+
+.buttonContainer{
+  display: flex;
+  flex-direction: column; /*垂直布局*/
+  align-items: center;/*水平方向居中*/
+  margin-top: 20rpx;
+}
+.button{
+  border-color:#ff5c5d !important;
+  background-color:#ff5c5d !important;
+  color:white !important;
+  /* width:160rpx !important; */
+}
+
+.ask_for_leave{
+  margin-top:50rpx;
+  margin-left: 550rpx;
+  margin-right: 30rpx;
+  margin-bottom: 50rpx;
+  color:#E9837F;
+  /* display: flex; */
+  text-align: right;
+}
+
+.cuIcon-right{
+  margin-left: 5rpx;
+}

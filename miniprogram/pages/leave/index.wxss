@@ -1,0 +1,44 @@
+/* pages/leave/index.wxss */
+
+.TOP {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+.toptop {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  font-weight: 500;
+  font-size: 150%;
+  color: white;
+  /* word-spacing: -5rpx; */
+}
+.topBack{
+  width:60rpx;
+  /* height:50rpx; */
+  margin-left: 40rpx;
+  margin-right: 180rpx;
+}
+
+.formContainer{
+  margin:20rpx 20rpx
+}
+.bg-color{
+  background-color: #ff5c5d;
+  color: white;
+  font-weight: normal !important;
+}
+.buttonContainer{
+  display: flex;
+  flex-direction: column; /*垂直布局*/
+  align-items: center;/*水平方向居中*/
+  margin-top: 50rpx;
+}
+.button{
+  border-color:#ff5c5d !important;
+  background-color:#ff5c5d !important;
+  color:white !important;
+  /* width:160rpx !important; */
+}

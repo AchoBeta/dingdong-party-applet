@@ -1,0 +1,66 @@
+<view class="TOP">
+  <view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
+  <view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop">
+    <view class="topBack" bindtap="topBack"><text class="cuIcon-back"></text></view>
+    <view>活 动 详 情</view>
+  </view>
+</view>
+<view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view><!-- 撑开高度 -->
+<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view>
+
+
+<view class="formContainer">
+  <form bindsubmit="formSubmit">
+    <view class="cu-form-group">
+      <view class="title">姓名：</view>
+      <input placeholder="xxx"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">学号：</view>
+      <input placeholder="xxx"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">所在党支部：</view>
+      <input placeholder="xxx"></input>
+    </view>
+    <view class="cu-form-group margin-top">
+      <view class="title">联系电话</view>
+      <input placeholder="请输入联系电话"></input>
+      <!-- <button size="mini" class="cu-btn bg-color shadow" open-type="getPhoneNum" bindtap="getPhoneNum">获取</button> -->
+    </view>
+    <view class="margin-top cu-form-group align-start">
+      <view class="title">请假理由：</view>
+      <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaBInput"
+        placeholder="请输入请假理由"></textarea>
+    </view>
+    <view>
+      <view class="cu-bar bg-white margin-top">
+        <view class="action">
+          上传请假证明：
+        </view>
+        <view class="action">
+          {{imgList.length}}/4
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+          <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage"
+            data-url="{{imgList[index]}}">
+            <image src='{{imgList[index]}}' mode='aspectFill'></image>
+            <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+              <text class="cuIcon-close"></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+            <text class="cuIcon-cameraadd"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="buttonContainer">
+      <button form-type="submit" class="button">
+        提交审核
+      </button>
+    </view>
+  </form>
+</view>

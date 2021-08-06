@@ -9,7 +9,7 @@ Page({
     fileList: undefined,
     winHeight: app.globalData.windowHeight,
     saveView: 0,
-    MODE:app.globalData.MODES,
+    MODE: app.globalData.MODES,
     topKKK: app.globalData.screenHeight,
     textBack: undefined
   },
@@ -26,12 +26,12 @@ Page({
    */
   onReady: function () {
     const that = this
-    wx.createSelectorQuery().select('#the-textView').boundingClientRect(function(rect){
-        let height = rect.height  // 节点的高度
-        that.setData({
-          textBack: height
-        })
-      }).exec()
+    wx.createSelectorQuery().select('#the-textView').boundingClientRect(function (rect) {
+      let height = rect.height // 节点的高度
+      that.setData({
+        textBack: height
+      })
+    }).exec()
   },
 
   /**
@@ -85,8 +85,7 @@ Page({
       wx.openDocument({
         filePath: e.currentTarget.dataset.path,
       })
-    }
-    else {
+    } else {
       wx.cloud.downloadFile({
         fileID: 'cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20-入党申请人培养考察手册（参考样本）.pdf',
         success(res) {

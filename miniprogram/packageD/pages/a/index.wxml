@@ -8,15 +8,13 @@
 	<view class="textBack" style="height:{{textBack}}px"></view>
 	<view class="textView" id="the-textView">
 		<text space decode class="text22">党组织应当及时将上级党委批准的预备党员编入党支部和党小组，对预备党员继续进行教育和考察。
-    </text>
+		</text>
 	</view>
-
 </view>
 
 <view class="nextStep">
-	<image wx:if="{{nowKey == 3 && nowStep == 1 && !MODE}}"
-	bindtap="toUpForm"
-	class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
+	<image wx:if="{{nowKey == 3 && nowStep == 1 && !MODE}}" bindtap="toUpForm" class="nextStepImg" mode="heightFix"
+		src="../../../picture/nextStep.png">
 	</image>
 </view>
 

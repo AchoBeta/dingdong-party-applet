@@ -2,38 +2,39 @@
 <view class="top2"></view>
 <view class="topText">支部大会讨论</view>
 <view bindtap="backNav">
-	<text class="cuIcon-back toBack"></text>
+  <text class="cuIcon-back toBack"></text>
 </view>
 <view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
-	<view class="textBack" style="height:{{textBack}}px"></view>
-	<view class="textView" id="the-textView">
-		<text space decode class="text22">召开讨论预备党员转正的支部大会，有表决权的到会人数必须超过应到会有表决权人数的半数。 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论预备党员转正的主要程序是： 
-（一）预备党员汇报对党的认识、入党动机、本人履历、家庭和主要社会关系情况，以及需向党组织说明的问题； 
-（二）入党介绍人介绍预备党员有关情况，并对其能否转正表明意见； 
-（三）支部委员会报告对预备党员的审查情况； 
-（四）与会党员对预备党员能否转正进行充分讨论，并采取无记名投票方式进行表决。
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞成人数超过应到会有表决权的正式党员的半数，才能通过预备党员转正的决议。因故不能
-到会的有表决权的正式党员，在支部大会召开前正式向党支部提出书面意见的，应当统计在
-票数内。 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论两个以上的预备党员转正时，必须逐个讨论和表决。 
+  <view class="textBack" style="height:{{textBack}}px"></view>
+  <view class="textView" id="the-textView">
+    <text space decode class="text22">召开讨论预备党员转正的支部大会，有表决权的到会人数必须超过应到会有表决权人数的半数。
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论预备党员转正的主要程序是：
+      （一）预备党员汇报对党的认识、入党动机、本人履历、家庭和主要社会关系情况，以及需向党组织说明的问题；
+      （二）入党介绍人介绍预备党员有关情况，并对其能否转正表明意见；
+      （三）支部委员会报告对预备党员的审查情况；
+      （四）与会党员对预备党员能否转正进行充分讨论，并采取无记名投票方式进行表决。
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞成人数超过应到会有表决权的正式党员的半数，才能通过预备党员转正的决议。因故不能
+      到会的有表决权的正式党员，在支部大会召开前正式向党支部提出书面意见的，应当统计在
+      票数内。
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支部大会讨论两个以上的预备党员转正时，必须逐个讨论和表决。
     </text>
-	</view>
+  </view>
 
-	<view class="fileDiv" wx:if="{{fileList}}">
-		<view class="fileBackView1"></view>
-		<view class="fileBackView2"></view>
-		<view class="fileView">
-			<view bindtap="previewFile" data-path="{{fileList[0].path}}" class="fileViewCell">
-				<image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
-				<text class="fileViewText">下载支部大会相关文件</text>
-			</view>
-			<view class="nextStep2">
-				<image wx:if="{{nowKey == 3 && nowStep == 11 && !MODE}}" bindtap="toUpForm" class="nextStepImg" mode="heightFix" src="../../../picture/nextStep.png">
-				</image>
-			</view>
-		</view>
-	</view>
+  <view class="fileDiv" wx:if="{{fileList}}">
+    <view class="fileBackView1"></view>
+    <view class="fileBackView2"></view>
+    <view class="fileView">
+      <view bindtap="previewFile" data-path="{{fileList[0].path}}" class="fileViewCell">
+        <image mode="aspectFit" class="fileViewIcon" src="../../../picture/file_v.png"></image>
+        <text class="fileViewText">下载支部大会相关文件</text>
+      </view>
+      <view class="nextStep2">
+        <image wx:if="{{nowKey == 3 && nowStep == 11 && !MODE}}" bindtap="toUpForm" class="nextStepImg" mode="heightFix"
+          src="../../../picture/nextStep.png">
+        </image>
+      </view>
+    </view>
+  </view>
 </view>
 
 

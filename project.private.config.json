@@ -1,54 +1,6 @@
 {
-  "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "enhance": true,
-    "postcss": true,
-    "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "nodeModules": true,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "uglifyFileName": true,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": false,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "enableEngineNative": false,
-    "bundle": false,
-    "useIsolateContext": true,
-    "useCompilerModule": false,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
-  },
-  "appid": "wxb5922ce236fc32c4",
-  "projectname": "%E5%85%9A%E5%BB%BA%E5%B0%8F%E5%8A%A9%E6%89%8B",
-  "libVersion": "2.11.1",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
+  "setting": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -141,6 +93,29 @@
           "name": "packageF/pages/a/index",
           "pathName": "packageF/pages/a/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "党建活动",
+          "pathName": "pages/activity/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "活动详情页",
+          "pathName": "pages/activityDetail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "请假",
+          "pathName": "pages/leave/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "活动详情-完成",
+          "pathName": "pages/activityDetailFinish/index",
           "scene": null
         }
       ]

@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    casid:undefined,
-    name:undefined
+    casid: undefined,
+    name: undefined
   },
 
   /**
@@ -16,92 +16,92 @@ Page({
   onLoad: function (options) {
     wx.showLoading({
       title: '加载中..',
-      mask:true
+      mask: true
     })
   },
-  hiddd(e){
+  hiddd(e) {
     wx.hideLoading({
       complete: (res) => {},
     })
   },
-  getCasid(e){
+  getCasid(e) {
     this.setData({
-      casid:e.detail.value
+      casid: e.detail.value
     })
   },
-  getName(e){
+  getName(e) {
     this.setData({
-      name:e.detail.value
+      name: e.detail.value
     })
   },
-  getInfo(e){
+  getInfo(e) {
     const that = this
     console.log(e)
-    
+
     wx.getSetting({
-      success:getS_res=> {
-        if (getS_res.authSetting['scope.userInfo']){
+      success: getS_res => {
+        if (getS_res.authSetting['scope.userInfo']) {
           wx.showLoading({
             title: '绑定中..',
           })
           app.globalData.userInfo = getS_res.userInfo
           wx.request({
             url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/bindCasId',
-            method:"POST",
-            header:{Authorization:wx.getStorageSync('Authorization')},
-            data:{
-              casId:that.data.casid,
-              name:that.data.name
+            method: "POST",
+            header: {
+              Authorization: wx.getStorageSync('Authorization')
             },
-            success(res){
+            data: {
+              casId: that.data.casid,
+              name: that.data.name
+            },
+            success(res) {
               console.log(res)
-              if(!res.data.error_code && res.data.code != "401"){
+              if (!res.data.error_code && res.data.code != "401") {
                 wx.showToast({
                   title: '欢迎使用',
                 })
                 wx.reLaunch({
                   url: '/pages/index/index',
                 })
-              }else if (res.data.code == "401"){
-                
-                if(res.data.msg == "你的账号已经绑定过了"){
+              } else if (res.data.code == "401") {
+                if (res.data.msg == "你的账号已经绑定过了") {
                   wx.reLaunch({
                     url: '/pages/index/index',
                   })
-                }else{
+                } else {
                   wx.showModal({
-                    title:"提示",
-                    content:res.data.msg
+                    title: "提示",
+                    content: res.data.msg
                   })
                 }
-              }
-              else{
+              } else {
                 wx.showModal({
-                  title:"提示",
-                  content:res.data.msg
+                  title: "提示",
+                  content: res.data.msg
                 })
               }
             },
-            fail(res){
+            fail(res) {
               wx.showModal({
-                title:"提示",
-                content:res.data.msg
+                title: "提示",
+                content: res.data.msg
               })
               console.log(res)
             },
-            complete(res){
+            complete(res) {
               wx.hideLoading({
                 complete: (res) => {
-                  
+
                 },
               })
             }
           })
-        }else{
+        } else {
           wx.showModal({
-            title:"提示",
-            content:"您选择了取消授权，点击确认重新选择，不然不能进行下一步哦"
-          },res=>{
+            title: "提示",
+            content: "您选择了取消授权，点击确认重新选择，不然不能进行下一步哦"
+          }, res => {
             if (res.confirm) {
               wx.openSetting()
             } else {}
@@ -110,9 +110,9 @@ Page({
       },
       complete: (res) => {},
     })
-    
+
   },
-  toLLL(e){
+  toLLL(e) {
     wx.reLaunch({
       url: '/pages/index/index',
     })

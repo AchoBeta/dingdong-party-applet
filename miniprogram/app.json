@@ -5,7 +5,11 @@
     "pages/about/index",
     "pages/login/index",
     "pages/application/index",
-    "pages/newsWeb/index"
+    "pages/newsWeb/index",
+    "pages/activity/index",
+    "pages/activityDetail/index",
+    "pages/activityDetailFinish/index",
+    "pages/leave/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -26,6 +30,11 @@
         "text": "党建",
         "iconPath": "picture/Honor.png",
         "selectedIconPath": "picture/HonorSelect.png"
+      },{
+        "pagePath": "pages/activity/index",
+        "text": "党建活动",
+        "iconPath": "picture/news.png",
+        "selectedIconPath": "picture/newsSelect.png"
       },{
         "pagePath": "pages/about/index",
         "text": "个人",

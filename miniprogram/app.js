@@ -63,7 +63,6 @@ App({
           this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
         }
       })
-
     } catch (e) {
       // Do something when catch error
     }
