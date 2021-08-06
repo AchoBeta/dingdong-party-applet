@@ -1,0 +1,13 @@
+<!--miniprogram/pages/binding/index.wxml-->
+<!-- <text>miniprogram/pages/binding/index.wxml</text> -->
+<view class="top">
+	<view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px">
+	<text>身份认证</text>
+	</view>
+</view>
+<view class="head3"></view>
+<view class="card">
+	<image class="cardPng" src="../../picture/wenhao.png" mode="aspectFit"></image>
+	<text>您当前尚未绑定身份信息</text>
+	<view class="cardBot" style="font-weight:bold;"><text>点击此处完成身份认证</text></view>
+</view>
