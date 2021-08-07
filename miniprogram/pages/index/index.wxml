@@ -1,5 +1,5 @@
 <!-- <view class="topText">{{process[rightLeftKey].name}}</view> -->
-<swiper style="height:{{windowHeight}}px;" circular bindchange="changeRightLeft" current="{{nowKey}}">
+<swiper style="height:{{windowHeight}}px;" bindchange="changeRightLeft" current="{{nowKey}}">
   <block wx:for="{{process}}" wx:key="name" wx:for-index="rightLeftIDX">
     <swiper-item current="{{nowKey}}">
       <view class="top">

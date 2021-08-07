@@ -27,7 +27,7 @@
         "selectedIconPath": "picture/newsSelect.png"
       },{
         "pagePath": "pages/index/index",
-        "text": "党建",
+        "text": "党建管理",
         "iconPath": "picture/Honor.png",
         "selectedIconPath": "picture/HonorSelect.png"
       },{
@@ -37,7 +37,7 @@
         "selectedIconPath": "picture/newsSelect.png"
       },{
         "pagePath": "pages/about/index",
-        "text": "个人",
+        "text": "个人中心",
         "iconPath": "picture/me.png",
         "selectedIconPath": "picture/meSelect.png"
       }]
