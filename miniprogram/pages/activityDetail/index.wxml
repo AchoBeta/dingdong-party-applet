@@ -1,16 +1,21 @@
-<view class="TOP">
+<!-- <view class="TOP">
   <view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
   <view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop">
     <view class="topBack" bindtap="topBack"><text class="cuIcon-back"></text></view>
     <view>活 动 详 情</view>
   </view>
 </view>
-<view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view><!-- 撑开高度 -->
-<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view>
+<view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view>
+<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view> -->
 
 <view class="main_container">
   <view class="container">
     <view class="detail-msg">
+      <view class="detail-msg__list">
+        <image src="../../picture/activityDetail/activity.png"></image>
+        <view>{{activity.name}}</view>
+      </view>
+      
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/date.svg"></image>
         <view>2021.04.30-2021.04.31</view>
@@ -18,22 +23,22 @@
 
       <view class="detail-msg__intro">
         <image src="../../picture/activityDetail/addr.png"></image>
-        <view class="msg__intro">广东东莞市莞城街道东莞理工学院莞城校区</view>
+        <view class="msg__intro">{{activity.address}}</view>
       </view>
 
-      <view class="detail-msg__list">
+      <!-- <view class="detail-msg__list">
         <image src="../../picture/activityDetail/tag.png"></image>
         <view>活动性质：必选活动/可选活动</view>
-      </view>
+      </view> -->
 
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/people.png"></image>
-        <view>负责人：刘星</view>
+        <view>负责人：{{activity.directorName}}</view>
       </view>
 
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/phone.png"></image>
-        <view>15015179049</view>
+        <view>{{activity.email}}</view>
       </view>
 
       <view class="detail-msg__list">
@@ -47,33 +52,45 @@
     <view class="tagContainer">
       <view class="tag">活动简介</view>
     </view>
-    <view class="textContainer"><text>文字内容</text></view>
+    <view class="textContainer"><text>{{activity.summary}}</text></view>
   </view>
 
   <view class="activityContent">
     <view class="tagContainer">
       <view class="tag">活动内容</view>
     </view>
-    <view class="textContainer"><text>文字内容</text></view>
+    <view class="textContainer"><text>{{activity.content}}</text></view>
   </view>
 
   <view class="requirement">
     <view class="tagContainer">
-      <view class="tag">报名要求</view>
+      <view class="tag">注意事项</view>
     </view>
-    <view class="textContainer"><text>无</text></view>
+    <view class="textContainer"><text>{{activity.attention}}</text></view>
   </view>
 
 </view>
 
+<!-- 
+<view class="buttonContainer">
+  <button disabled class="button" size="mini">已参与</button>
+</view> -->
 
 <view class="buttonContainer">
   <!-- <view class="examine">点击查看心得</view> -->
-  <button disabled class="button" size="mini">已参与</button>
+  <button wx:if="{{activity.status==3}}" class="button" size="mini" data-target="Modal">未开始</button>
+  <button wx:if="{{activity.status==4}}" class="button" size="mini" data-target="Modal">进行中</button>
+  <button wx:if="{{activity.status==5}}" bindtap="writeExperience" class="button" size="mini" data-target="Modal">已结束</button>
+  <button wx:if="{{activity.status==6}}" bindtap="applyParticipation" class="button" size="mini" data-target="Modal">申请参与</button>
 </view>
 
 <view class="ask_for_leave">
-  <view style="font-weight: bolder;" bindtap="navToleave">
+  
+  <view style="font-weight: bolder;" bindtap="navToleave" data-id="{{activity.id}}" wx:if="{{partStatus==2}}">
+    请假成功
+  </view>
+  <view style="font-weight: bolder;" bindtap="navToleave" data-id="{{activity.id}}" wx:if="{{partStatus==1}}">
     去请假<text class="cuIcon-right"></text>
   </view>
 </view>
+

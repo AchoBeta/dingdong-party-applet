@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationStyle":"default",
+  "navigationBarBackgroundColor":"#ff5c5d",
+  "navigationBarTextStyle":"white",
+  "navigationBarTitleText":"活动请假"
 }

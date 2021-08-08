@@ -40,6 +40,7 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   /* margin-left: 25rpx; */
   /* padding-left: 10rpx; */
   background-color: rgb(255, 255, 255);
+  font-size: 30rpx;
 }
 .detail-msg__list {
   margin-right: 10rpx;
@@ -138,3 +139,5 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 .cuIcon-right{
   margin-left: 5rpx;
 }
+
+

@@ -48,7 +48,8 @@ App({
       casid:undefined,
       class:undefined,
       branch_name:undefined,
-      MODES:false
+      MODES:false,
+      APIUrlHead : 'http://121.5.0.60:81'
     }
     try {
       const res = wx.getSystemInfoSync()

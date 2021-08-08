@@ -28,11 +28,13 @@ Page({
     this.setData({
       casid: e.detail.value
     })
+    console.log(this.data);
   },
   getName(e) {
     this.setData({
       name: e.detail.value
     })
+    console.log(this.data);
   },
   getInfo(e) {
     const that = this
@@ -40,6 +42,7 @@ Page({
 
     wx.getSetting({
       success: getS_res => {
+        console.log(getS_res);
         if (getS_res.authSetting['scope.userInfo']) {
           wx.showLoading({
             title: '绑定中..',

@@ -21,11 +21,47 @@ Page({
     })
   },
 
+  // showModal(e) {
+  //   this.setData({
+  //     modalName: e.currentTarget.dataset.target
+  //   })
+  // },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  writeExperience(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options.id)
+    this.requestActivity(options.id)
+  },
 
+  requestActivity(id) {
+    var that = this
+    wx.request({
+      url: app.globalData.APIUrlHead+'/api/dingdong-party/v1/organization/activities/'+id,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': '0563-8945'
+      },
+      success(res) {
+        that.setData({
+          activity : res.data.data.item
+        })
+        console.log(res)
+      }
+    })
   },
 
   /**

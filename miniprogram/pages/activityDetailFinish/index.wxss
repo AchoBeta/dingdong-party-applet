@@ -117,7 +117,8 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   display: flex;
   flex-direction: column; /*垂直布局*/
   align-items: center;/*水平方向居中*/
-  margin-top: 20rpx;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
 }
 .button{
   border-color:#ff5c5d !important;
@@ -142,6 +143,11 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 
 
 /* 评论区 */
+.commentArea{
+  margin-bottom:20rpx;
+  margin-top:20rpx;
+}
+
 .c-minheight {
   min-height: 80rpx;
 }
@@ -152,7 +158,7 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 .commentListContainer {
   padding: 10rpx 37.5rpx;
   padding-bottom: 10rpx;
-  margin-bottom: 100rpx;
+  margin-bottom: 20rpx;
   /* border: 1rpx solid #eeeeee; */
 }
 
@@ -213,10 +219,14 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 }
 
 .userName {
+  /* font-weight: bold; */
   font-size: 32rpx;
   color: rgb(27, 91, 166);
   display: block;
-  padding-top: 5rpx;
+  /* padding-top: 5rpx; */
+}
+.identity{
+  font-size: smaller;
 }
 
 .userTags{
@@ -286,3 +296,22 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   margin-left: 5rpx;
   font-size: 36rpx;
 }
+
+.writeArea{
+  text-align: left;
+  padding:10rpx 20rpx;
+  border: 0rpx solid white;
+  border-radius: 15rpx;
+}
+.publishExperience{
+  display: flex;
+  flex-direction: column; /*垂直布局*/
+  align-items: center;/*水平方向居中*/
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+.cu-form-group textarea{
+  min-height:500rpx;
+  height:auto;
+}
+

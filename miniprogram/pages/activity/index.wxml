@@ -17,28 +17,33 @@
 </view>
 
 <view>
-  <view class="list" wx:for="{{jobList}}">
-    <view class="item-whole" bindtap="navToDetail" data-id="{{index}}">
+  <view class="list" wx:for="{{activityList}}" wx:key="index">
+    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}">
       <view class="list-item list-item-left">
-        <image style="width:180rpx;height:180rpx;" src="{{item.imgUrl}}" />
+        <image style="width:180rpx;height:180rpx;" src="../../picture/activityDetail/dang.png" />
       </view>
       <view class="list-item list-item-middle">
-        <view class="f-bold f-black">{{item.name}}</view>
-        <!-- <view class="branch">{{item.companyName}}</view> -->
+        <view class="f-bold f-black activityName">{{item.name}}</view>
+        <view class="branch" wx:if="{{TabIndex==0 && item.partStatus==1}}">请假申请中</view>
+        <view class="branch" wx:if="{{TabIndex==0 && item.partStatus==2}}">请假成功</view>
+        <view class="branch" wx:if="{{TabIndex==0 && item.partStatus==3}}">申请加入活动中</view>
+        <view class="branch" wx:if="{{TabIndex==1}}"></view>
         <view class="time">
           <view class="time-item">
-            <image src="../../picture/myIcon.png"></image>
-            <view>报名截止：2021.08.07</view>
+            <image src="../../picture/activityDetail/date.svg"></image>
+            <view>报名截止：{{item.endTime}}</view>
           </view>
           <view class="time-item">
-            <image src="../../picture/myIcon.png"></image>
-            <view>活动时间：2021.08.08</view>
+            <image src="../../picture/activityDetail/date.svg"></image>
+            <view>活动时间：{{item.startTime}}</view>
           </view>
         </view>
       </view>
       <view class="list-item list-item-right">
-        <view class="list-item-tag"><text>进行中</text></view>
-        <!-- <view class="f-gray f30"> {{item.createTime}}</view> -->
+        <view class="list-item-tag" wx:if="{{item.status==3}}"><text>未开始</text></view>
+        <view class="list-item-tag" wx:if="{{item.status==4}}"><text>进行中</text></view>
+        <view class="list-item-tag" wx:if="{{item.status==5}}"><text>已结束</text></view>
+        <view class="list-item-tag" wx:if="{{item.status==6 && TabIndex==1}}"><text>可报名</text></view>
       </view>
     </view>
   </view>

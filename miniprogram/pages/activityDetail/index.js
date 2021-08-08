@@ -8,6 +8,8 @@ Page({
   data: {
     topLLL: app.globalData.StatusBar,
     topKKK: app.globalData.screenHeight,
+    activity: {},
+    partStatus: null //请假状态
   },
 
   topBack(e) {
@@ -15,17 +17,50 @@ Page({
     // console.log("asd")
   },
 
-  navToleave(e){
+  navToleave(e) {
     wx.navigateTo({
-      url: '../leave/index',
+      url: '../leave/index?id=' + e.currentTarget.dataset.id,
     })
+  },
+
+  textareaAInput(e) {
+    this.setData({
+      textareaAValue: e.detail.value
+    })
+  },
+
+  publishExperience() {
+    console.log(this.data.textareaAValue)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options.partStatus)
+    this.requestActivity(options.id)
+    this.setData({
+      partStatus: options.partStatus
+    })
 
+  },
+
+  requestActivity(id) {
+    var that = this
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': '0563-8945'
+      },
+      success(res) {
+        that.setData({
+          activity: res.data.data.item
+        })
+        console.log(res)
+      }
+    })
   },
 
   /**

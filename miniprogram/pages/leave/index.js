@@ -10,6 +10,10 @@ Page({
     topLLL: app.globalData.StatusBar,
     topKKK: app.globalData.screenHeight,
     imgList: [],
+    activityID: null,
+    userName: "默认名字",
+    userNum: "默认学号",
+    userBranch: "默认党支部"
   },
 
   topBack(e) {
@@ -58,11 +62,55 @@ Page({
     })
   },
 
+  formSubmit(e) {
+    // var activityId = this.data.activityID
+    var activityId = "1419572434029355010"
+    var userId = "1"
+    var reason = e.detail.value.reason
+
+    if (activityId == null) {
+      wx.showToast({
+        title: '请从活动详情页重新进入此页面',
+        icon: "none"
+      })
+    } else {
+      if (reason.length == 0) {
+        wx.showToast({
+          title: '请输入请假理由',
+          icon: "none"
+        })
+      } else {
+        wx.request({
+          url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + activityId + '/users/' + userId + '/leave',
+          data: {
+            reason : "reason"
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded',  // 默认值
+            'token': '2112-9473'
+          },
+          success(res) {
+            console.log(res.data.message)
+            if(res.data.message == "成功"){
+              wx.showToast({
+                title: '提交成功，请等待审核',
+                icon:"none"
+              })
+            }
+          }
+        })
+      }
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      activityID: options.id
+    })
   },
 
   /**
