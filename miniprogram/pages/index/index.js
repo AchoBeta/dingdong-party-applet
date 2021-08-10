@@ -35,12 +35,14 @@ Page({
       title: '数据加载中..',
     })
     app.Login(function (token) {
-
       wx.request({
-        url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/bind/check',
-        method: "GET",
+        // url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/bind/check',
+        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
+        method: "POST",
         header: {
-          Authorization: token
+          // Authorization: token
+          'content-type': 'application/json', // 默认值
+          'token': '3319-2320'
         },
         success(getR) {
           console.log(getR)
@@ -49,11 +51,14 @@ Page({
             that.setData({
               MODE: true
             })
+            console.log(app.globalData)
             wx.request({
-              url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/person/info',
+              url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
               method: "GET",
               header: {
-                Authorization: wx.getStorageSync('Authorization')
+                // Authorization: wx.getStorageSync('Authorization')
+                'content-type': 'application/json', // 默认值
+                'token': '3319-2320'
               },
               success(res) {
                 console.log(res)

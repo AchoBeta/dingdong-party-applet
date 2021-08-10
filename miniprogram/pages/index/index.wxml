@@ -1,9 +1,26 @@
 <!-- <view class="topText">{{process[rightLeftKey].name}}</view> -->
-<swiper style="height:{{windowHeight}}px;" bindchange="changeRightLeft" current="{{nowKey}}">
+<view wx:if="{{MODE == true}}">
+  <view class="top" style="position:fixed;top:0;z-index:6;width:100%;height:12.3%;background:#ff5c5d;">
+    <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px">
+      <text>身份认证</text>
+    </view>
+  </view>
+  <view class="head3" style="width: 100%;	height: 400rpx;	background: #ff5c5d;"></view>
+  <view class="card" style="position:fixed;	border-radius:20rpx;top:13%;left:3%;z-index:1;background:#fffbed;width:94%;	height:58%;	display:flex;	justify-items:center;	align-items:center;	flex-direction:column;color:rgb(190, 190, 190);">
+    <image class="cardPng" src="../../picture/wenhao.png" mode="aspectFit" style="height: 65%;width: 65%;"></image>
+    <text>您当前尚未绑定身份信息</text>
+    <view class="cardBot" style="position: absolute;bottom: 0%;	height: 16%;width: 100%;background-color: #e26d6e;	border-radius: 20rpx 20rpx 20rpx 20rpx;	border: 3rpx solid #ecebeb;	display: flex;align-items: center;	justify-content: center;font-size:130%;font-weight:600;color:#fff;word-spacing:-5rpx;font-weight:bold;">
+      <text>点击此处完成身份认证</text>
+    </view>
+  </view>
+</view>
+<view wx:else>
+  <swiper style="height:{{windowHeight}}px;" bindchange="changeRightLeft" current="{{nowKey}}">
   <block wx:for="{{process}}" wx:key="name" wx:for-index="rightLeftIDX">
     <swiper-item current="{{nowKey}}">
       <view class="top">
-        <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px"><text>{{process[rightLeftIDX].name}}</text></view>
+        <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px">
+          <text>{{process[rightLeftIDX].name}}</text></view>
       </view>
       <view class></view>
       <swiper vertical style="height:{{windowHeight}}px" current="{{upDownKey}}" bindchange="changeUpDown">
@@ -13,24 +30,24 @@
           </view>
           <view class="card">
             <image class="cardPng" src="{{mainPngSrc + (rightLeftIDX + 1) + gender + '.png'}}" mode="aspectFit"></image>
-            <view class="cardBot"  style="font-weight:bold;"><text>所 属 党 支 部：xx 党 支 部（示例）</text></view>
+            <view class="cardBot" style="font-weight:bold;"><text>所 属 党 支 部：xx 党 支 部（示例）</text></view>
           </view>
           <view class="shake">
             左右滑动查看更多
           </view>
           <view class="allPro">总进度</view>
-          <progress wx:if="{{rightLeftKey>=nowKey}}" class="progressTip" percent="{{rightLeftKey==nowKey?nowStepKey / step[rightLeftKey].step.numStep * 100:0}}" border-radius="2.4%" stroke-width="20rpx" activeColor="#ffe7e7"></progress>
-          <progress wx:if="{{rightLeftKey<nowKey}}" class="progressTip" percent="100" border-radius="2.4%" stroke-width="20rpx" activeColor="#ffe7e7"></progress>
+          <progress wx:if="{{rightLeftKey>=nowKey}}" class="progressTip"
+            percent="{{rightLeftKey==nowKey?nowStepKey / step[rightLeftKey].step.numStep * 100:0}}" border-radius="2.4%"
+            stroke-width="20rpx" activeColor="#ffe7e7"></progress>
+          <progress wx:if="{{rightLeftKey<nowKey}}" class="progressTip" percent="100" border-radius="2.4%"
+            stroke-width="20rpx" activeColor="#ffe7e7"></progress>
           <view bindtap="{{rightLeftKey==nowKey?'toNowStep':''}}">
-            <image src="{{rightLeftIDX == nowKey?step[nowKey].step.url+nowStepKey+'.png':step[rightLeftIDX].step.url+'1.png'}}" 
-              mode="scaleToFill" 
-              class="nowCardTipPng" 
-              style="{{rightLeftIDX == nowKey?'':'filter: grayscale(85%)'}};">
+            <image
+              src="{{rightLeftIDX == nowKey?step[nowKey].step.url+nowStepKey+'.png':step[rightLeftIDX].step.url+'1.png'}}"
+              mode="scaleToFill" class="nowCardTipPng" style="{{rightLeftIDX == nowKey?'':'filter: grayscale(85%)'}};">
             </image>
-            <image 
-              wx:if="{{rightLeftIDX != nowKey}}" 
-              src="../../picture/lock.png" 
-              class="nowCardTipLock" mode="aspectFit">
+            <image wx:if="{{rightLeftIDX != nowKey}}" src="../../picture/lock.png" class="nowCardTipLock"
+              mode="aspectFit">
             </image>
           </view>
           <view class="toDown">下滑查看更多</view>
@@ -38,14 +55,21 @@
         <swiper-item class="head2">
           <scroll-view class="downScroll" scroll-y>
             <block wx:for="{{step[rightLeftIDX].step.listStep}}" wx:key="*this" wx:for-index="stepIDX">
-              <view class="downCardTip" bindtap="downToStep" data-s="{{stepIDX}}" data-r="{{rightLeftKey}}" style="border-radius:20rpx">
-                <image wx:if="{{((stepIDX + 1) < nowStepKey && rightLeftIDX <= nowKey) || rightLeftIDX < nowKey }}" class="hasFinish" src="../../picture/finish.png" mode="aspectFit">
+              <view class="downCardTip" bindtap="downToStep" data-s="{{stepIDX}}" data-r="{{rightLeftKey}}"
+                style="border-radius:20rpx">
+                <image wx:if="{{((stepIDX + 1) < nowStepKey && rightLeftIDX <= nowKey) || rightLeftIDX < nowKey }}"
+                  class="hasFinish" src="../../picture/finish.png" mode="aspectFit">
                 </image>
-                <image  mode="scaleToFill" wx:if="{{rightLeftIDX == nowKey}}" class="{{(stepIDX + 1) > nowStepKey?'downCardTipNoImg':'downCardTipHadImg'}}" style="{{(stepIDX + 1) < nowStepKey?'top: -84%':''}};" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                <image mode="scaleToFill" wx:if="{{rightLeftIDX == nowKey}}"
+                  class="{{(stepIDX + 1) > nowStepKey?'downCardTipNoImg':'downCardTipHadImg'}}"
+                  style="{{(stepIDX + 1) < nowStepKey?'top: -84%':''}};"
+                  src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
                 </image>
-                <image  mode="scaleToFill" lazy-load wx:if="{{rightLeftIDX > nowKey}}" class="downCardTipNoImg" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                <image mode="scaleToFill" lazy-load wx:if="{{rightLeftIDX > nowKey}}" class="downCardTipNoImg"
+                  src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
                 </image>
-                <image  mode="scaleToFill" lazy-load wx:if="{{rightLeftIDX < nowKey}}" class="downCardTipHadImg" style="top: -84%" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
+                <image mode="scaleToFill" lazy-load wx:if="{{rightLeftIDX < nowKey}}" class="downCardTipHadImg"
+                  style="top: -84%" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
                 </image>
                 <!-- <image wx:if="{{stepIDX + 1 > nowStepKey}}" lazy-load
                   class="downCardTipNoImg" src="{{step[rightLeftIDX].step.url + (stepIDX + 1) + '.png'}}">
@@ -101,4 +125,4 @@
 <view class="toRemindFixed" bindtap="toLogin" wx:if="{{!MODE}}">
   <text class="toRemindIcon">登录</text>
 </view>
-
+</view>

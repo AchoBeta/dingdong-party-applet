@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    casid: undefined,
+    studentId: undefined,
     name: undefined
   },
 
@@ -26,7 +26,7 @@ Page({
   },
   getCasid(e) {
     this.setData({
-      casid: e.detail.value
+      studentId: e.detail.value
     })
     console.log(this.data);
   },
@@ -39,7 +39,10 @@ Page({
   getInfo(e) {
     const that = this
     console.log(e)
-
+    // var user = {
+    //   studentId: app.globalData.studentId,
+    //   name: app.globalData.name
+    // }
     wx.getSetting({
       success: getS_res => {
         console.log(getS_res);
@@ -48,16 +51,17 @@ Page({
             title: '绑定中..',
           })
           app.globalData.userInfo = getS_res.userInfo
+          console.log(wx.getStorageSync('Authorization'))
+          
           wx.request({
-            url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/bindCasId',
+            url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
             method: "POST",
             header: {
-              Authorization: wx.getStorageSync('Authorization')
+              // Authorization: wx.getStorageSync('Authorization')
+              'content-type': 'application/json', // 默认值
+              'token': '3319-2320'
             },
-            data: {
-              casId: that.data.casid,
-              name: that.data.name
-            },
+            data: user,
             success(res) {
               console.log(res)
               if (!res.data.error_code && res.data.code != "401") {

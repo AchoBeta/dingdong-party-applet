@@ -49,7 +49,23 @@ App({
       class:undefined,
       branch_name:undefined,
       MODES:false,
-      APIUrlHead : 'http://121.5.0.60:81'
+      APIUrlHead : 'http://121.5.0.60:81',
+      user:{
+        "userId": "",
+        "name": "",
+        "openId": "",
+        "studentId": "",
+        "teacherId": "",
+        "branchId": "",
+        "branchName": "",
+        "groupId": "",
+        "groupName": "",
+        "stageId": 0,
+        "stage": 0,
+        "taskId": 0,
+        "status": 0,
+        "statusReason": ""
+      }
     }
     try {
       const res = wx.getSystemInfoSync()
@@ -99,6 +115,7 @@ App({
                       code: res.code
                     }, //data
                   ).then((e) => {
+                    console.log(e)
                     api.getStorage
                     var token = e.data.Authorization
                     api.setStorage('Authorization', token)
