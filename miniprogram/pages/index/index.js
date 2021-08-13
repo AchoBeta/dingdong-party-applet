@@ -97,10 +97,7 @@ Page({
                       app.globalData.nowKey = 3
                       app.globalData.nowStep = 11
                     }
-
-
                     wx.hideLoading()
-
                   }).catch((res) => {
                     that.setData({
                       nowKey: 3,

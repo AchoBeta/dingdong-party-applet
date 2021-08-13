@@ -18,8 +18,9 @@ Page({
   },
 
   navToleave(e) {
+    // console.log(e)
     wx.navigateTo({
-      url: '../leave/index?id=' + e.currentTarget.dataset.id,
+      url: '../leave/index?id=' + e.currentTarget.dataset.id+'&activityName='+e.currentTarget.dataset.activityname,
     })
   },
 
@@ -33,32 +34,106 @@ Page({
     console.log(this.data.textareaAValue)
   },
 
+  //申请参与活动
+  async applyParticipation() {
+    var activityId = this.data.activityID
+    // var activityId = ""
+    var userId = wx.getStorageSync('userInfo').userId
+
+    if (activityId == null) {
+      wx.showToast({
+        title: '请从活动详情页重新进入此页面',
+        icon: "none"
+      })
+    } else {
+      await app.getToken()//判断token是否过期
+      var token = wx.getStorageSync('token')
+      wx.request({
+        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + activityId + '/users/' + userId + '/participate',
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          'token': token
+        },
+        success(res) {
+          if (res.data.message == "成功") {
+            wx.showToast({
+              title: '提交成功',
+            })
+            setTimeout(res=>{
+              wx.navigateBack({
+                delta: 1,
+              })
+            },1500)
+          } else {
+            wx.showToast({
+              title: '提交失败',
+            })
+          }
+        }
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // console.log(options.partStatus)
     this.requestActivity(options.id)
-    this.setData({
-      partStatus: options.partStatus
-    })
+    this.requestNumOfPeople(options.id)
 
+    this.setData({
+      partStatus: options.partStatus,
+      activityID: options.id
+    })
   },
 
-  requestActivity(id) {
+  //根据id请求活动详情数据
+  async requestActivity(id) {
     var that = this
+    await app.getToken()//判断token是否过期
+    var token = wx.getStorageSync('token')
     wx.request({
       url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id,
       method: 'GET',
       header: {
         'content-type': 'application/json', // 默认值
-        'token': '0563-8945'
+        'token': token
+      },
+      success(res) {
+        if (res.data.message == "成功") {
+          that.setData({
+            activity: res.data.data.item
+          })
+        }else{
+          wx.showToast({
+            title: '请重新加入页面',
+            icon: "loading"
+          })
+        }
+        // console.log(res)
+      }
+    })
+  },
+
+  //获取活动人数
+  async requestNumOfPeople(id){
+    var that = this
+    await app.getToken()//判断token是否过期
+    var token = wx.getStorageSync('token')
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/'+id+'/users',
+      method: 'GET',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'token': token
       },
       success(res) {
         that.setData({
-          activity: res.data.data.item
+          NumOfPeople : res.data.data.items.length
         })
-        console.log(res)
+        // console.log(res)
       }
     })
   },

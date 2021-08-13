@@ -62,10 +62,9 @@ Page({
     })
   },
 
-  formSubmit(e) {
-    // var activityId = this.data.activityID
-    var activityId = "1419572434029355010"
-    var userId = "1"
+  async formSubmit(e) {
+    var activityId = this.data.activityID
+    var userId = wx.getStorageSync('userInfo').userId
     var reason = e.detail.value.reason
 
     if (activityId == null) {
@@ -80,22 +79,34 @@ Page({
           icon: "none"
         })
       } else {
+        await app.getToken() //判断token是否过期
+        var token = wx.getStorageSync('token')
         wx.request({
           url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + activityId + '/users/' + userId + '/leave',
           data: {
-            reason : "reason"
+            reason: reason
           },
           method: 'POST',
           header: {
-            'content-type': 'application/x-www-form-urlencoded',  // 默认值
-            'token': '2112-9473'
+            'content-type': 'application/x-www-form-urlencoded', // 默认值
+            'token': token
           },
           success(res) {
-            console.log(res.data.message)
-            if(res.data.message == "成功"){
+            // console.log(res)
+            if (res.data.message == "成功") {
               wx.showToast({
                 title: '提交成功，请等待审核',
-                icon:"none"
+                icon: "none"
+              })
+              setTimeout(res => {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }, 1500)
+            } else {
+              wx.showToast({
+                title: '提交失败，请重新提交',
+                icon: "none"
               })
             }
           }
@@ -104,10 +115,27 @@ Page({
     }
   },
 
+  // 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(wx.getStorageSync('userInfo').name.length)
+    const name = wx.getStorageSync('userInfo').name
+    const studentId = wx.getStorageSync('userInfo').studentId
+    const branchName = wx.getStorageSync('userInfo').branchName
+    if (name != null && name.length != 0) {
+      this.setData({
+        userName: name,
+        userNum: studentId,
+        userBranch: branchName,
+        activityName: options.activityName
+      })
+    }else{
+      //未完善，等用户登录页面
+    }
+
     this.setData({
       activityID: options.id
     })

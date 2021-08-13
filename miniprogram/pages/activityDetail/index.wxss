@@ -61,7 +61,9 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   align-items: center;
   margin-bottom: 10rpx;
 }
-
+.activityTime{
+  font-size: 27rpx;
+}
 .detail-msg__intro image {
   position: absolute;
   margin-right: 30rpx;
@@ -128,7 +130,7 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 
 .ask_for_leave{
   margin-top:50rpx;
-  margin-left: 550rpx;
+  margin-left: 500rpx;
   margin-right: 30rpx;
   margin-bottom: 50rpx;
   color:#E9837F;

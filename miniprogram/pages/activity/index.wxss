@@ -1,10 +1,11 @@
 /* pages/activity/index.wxss */
 page{
   background-color: white;
+  /* height: 100%; */
 }
 .TOP {
   position: fixed;
-  z-index: 999;
+  z-index: 500;
   top: 0;
   width: 100%;
   height: auto;
@@ -15,9 +16,13 @@ page{
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  font-size: 150%;
+  font-size: 130%;
   color: white;
   word-spacing: -5rpx;
+}
+
+.ListContainer{
+  margin-top:120rpx
 }
 
 
@@ -25,15 +30,18 @@ page{
   /* border-top: 1rpx solid orangered; */
   width:100%;
   background-color:white;
-  margin-top:10rpx;
-  margin-bottom: 20rpx;
+  padding-top:10rpx;
+  padding-bottom: 20rpx;
+  position: fixed;
+  z-index: 500;
 }
 .tabs_container{
   margin:5rpx 10rpx;
   border:5rpx solid #E9837F;
   /* border-radius: 20rpx; */
-  height:60rpx;
+  height:80rpx;
   display: flex;
+  font-size: 30rpx;
 }
 .tabs_item{
   display: flex;
@@ -46,7 +54,6 @@ page{
   background-color: #E9837F;
   /* border-bottom: 5rpx solid currentColor; */
 }
-
 
 .list {
   width: 100%;

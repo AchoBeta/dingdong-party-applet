@@ -68,6 +68,9 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   width: 50rpx;
   height: 50rpx;
 }
+.activityTime{
+  font-size: 27rpx;
+}
 .msg__intro {
   padding-left: 80rpx;
   /* padding-right: 20rpx; */
@@ -156,7 +159,7 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   display: block;
 }
 .commentListContainer {
-  padding: 10rpx 37.5rpx;
+  padding: 10rpx 37.5rpx 10rpx 20rpx;
   padding-bottom: 10rpx;
   margin-bottom: 20rpx;
   /* border: 1rpx solid #eeeeee; */
@@ -225,9 +228,6 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   display: block;
   /* padding-top: 5rpx; */
 }
-.identity{
-  font-size: smaller;
-}
 
 .userTags{
   margin-left:5rpx
@@ -285,10 +285,11 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
   height: 40rpx;
 }
 
-.ListItem_CreatTime {
-  font-size: 32rpx;
+.ListItem_Time {
+  /* font-size: 32rpx; */
   color: rgb(186, 186, 186);
   padding-right: 2px;
+  font-size: small;
 }
 
 .comment_button {

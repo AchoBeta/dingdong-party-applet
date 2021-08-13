@@ -15,10 +15,10 @@
         <image src="../../picture/activityDetail/activity.png"></image>
         <view>{{activity.name}}</view>
       </view>
-      
+
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/date.svg"></image>
-        <view>2021.04.30-2021.04.31</view>
+        <view class="activityTime">{{activity.startTime}}——{{activity.endTime}}</view>
       </view>
 
       <view class="detail-msg__intro">
@@ -43,7 +43,7 @@
 
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/peopleNum.png"></image>
-        <view>29/35</view>
+        <view>{{NumOfPeople}}</view>
       </view>
     </view>
   </view>
@@ -62,9 +62,13 @@
     <view class="textContainer"><text>{{activity.content}}</text></view>
   </view>
 
-  <view class="buttonContainer">
-  <button bindtap="writeExperience" class="button" size="mini" data-target="Modal">填写心得</button>
-</view>
+  <view class="buttonContainer" wx:if="{{!updateExperience}}">
+    <button bindtap="writeExperience" class="button" size="mini" data-target="Modal">填写心得</button>
+  </view>
+
+  <view class="buttonContainer" wx:if="{{updateExperience}}">
+    <button bindtap="writeExperience" class="button" size="mini" data-target="Modal">更改心得</button>
+  </view>
 </view>
 
 
@@ -82,46 +86,49 @@
       <text class="c-block commentAmountText">1人评论</text>
     </view> -->
 
-    <view class="commentListItem">
-      <navigator class="nav_userlink" hover-class="navigator-hover">
+    <view class="commentListItem" wx:for="{{commentList}}" wx:key="index">
+      <!-- <navigator class="nav_userlink" hover-class="navigator-hover">
         <view class="likeuser">
           <image class="useravatar" mode="aspectFill"
             src="https://img1.baidu.com/it/u=3347598173,1161261498&fm=26&fmt=auto&gp=0.jpg" />
         </view>
-      </navigator>
+      </navigator> -->
       <view class="c-minheight user_comment">
         <view class="userNameContainer">
           <view hover-class="navigator-hover" class="userName_Tags">
-            <text class="userName">LDJ</text>
-            <text class="identity">（入党积极分子）</text>
+            <text class="userName">{{item.name}}</text>
+            <text class="userName" wx:if="{{item.userId.length==0}}">佚名</text>            
+            <text class="ListItem_Time" decode="true">&nbsp;&nbsp;({{item.time}})</text>
           </view>
-          <view class="deleteUserComment" bindtap="deleteComment" wx:if="{{item.src == userinfo.avatarUrl}}"
-            data-comment_id="{{item.comment_id}}">
+          <!-- 删除评论功能 -->
+          <view class="deleteUserComment" bindtap="deleteComment" wx:if="{{userId == item.userId}}"
+            data-comment_id="{{item.id}}">
             <image class="comment_image"
               src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F24%2F0057445a891e4aa.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617070496&t=5cfcdd990a564ae35f858e2056fff231">
             </image>
           </view>
         </view>
-        <text class="c-block comment_text">不忘初心，牢记使命</text>
+        <text class="c-block comment_text">　{{item.content}}</text> <!-- 万能空格 -->
         <view class="comment_operate">
           <view class="comment_operate_two">
-            <view class="commentLike">
+            <!-- <view class="commentLike">
               <view class="comment_image" bindtap="" data-comment_id="{{item.comment_id}}">
                 <text class="cuIcon-appreciate text-gray"></text>
               </view>
               <text>0</text>
             </view>
-            <!-- <view class="commentLike">
-            <view class="comment_image" bindtap="" data-comment_id="{{item.comment_id}}">
-              <text class="cuIcon-comment text-gray"></text>
-            </view>
-            <text>0</text>
-          </view> -->
+            <view class="commentLike">
+              <view class="comment_image" bindtap="" data-comment_id="{{item.comment_id}}">
+                <text class="cuIcon-comment text-gray"></text>
+              </view>
+              <text>0</text>
+            </view> -->
           </view>
-          <text class="ListItem_CreatTime">2021.08.04 16:35:11</text>
+          
         </view>
       </view>
     </view>
+    
 
     <!-- <button class="comment_button" hover-class="button-hover" size="default" type="default">
     写点评
@@ -140,10 +147,14 @@
     </view>
     <view class="writeArea">
       <view class="cu-form-group">
-        <textarea maxlength="1000" bindinput="textareaAInput" placeholder="请填写心得体会"></textarea>
+        <textarea wx:if="{{!updateExperience}}" maxlength="1000" bindinput="textareaInput" placeholder="请填写心得体会"></textarea>
+        <textarea wx:if="{{updateExperience}}" maxlength="1000" bindinput="textareaInput">{{textareaValue}}</textarea>
       </view>
-      <view class="publishExperience">
+      <view class="publishExperience" wx:if="{{!updateExperience}}">
         <button bindtap="publishExperience" class="button" size="mini" data-target="Modal">提交</button>
+      </view>
+      <view class="publishExperience" wx:if="{{updateExperience}}">
+        <button bindtap="updateExperience" class="button" size="mini" data-target="Modal">更新</button>
       </view>
     </view>
   </view>

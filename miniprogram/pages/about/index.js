@@ -1,4 +1,7 @@
 //index.js
+
+const api = require("../../style/api")
+
 //获取应用实例
 const app = getApp()
 
@@ -8,10 +11,10 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    keyName:undefined,
-    casid:undefined,
-    name:undefined,
-    class:undefined,
+    keyName: undefined,
+    casid: undefined,
+    name: undefined,
+    class: undefined,
     topLLL: app.globalData.StatusBar,
     topKKK: app.globalData.screenHeight
   },
@@ -23,10 +26,10 @@ Page({
   },
   onLoad: function () {
     this.setData({
-      keyName:app.globalData.keyName,
-      name:app.globalData.name,
-      casid:app.globalData.casid,
-      class:app.globalData.class
+      keyName: app.globalData.keyName,
+      name: app.globalData.name,
+      casid: app.globalData.casid,
+      class: app.globalData.class
     })
     if (app.globalData.userInfo) {
       this.setData({
@@ -75,14 +78,17 @@ Page({
       }
     })
   },
-  Login(e){
+  Login(e) {
     wx.reLaunch({
       url: '/pages/login/index',
     })
   },
-  toApplication(e){
+  toApplication(e) {
     wx.navigateTo({
       url: '/pages/application/index',
     })
-  }
+  },
+
+  
+
 })
