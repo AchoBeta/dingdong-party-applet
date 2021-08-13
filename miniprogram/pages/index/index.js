@@ -31,18 +31,22 @@ Page({
     const that = this
     var step = ''
     var key = ''
+    var user = app.globalData.user
     wx.showLoading({
       title: '数据加载中..',
     })
     app.Login(function (token) {
       wx.request({
         // url: 'https://www.dingdongtongxue.com/Party/public/index.php/client/v1/user/bind/check',
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
+        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/login',
         method: "POST",
         header: {
           // Authorization: token
           'content-type': 'application/json', // 默认值
           'token': '3319-2320'
+        },
+        data:{
+          openId: 1,
         },
         success(getR) {
           console.log(getR)
@@ -51,9 +55,9 @@ Page({
             that.setData({
               MODE: true
             })
-            console.log(app.globalData)
+            console.log(app.globalData.user)
             wx.request({
-              url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
+              url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/+'+'{userId}'+'/info',
               method: "GET",
               header: {
                 // Authorization: wx.getStorageSync('Authorization')
@@ -190,6 +194,11 @@ Page({
   toLogin(e) {
     wx.reLaunch({
       url: '/pages/login/index',
+    })
+  },
+  toBinding(e) {
+    wx.navigateTo({
+      url: '../userBinding/index',
     })
   }
 })

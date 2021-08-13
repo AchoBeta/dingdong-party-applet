@@ -51,20 +51,20 @@ App({
       MODES:false,
       APIUrlHead : 'http://121.5.0.60:81',
       user:{
-        "userId": "",
-        "name": "",
-        "openId": "",
-        "studentId": "",
-        "teacherId": "",
-        "branchId": "",
-        "branchName": "",
-        "groupId": "",
-        "groupName": "",
-        "stageId": 0,
-        "stage": 0,
-        "taskId": 0,
-        "status": 0,
-        "statusReason": ""
+        "userId": "",//用户ID
+        "name": "",//姓名
+        "openId": "",//微信openid
+        "studentId": "",//学号
+        "teacherId": "",//教师工号
+        "branchId": "",//党支部id
+        "branchName": "",//党支部名称
+        "groupId": "",//党组id
+        "groupName": "",//党组名称
+        "stageId": 0,//所属阶段
+        "stage": 0,//期数
+        "taskId": 0,//阶段任务
+        "status": 0,//信息审核状态，1：通过 2：不通过
+        "statusReason": ""//不通过原因
       }
     }
     try {

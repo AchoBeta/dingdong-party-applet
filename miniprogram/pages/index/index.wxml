@@ -6,10 +6,10 @@
     </view>
   </view>
   <view class="head3" style="width: 100%;	height: 400rpx;	background: #ff5c5d;"></view>
-  <view class="card" style="position:fixed;	border-radius:20rpx;top:13%;left:3%;z-index:1;background:#fffbed;width:94%;	height:58%;	display:flex;	justify-items:center;	align-items:center;	flex-direction:column;color:rgb(190, 190, 190);">
+  <view class="card" style="position:fixed;	border-radius:20rpx;top:13%;left:3%;z-index:1;background:#fffbed;width:94%;	height:58%;	display:flex;	justify-items:center;	align-items:center;	flex-direction:column;color:#999;">
     <image class="cardPng" src="../../picture/wenhao.png" mode="aspectFit" style="height: 65%;width: 65%;"></image>
     <text>您当前尚未绑定身份信息</text>
-    <view class="cardBot" style="position: absolute;bottom: 0%;	height: 16%;width: 100%;background-color: #e26d6e;	border-radius: 20rpx 20rpx 20rpx 20rpx;	border: 3rpx solid #ecebeb;	display: flex;align-items: center;	justify-content: center;font-size:130%;font-weight:600;color:#fff;word-spacing:-5rpx;font-weight:bold;">
+    <view class="cardBot" style="position: absolute;bottom: 0%;	height: 16%;width: 100%;background-color: #e26d6e;	border-radius: 20rpx 20rpx 20rpx 20rpx;	border: 3rpx solid #ecebeb;	display: flex;align-items: center;	justify-content: center;font-size:130%;font-weight:600;color:#fff;word-spacing:-5rpx;font-weight:bold;" bindtap="toBinding">
       <text>点击此处完成身份认证</text>
     </view>
   </view>
