@@ -2,7 +2,7 @@
 const base_url = 'https://www.dingdongtongxue.com/Party/public/index.php'
 const api = require("./style/api.js")
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     const that = this
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -16,6 +16,8 @@ App({
         traceUser: true,
       })
     }
+
+    this.getToken() //判断token是否过期
 
     // 登录
     // 获取用户信息
@@ -35,6 +37,8 @@ App({
         }
       }
     })
+
+
     this.globalData = {
       userInfo: null,
       windowHeight: undefined,
@@ -43,29 +47,14 @@ App({
       nowKey: 3,
       fileList: [1],
       baseUrl: 'https://www.dingdongtongxue.com/Party/public/index.php',
-      keyName:undefined,
-      name:undefined,
-      casid:undefined,
-      class:undefined,
-      branch_name:undefined,
-      MODES:false,
-      APIUrlHead : 'http://121.5.0.60:81',
-      user:{
-        "userId": "",//用户ID
-        "name": "",//姓名
-        "openId": "",//微信openid
-        "studentId": "",//学号
-        "teacherId": "",//教师工号
-        "branchId": "",//党支部id
-        "branchName": "",//党支部名称
-        "groupId": "",//党组id
-        "groupName": "",//党组名称
-        "stageId": 0,//所属阶段
-        "stage": 0,//期数
-        "taskId": 0,//阶段任务
-        "status": 0,//信息审核状态，1：通过 2：不通过
-        "statusReason": ""//不通过原因
-      }
+      keyName: undefined,
+      name: undefined,
+      casid: undefined,
+      class: undefined,
+      branch_name: undefined,
+      MODES: false,
+      // APIUrlHead : 'http://121.5.0.60:81'
+      APIUrlHead: 'https://www.dingdongtongxue.com/a'
     }
     try {
       const res = wx.getSystemInfoSync()
@@ -83,9 +72,94 @@ App({
     } catch (e) {
       // Do something when catch error
     }
-
-
   },
+
+  //获取openid
+  async getOpenId() {
+    var userInfo = {}
+
+    await wx.cloud.callFunction({
+      name: 'getOpenID',
+      data: {}
+    }).then((res) => {
+      //console.log('[云函数] [getOpenID] user openid: ', res.result.openid);
+      userInfo.openId = res.result.openid
+    }).catch((err) => {
+      console.log(err)
+    })
+
+    // console.log(userInfo)
+    wx.setStorageSync("userInfo", userInfo); //存入缓存
+  },
+
+  //判断token是否过期
+  async getToken() {
+    var that = this
+    return new Promise((resolve, reject) => {
+      const userInfo = wx.getStorageSync('userInfo')
+      console.log(userInfo)
+      let token_deadtime = wx.getStorageSync('token_deadtime')
+      //判断有没有进行微信的用户登录，是否有openid
+      if (userInfo.openId.length != 0) {
+        if ((new Date().getTime() - token_deadtime) > 1800000) { //判断token是否过期，30min
+          that.requestToken()
+        } else {
+          // console.log("token未过期")
+        }
+      } else {
+        //引导用户重新执行getOpenId
+        
+      }
+      resolve('成功')
+    })
+  },
+
+  //使用接口获取token
+  requestToken() {
+    const userInfo = wx.getStorageSync('userInfo')
+    var that = this
+    wx.request({
+      url: that.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/login',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+      },
+      data: {
+        openId: userInfo.openId
+      },
+      success(res) {
+        if (res.data.message == "成功") {
+          var userInfo = wx.getStorageSync('userInfo')
+          userInfo.userId = res.data.data.item.userId
+          userInfo.name = res.data.data.item.name
+          userInfo.studentId = res.data.data.item.studentId
+          userInfo.teacherId = res.data.data.item.teacherId
+          userInfo.branchId = res.data.data.item.branchId
+          userInfo.branchName = res.data.data.item.branchName
+          userInfo.groupId = res.data.data.item.groupId
+          userInfo.groupName = res.data.data.item.groupName
+          userInfo.stageId = res.data.data.item.stageId
+          userInfo.stage = res.data.data.item.stage
+          userInfo.taskId = res.data.data.item.taskId
+          userInfo.status = res.data.data.item.status
+          userInfo.statusReason = res.data.data.item.statusReason
+          userInfo = res.data.data.item
+          // console.log(res.data.data.item.userId)
+          wx.setStorageSync('userInfo', userInfo)
+
+          //设置token的缓存和过期时间
+          wx.setStorageSync('token', res.data.data.token)
+          wx.setStorageSync('token_deadtime', (new Date().getTime()))
+        } else {
+          wx.showToast({
+            title: '请重新登录',
+            icon: "error"
+          })
+        }
+      }
+    })
+  },
+
   Login(callBack) {
     wx.showLoading({
       title: '加载中..',
@@ -107,6 +181,7 @@ App({
           if (res.code) {
             wx.login({
               success: res => {
+                // console.log(res)
                 if (res.code) {
                   //发起网络请求
                   api.request.get(
@@ -121,17 +196,16 @@ App({
                     api.setStorage('Authorization', token)
                     api.setStorage('Authorization_deadtime', (new Date().getTime()))
                     callBack(token)
-                  }).catch((err)=>{
+                  }).catch((err) => {
                     wx.showModal({
                       title: '警告',
                       content: '账号登录失败或已失效，请点击确认重新登录',
-                      success (res) {
+                      success(res) {
                         if (res.confirm) {
                           wx.navigateTo({
                             url: '/pages/login/index'
                           })
-                        } else if (res.cancel) {
-                        }
+                        } else if (res.cancel) {}
                       }
                     })
                     wx.hideLoading()
@@ -139,16 +213,14 @@ App({
                 } else {
                   api.showModal("警告", "登录失败，请退出重新登录")
                   console.log('登录失败！' + res.errMsg)
-
                 }
               }
             })
           }
         }
       })
-    }
-    else{
+    } else {
       callBack(wx.getStorageSync("Authorization"))
     }
-  }
+  },
 })

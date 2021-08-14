@@ -132,12 +132,124 @@ Page({
         userBranch: branchName,
         activityName: options.activityName
       })
-    }else{
+    } else {
       //未完善，等用户登录页面
     }
 
     this.setData({
       activityID: options.id
+    })
+
+
+  },
+
+  //查看自己信息
+  async showUserInfo() {
+    await app.getToken() //判断token是否过期
+    var token = wx.getStorageSync('token')
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
+      method: 'GET',
+      header: {
+        'token': token
+      },
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+
+  //创建用户
+  async updateUserInfo(){
+    await app.getToken() //判断token是否过期
+    var token = wx.getStorageSync('token')
+    // var studentId = wx.getStorageSync('userInfo').studentId
+    
+    var userInfo = {
+      "birthday": "",
+      "branchId": "",
+      "branchName": "",
+      "className": "",
+      "classPosition": "",
+      "dormitoryArea": "",
+      "dormitoryNo": "",
+      "familyAddress": "",
+      "gender": true, 
+      "grade": 0,
+      "groupId": "",
+      "groupName": "",
+      "idCard": "",
+      "institute": "",
+      "joinLeagueTime": "",
+      "major": "",
+      "name": "asd",
+      "nation": "",
+      "origin": "",
+      "phone": "",
+      "stage": 0,
+      "stageId": 0,
+      "studentId": "201943362335",
+      "taskId": 0
+    }
+
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
+      method: 'PUT',
+      data : userInfo,
+      header: {
+        'content-type': 'application/json;charset=UTF-8',
+        'token': token
+      },
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+
+  //修改学生信息
+  async updateStudentInfo() {
+    await app.getToken() //判断token是否过期
+    var token = wx.getStorageSync('token')
+    var studentId = wx.getStorageSync('userInfo').studentId
+    
+    var studentEntity = {
+      "birthday": "",
+      "branchId": "",
+      "branchName": "",
+      "className": "",
+      "classPosition": "",
+      "dormitoryArea": "",
+      "dormitoryNo": "",
+      "familyAddress": "",
+      "gender": true, 
+      "grade": 0,
+      "groupId": "",
+      "groupName": "",
+      "idCard": "",
+      "institute": "",
+      "joinLeagueTime": "",
+      "major": "",
+      "name": "asd",
+      "nation": "",
+      "origin": "",
+      "phone": "",
+      "stage": 0,
+      "stageId": 0,
+      "studentId": studentId,
+      "taskId": 0
+    }
+
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/students/'+studentId,
+      method: 'PUT',
+      data : studentEntity,
+      header: {
+        'content-type': 'application/json;charset=UTF-8',
+        'token': token
+      },
+      success(res) {
+        console.log(res)
+      }
     })
   },
 

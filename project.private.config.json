@@ -116,6 +116,13 @@
         {
           "name": "活动详情-完成",
           "pathName": "pages/activityDetailFinish/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "测试专用",
+          "pathName": "pages/testOnly/index",
+          "query": "",
           "scene": null
         }
       ]

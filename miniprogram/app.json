@@ -10,7 +10,8 @@
         "pages/activityDetail/index",
         "pages/activityDetailFinish/index",
         "pages/leave/index",
-        "pages/userBinding/index"
+        "pages/userBinding/index",
+        "pages/testOnly/index"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

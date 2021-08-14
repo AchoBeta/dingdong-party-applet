@@ -1,7 +1,7 @@
 // pages/index/index.js
 const app = getApp()
 const api = require("../../style/api.js")
-const sData = require("../utils/testData.js")
+const sData = require("../../utils/testData.js")
 Page({
 
   /**

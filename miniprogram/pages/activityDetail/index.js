@@ -85,7 +85,8 @@ Page({
 
     this.setData({
       partStatus: options.partStatus,
-      activityID: options.id
+      activityID: options.id,
+      TabIndex : options.TabIndex
     })
   },
 
