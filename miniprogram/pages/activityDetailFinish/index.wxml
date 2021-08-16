@@ -62,12 +62,9 @@
     <view class="textContainer"><text>{{activity.content}}</text></view>
   </view>
 
-  <view class="buttonContainer" wx:if="{{!updateExperience}}">
-    <button bindtap="writeExperience" class="button" size="mini" data-target="Modal">填写心得</button>
-  </view>
-
-  <view class="buttonContainer" wx:if="{{updateExperience}}">
-    <button bindtap="writeExperience" class="button" size="mini" data-target="Modal">更改心得</button>
+  <view class="buttonContainer" >
+    <button wx:if="{{!updateExperience}}" bindtap="writeExperience" class="button" size="mini" data-target="Modal">填写心得</button>
+    <button wx:else bindtap="writeExperience" class="button" size="mini" data-target="Modal">更改心得</button>
   </view>
 </view>
 
@@ -151,7 +148,7 @@
         <textarea wx:if="{{updateExperience}}" maxlength="1000" bindinput="textareaInput">{{textareaValue}}</textarea>
       </view>
       <view class="publishExperience" wx:if="{{!updateExperience}}">
-        <button bindtap="publishExperience" class="button" size="mini" data-target="Modal">提交</button>
+        <button bindtap="PublishExperience" class="button" size="mini" data-target="Modal">提交</button>
       </view>
       <view class="publishExperience" wx:if="{{updateExperience}}">
         <button bindtap="updateExperience" class="button" size="mini" data-target="Modal">更新</button>

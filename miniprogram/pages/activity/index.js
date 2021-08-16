@@ -48,19 +48,19 @@ Page({
 
     // console.log(e.currentTarget.dataset.index)
     if (e.currentTarget.dataset.index == 0) {
-      this.requestMyActivity();
+      this.MyActivity();
     } else if (e.currentTarget.dataset.index == 1) {
       this.setData({
         RelatedPage: 2,
         RelatedActivityList: []
       })
-      this.requestRelatedActivity(1);
+      this.RelatedActivity(1);
     } else if (e.currentTarget.dataset.index == 2) {
       this.setData({
         AllPage: 2,
         AllActivityList: []
       })
-      this.requestAllActivity(1);
+      this.AllActivity(1);
     }
   },
 
@@ -68,20 +68,20 @@ Page({
     //  console.log(e.currentTarget.dataset)
     if (e.currentTarget.dataset.status == 3 || e.currentTarget.dataset.status == 4) {
       wx.navigateTo({
-        url: '../activityDetail/index?id=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus,
+        url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus,
       })
     } else if (e.currentTarget.dataset.status == 5 && this.data.TabIndex == 0) {
       wx.navigateTo({
-        url: '../activityDetailFinish/index?id=' + e.currentTarget.dataset.id,
+        url: '../activityDetailFinish/index?activityId=' + e.currentTarget.dataset.id,
       })
     } else if (e.currentTarget.dataset.status == 5 && this.data.TabIndex == 2) {
       wx.navigateTo({
-        url: '../activityDetail/index?id=' + e.currentTarget.dataset.id,
+        url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id,
       })
     } else if (e.currentTarget.dataset.status == 6) {
       // console.log(e.currentTarget.dataset.TabIndex)
       wx.navigateTo({
-        url: '../activityDetail/index?id=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus + '&TabIndex=' + e.currentTarget.dataset.tabindex,
+        url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus + '&TabIndex=' + e.currentTarget.dataset.tabindex,
       })
     }
   },
@@ -113,139 +113,73 @@ Page({
   },
 
   //请求与我相关的活动数据
-  async requestRelatedActivity(page) {
+  async RelatedActivity(page) {
     var that = this
-    await app.getToken()
-    var token = wx.getStorageSync('token')
-    var branchId = wx.getStorageSync('userInfo').branchId
-    var groupId = wx.getStorageSync('userInfo').groupId
+
+    var branchIdParams = {
+      branchId: wx.getStorageSync('userInfo').branchId,
+      page: page,
+      size: "10"
+    }
+    var groupIdParams = {
+      groupId: wx.getStorageSync('userInfo').groupId,
+      page: page,
+      size: "10"
+    }
 
     return new Promise((resolve, reject) => {
-      var RelatedActivityList = []
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities',
-        method: 'GET',
-        data: {
-          branchId: branchId,
-          page: page,
-          size: "10"
-        },
-        header: {
-          'content-type': 'application/json',
-          'token': token
-        },
-        success(res) {
-          // console.log(res)
-          if (res.data.message == "成功") {
-            RelatedActivityList = that.data.RelatedActivityList
-            let newList = res.data.data.list.items;
-            for (var i = 0; i < res.data.data.list.items.length; i++) {
-              newList[i].startTime = res.data.data.list.items[i].startTime.substring(0, 10);
-              newList[i].endTime = res.data.data.list.items[i].endTime.substring(0, 10);
-            }
-            // AllActivityList=AllActivityList.concat(newList)
-            if (newList.length != 0) {
-              that.setData({
-                RelatedActivityList: [...RelatedActivityList, ...newList] //拼接两个数组
-              });
-            }
-            resolve("成功");
-          } else {
-            wx.showToast({
-              title: '请重新进入页面',
-              icon: "loading"
-            });
-            reject("失败");
-          }
-          // console.log(res.data.data.list.items)
-        }
-      })
+      const branchPromise = getRelatedActivity(branchIdParams)
+      const groupPromise = getRelatedActivity(groupIdParams)
+      Promise.all([branchPromise, groupPromise]).then(res => {
+        // console.log(res)
+        let RelatedActivityList = that.data.RelatedActivityList
+        let branchList = res[0].data.data.list.items;
+        let groupList = res[1].data.data.list.items;
+        let concatList = branchList.concat(groupList); //拼接两个数组
 
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities',
-        method: 'GET',
-        data: {
-          groupId: groupId,
-          page: page,
-          size: "10"
-        },
-        header: {
-          'content-type': 'application/json', // 默认值
-          'token': token
-        },
-        success(res) {
-          // console.log(res)
-          if (res.data.message == "成功") {
-            RelatedActivityList = that.data.RelatedActivityList
-            let newList = res.data.data.list.items
-            for (var i = 0; i < res.data.data.list.items.length; i++) {
-              newList[i].startTime = res.data.data.list.items[i].startTime.substring(0, 10)
-              newList[i].endTime = res.data.data.list.items[i].endTime.substring(0, 10)
-            }
-            // AllActivityList=AllActivityList.concat(newList)
-            if (newList.length != 0) {
-              that.setData({
-                RelatedActivityList: [...RelatedActivityList, ...newList] //拼接两个数组
-              })
-            }
-            resolve("成功")
-          } else {
-            wx.showToast({
-              title: '请重新进入页面',
-              icon: "loading"
-            })
-            reject("失败")
-          }
-          // console.log(res.data.data.list.items)
+        for (var i = 0; i < concatList.length; i++) {
+          concatList[i].startTime = concatList[i].startTime.substring(0, 10);
+          concatList[i].endTime = concatList[i].endTime.substring(0, 10);
         }
+        if(concatList.length != 0){
+          that.setData({
+            RelatedActivityList: [...RelatedActivityList, ...concatList]
+          })
+        }
+        // console.log(that.data.RelatedActivityList)
+        resolve("成功")
+      }).catch(err => {
+        reject("失败")
       })
     })
   },
 
   //请求全部数据
-  async requestAllActivity(page) {
+  async AllActivity(page) {
     var that = this
-    await app.getToken()
-    var token = wx.getStorageSync('token')
 
     return new Promise((resolve, reject) => {
       var AllActivityList = that.data.AllActivityList
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/all',
-        method: 'GET',
-        data: {
-          page: page,
-          size: "10"
-        },
-        header: {
-          'content-type': 'application/json', // 默认值
-          'token': token
-        },
-        success(res) {
-          // console.log(res)
-          if (res.data.message == "成功") {
-            let newList = res.data.data.list.items
-            for (var i = 0; i < res.data.data.list.items.length; i++) {
-              newList[i].startTime = res.data.data.list.items[i].startTime.substring(0, 10)
-              newList[i].endTime = res.data.data.list.items[i].endTime.substring(0, 10)
-            }
-            // AllActivityList=AllActivityList.concat(newList)
-            if (newList.length != 0) {
-              that.setData({
-                AllActivityList: [...AllActivityList, ...newList] //拼接两个数组
-              })
-              // AllActivityList.sort(that.compare1("startTime")) //按时间排序
-            }
-            resolve("成功")
-          } else {
-            wx.showToast({
-              title: '请重新进入页面',
-              icon: "loading"
-            })
-            reject("失败")
-          }
-          // console.log(res.data.data.list.items)
+
+      let params = {
+        page: page,
+        size: 7
+      }
+      getAllActivity(params).then(res => {
+        let newList = res.data.data.list.items
+        for (var i = 0; i < res.data.data.list.items.length; i++) {
+          newList[i].startTime = res.data.data.list.items[i].startTime.substring(0, 10)
+          newList[i].endTime = res.data.data.list.items[i].endTime.substring(0, 10)
         }
+        if (newList.length != 0) {
+          that.setData({
+            AllActivityList: [...AllActivityList, ...newList] //拼接两个数组
+          })
+          // AllActivityList.sort(that.compare1("startTime")) //按时间排序
+        }
+        resolve("成功")
+      }).catch(err=>{
+        reject("失败")
       })
     })
   },
@@ -291,19 +225,19 @@ Page({
    */
   onPullDownRefresh: function () {
     if (this.data.TabIndex == 0) {
-      this.requestMyActivity().then(e => {
+      this.MyActivity().then(e => {
         if (e == "成功") {
           wx.stopPullDownRefresh();
         }
       })
     } else if (this.data.TabIndex == 1) {
-      this.requestRelatedActivity(1).then(e => {
+      this.RelatedActivity(1).then(e => {
         if (e == "成功") {
           wx.stopPullDownRefresh();
         }
       })
     } else if (this.data.TabIndex == 2) {
-      this.requestAllActivity(1).then(e => {
+      this.AllActivity(1).then(e => {
         if (e == "成功") {
           wx.stopPullDownRefresh();
         }
@@ -319,7 +253,7 @@ Page({
     if (this.data.TabIndex == 2) {
       var AllPage = this.data.AllPage
       //调用接口返回新数据
-      this.requestAllActivity(AllPage).then(e => {
+      this.AllActivity(AllPage).then(e => {
         if (e == "成功") {
           AllPage = AllPage + 1
           this.setData({
@@ -330,7 +264,7 @@ Page({
     } else if (this.data.TabIndex == 1) {
       var RelatedPage = this.data.RelatedPage
       //调用接口返回新数据
-      this.requestRelatedActivity(RelatedPage).then(e => {
+      this.RelatedActivity(RelatedPage).then(e => {
         if (e == "成功") {
           RelatedPage = RelatedPage + 1
           this.setData({

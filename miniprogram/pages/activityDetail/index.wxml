@@ -81,11 +81,11 @@
   <button wx:if="{{activity.status==3}}" class="button" size="mini" data-target="Modal">未开始</button>
   <button wx:if="{{activity.status==4}}" class="button" size="mini" data-target="Modal">进行中</button>
   <button wx:if="{{activity.status==5}}" bindtap="writeExperience" class="button" size="mini" data-target="Modal">已结束</button>
-  <button wx:if="{{activity.status==6 && partStatus!=5 && partStatus!=4 && TabIndex==1}}" bindtap="applyParticipation" class="button" size="mini" data-target="Modal">申请参与</button>
+  <button wx:if="{{activity.status==6 && partStatus!=5 && partStatus!=4 && TabIndex==1}}" bindtap="applyToParticipation" class="button" size="mini" data-target="Modal">申请参与</button>
 </view>
 
 <view class="ask_for_leave">
-  <view style="font-weight: bolder;" bindtap="navToleave" data-id="{{activity.id}}" data-activityName="{{activity.name}}" wx:if="{{partStatus==0}}">
+  <view style="font-weight: bolder;" bindtap="navToleave" data-activityId="{{activity.id}}" data-activityName="{{activity.name}}" wx:if="{{partStatus==0}}">
     去请假<text class="cuIcon-right"></text>
   </view>
   <view style="font-weight: bolder;" wx:if="{{partStatus==2}}">

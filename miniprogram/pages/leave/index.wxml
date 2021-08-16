@@ -18,7 +18,7 @@
 
     <view class="cu-form-group">
       <view class="title">姓名：</view>
-      <input name="userName" value="{{userName}}"></input>
+      <input name="userName" value="{{userName}}" disabled="{{true}}"></input>
     </view>
     <view class="cu-form-group">
       <view class="title">学号：</view>

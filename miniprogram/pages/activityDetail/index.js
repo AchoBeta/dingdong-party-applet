@@ -1,5 +1,10 @@
 // pages/activityDetail/index.js
 const app = getApp()
+const {
+  getActivityDetail,
+  applyParticipation,
+  getActivityPeopleNum
+} = require("../../utils/api.js")
 Page({
 
   /**
@@ -20,7 +25,7 @@ Page({
   navToleave(e) {
     // console.log(e)
     wx.navigateTo({
-      url: '../leave/index?id=' + e.currentTarget.dataset.id+'&activityName='+e.currentTarget.dataset.activityname,
+      url: '../leave/index?activityId=' + e.currentTarget.dataset.activityid + '&activityName=' + e.currentTarget.dataset.activityname,
     })
   },
 
@@ -30,13 +35,32 @@ Page({
     })
   },
 
-  publishExperience() {
-    console.log(this.data.textareaAValue)
+  //根据id请求活动详情数据
+  async ActivityDetail(activityId) {
+    var that = this
+    getActivityDetail(activityId).then(res => {
+      // console.log(res)
+      that.setData({
+        activity: res.data.data.item
+      })
+    }).catch(err => {
+      //已在request.js处理
+    })
+  },
+
+  //获取活动人数
+  async NumOfPeople(activityId) {
+    var that = this
+    getActivityPeopleNum(activityId).then(res => {
+      that.setData({
+        NumOfPeople: res.data.data.items.length
+      })
+    })
   },
 
   //申请参与活动
-  async applyParticipation() {
-    var activityId = this.data.activityID
+  applyToParticipation() {
+    var activityId = this.data.activityId
     // var activityId = ""
     var userId = wx.getStorageSync('userInfo').userId
 
@@ -46,31 +70,21 @@ Page({
         icon: "none"
       })
     } else {
-      await app.getToken()//判断token是否过期
-      var token = wx.getStorageSync('token')
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + activityId + '/users/' + userId + '/participate',
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded', // 默认值
-          'token': token
-        },
-        success(res) {
-          if (res.data.message == "成功") {
-            wx.showToast({
-              title: '提交成功',
-            })
-            setTimeout(res=>{
-              wx.navigateBack({
-                delta: 1,
-              })
-            },1500)
-          } else {
-            wx.showToast({
-              title: '提交失败',
-            })
-          }
-        }
+      applyParticipation(userId, activityId).then(res => {
+        wx.showToast({
+          title: '提交成功',
+        })
+        //返回上一页面
+        setTimeout(e => {
+          wx.navigateBack({
+            delta: 1,
+          })
+        }, 1500)
+      }).catch(err => {
+        wx.showToast({
+          title: '提交失败',
+          icon : "error"
+        })
       })
     }
   },
@@ -80,64 +94,16 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options.partStatus)
-    this.requestActivity(options.id)
-    this.requestNumOfPeople(options.id)
+    this.ActivityDetail(options.activityId)
+    this.NumOfPeople(options.activityId)
 
     this.setData({
       partStatus: options.partStatus,
-      activityID: options.id,
-      TabIndex : options.TabIndex
+      activityId: options.activityId,
+      TabIndex: options.TabIndex
     })
   },
 
-  //根据id请求活动详情数据
-  async requestActivity(id) {
-    var that = this
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id,
-      method: 'GET',
-      header: {
-        'content-type': 'application/json', // 默认值
-        'token': token
-      },
-      success(res) {
-        if (res.data.message == "成功") {
-          that.setData({
-            activity: res.data.data.item
-          })
-        }else{
-          wx.showToast({
-            title: '请重新加入页面',
-            icon: "loading"
-          })
-        }
-        // console.log(res)
-      }
-    })
-  },
-
-  //获取活动人数
-  async requestNumOfPeople(id){
-    var that = this
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/'+id+'/users',
-      method: 'GET',
-      header: {
-        'content-type': 'application/json', // 默认值
-        'token': token
-      },
-      success(res) {
-        that.setData({
-          NumOfPeople : res.data.data.items.length
-        })
-        // console.log(res)
-      }
-    })
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

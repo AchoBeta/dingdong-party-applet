@@ -1,5 +1,14 @@
 // pages/activityDetailFinish/index.js
 const app = getApp()
+
+const {
+  getActivityDetail,
+  getActivityPeopleNum,
+  FirstPublishExperience,
+  updateExperience,
+  getComments
+} = require("../../utils/api.js")
+
 Page({
 
   /**
@@ -16,12 +25,6 @@ Page({
   topBack(e) {
     wx.navigateBack({})
     // console.log("asd")
-  },
-
-  navToleave(e) {
-    wx.navigateTo({
-      url: '../leave/index',
-    })
   },
 
   // showModal(e) {
@@ -48,132 +51,76 @@ Page({
   },
 
   //首次提交心得评论
-  async publishExperience() {
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
-
-    // console.log(this.data.textareaValue)
-    var id = this.data.activityId
+  async PublishExperience() {
     var that = this
-
-    var userId = wx.getStorageSync('userInfo').userId
 
     var comment = {
       activityId: this.data.activityId,
       content: this.data.textareaValue,
       id: "",
       image: "",
-      userId: userId
+      userId: wx.getStorageSync('userInfo').userId
     }
 
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id + '/comments',
-      method: 'POST',
-      header: {
-        'content-type': 'application/json;charset=UTF-8',
-        // 'contentType' : 'application/x-www-form-urlencoded;charset=UTF-8',
-        'token': token
-      },
-      data: comment,
-      success(res) {
-        if (res.data.message == "成功") {
-          wx.showToast({
-            title: '发布成功',
-          })
-          that.hideModal()
-          that.requestComment(that.data.activityId)
-        } else {
-          wx.showToast({
-            title: '请重新提交',
-          })
-        }
-        // console.log(res.data)
-      }
+    FirstPublishExperience(comment.activityId, comment).then(res => {
+      wx.showToast({
+        title: '发布成功',
+      })
+      that.hideModal()
+      that.requestComment(that.data.activityId)
+    }).catch(err => {
+      wx.showToast({
+        title: '提交失败，请重新提交',
+        icon: "none"
+      })
+      that.hideModal()
     })
   },
 
   //根据id请求活动详情数据
-  async requestActivity(id) {
+  async ActivityDetail(activityId) {
     var that = this
-
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
-
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id,
-      method: 'GET',
-      header: {
-        'content-type': 'application/json', // 默认值
-        'token': token
-      },
-      success(res) {
-        if (res.data.message == "成功") {
-          that.setData({
-            activity: res.data.data.item
-          })
-
-        } else {
-          wx.showToast({
-            title: '请重新加入页面',
-            icon: "loading"
-          })
-        }
-      }
+    getActivityDetail(activityId).then(res => {
+      // console.log(res)
+      that.setData({
+        activity: res.data.data.item
+      })
+    }).catch(err => {
+      wx.showToast({
+        title: '请重新加入页面',
+        icon: "loading"
+      })
     })
   },
 
   //根据id查询活动人数
-  async requestNumOfPeople(id) {
+  async NumOfPeople(activityId) {
     var that = this
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
-
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id + '/users',
-      method: 'GET',
-      header: {
-        'content-type': 'application/json', // 默认值
-        'token': token
-      },
-      success(res) {
-        that.setData({
-          NumOfPeople: res.data.data.items.length
-        })
-        // console.log(res)
-      }
+    getActivityPeopleNum(activityId).then(res => {
+      that.setData({
+        NumOfPeople: res.data.data.items.length
+      })
     })
   },
 
   //查询所有心得评论
-  async requestComment(id) {
+  async Comments(activityId) {
     var that = this
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
 
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + id + '/comments',
-      method: 'GET',
-      data: {
-        page: 1,
-        size: 20
-      },
-      header: {
-        'content-type': 'application/json', // 默认值
-        'token': token
-      },
-      success(res) {
-        if (res.data.message == "成功") {
-          that.setData({
-            commentList: res.data.data.list.items
-          })
-          that.checkUpdateExperience()
-        } else {
-          wx.showToast({
-            title: '请重新加入页面',
-            icon: "loading"
-          })
-        }
-      }
+    var params = {
+      page: 1,
+      size: 20
+    }
+    getComments(activityId, params).then(res=>{
+      that.setData({
+        commentList: res.data.data.list.items
+      })
+      that.checkUpdateExperience()
+    }).catch(err=>{
+      wx.showToast({
+        title: '请重新加入页面',
+        icon: "loading"
+      })
     })
   },
 
@@ -204,48 +151,27 @@ Page({
   },
 
   //更新心得
-  async updateExperience() {  
-    await app.getToken()//判断token是否过期
-    var token = wx.getStorageSync('token')
-
-    var commentId = this.data.myCommentId
-    var activityId = this.data.activityId
-
+  async updateExperience() {
     var that = this
 
     var comment = {
-      // activityId: this.data.activityId,
-      // content: this.data.textareaValue,
-      activityId: activityId,
+      activityId: this.data.activityId,
       content: this.data.textareaValue,
-      id: commentId,
+      id: this.data.myCommentId,
       image: "",
-      userId: userId
+      userId: wx.getStorageSync('userInfo').userId
     }
 
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/organization/activities/' + activityId + '/comments/' + commentId,
-      method: 'PUT',
-      header: {
-        'content-type': 'application/json;charset=UTF-8',
-        // 'contentType' : 'application/x-www-form-urlencoded;charset=UTF-8',
-        'token': token
-      },
-      data: comment,
-      success(res) {
-        // console.log(res)
-        if (res.data.message == "成功") {
-          wx.showToast({
-            title: '更新成功',
-          })
-          that.hideModal()
-          that.requestComment(that.data.activityId)
-        } else {
-          wx.showToast({
-            title: '请重新提交',
-          })
-        }
-      }
+    updateExperience(comment.activityId, comment.id, comment).then(res => {
+      wx.showToast({
+        title: '更新成功',
+      })
+      that.hideModal()
+      that.requestComment(that.data.activityId)
+    }).catch(err => {
+      wx.showToast({
+        title: '请重新提交',
+      })
     })
   },
 
@@ -254,12 +180,12 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      activityId: options.id
+      activityId: options.activityId
     })
     // console.log(options.id)
-    this.requestActivity(options.id)
-    this.requestNumOfPeople(options.id)
-    this.requestComment(options.id)
+    this.ActivityDetail(options.activityId)
+    this.NumOfPeople(options.activityId)
+    this.Comments(options.activityId)
 
   },
 

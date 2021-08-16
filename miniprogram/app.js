@@ -17,8 +17,6 @@ App({
       })
     }
 
-    this.getToken() //判断token是否过期
-
     // 登录
     // 获取用户信息
     wx.getSetting({
@@ -72,6 +70,8 @@ App({
     } catch (e) {
       // Do something when catch error
     }
+
+    this.getToken() //判断token是否过期
   },
 
   //获取openid
@@ -118,6 +118,7 @@ App({
   requestToken() {
     const userInfo = wx.getStorageSync('userInfo')
     var that = this
+    // console.log(this.globalData)
     wx.request({
       url: that.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/login',
       method: 'POST',

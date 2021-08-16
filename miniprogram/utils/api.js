@@ -25,5 +25,5 @@ module.exports = {
   //查询所有心得评论
   getComments : (activityId,params) => request('/api/dingdong-party/v1/organization/activities/' + activityId + '/comments', params),
   //请假申请
-  applyForLeave : (userId,activityId,reason) => request('/api/dingdong-party/v1/organization/activities/' + activityId + '/users/' + userId + '/leave', reason , 'application/x-www-form-urlencoded' , "POST")
+  applyForLeave : (userId,activityId,reason) => request('/api/dingdong-party/v1/organization/activities/' + activityId + '/users/' + userId + '/leave', {reason:reason} , 'application/x-www-form-urlencoded' , "POST")
 }
