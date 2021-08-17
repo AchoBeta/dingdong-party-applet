@@ -64,26 +64,11 @@ Page({
     }
   },
 
-  navToDetail(e) {
-    //  console.log(e.currentTarget.dataset)
-    if (e.currentTarget.dataset.status == 3 || e.currentTarget.dataset.status == 4) {
-      wx.navigateTo({
-        url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus,
-      })
-    } else if (e.currentTarget.dataset.status == 5 && this.data.TabIndex == 0) {
-      wx.navigateTo({
-        url: '../activityDetailFinish/index?activityId=' + e.currentTarget.dataset.id,
-      })
-    } else if (e.currentTarget.dataset.status == 5 && this.data.TabIndex == 2) {
-      wx.navigateTo({
-        url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id,
-      })
-    } else if (e.currentTarget.dataset.status == 6) {
-      // console.log(e.currentTarget.dataset.TabIndex)
-      wx.navigateTo({
-        url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus + '&TabIndex=' + e.currentTarget.dataset.tabindex,
-      })
-    }
+
+  navToDetail(e){
+    wx.navigateTo({
+      url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus +'&TabIndex=' + e.currentTarget.dataset.tabindex,
+    })
   },
 
   //获取我的活动的数据
@@ -128,8 +113,8 @@ Page({
     }
 
     return new Promise((resolve, reject) => {
-      const branchPromise = getRelatedActivity(branchIdParams)
-      const groupPromise = getRelatedActivity(groupIdParams)
+      const branchPromise = getRelatedActivity(branchIdParams).catch(err=>{})
+      const groupPromise = getRelatedActivity(groupIdParams).catch(err=>{})
       Promise.all([branchPromise, groupPromise]).then(res => {
         // console.log(res)
         let RelatedActivityList = that.data.RelatedActivityList
@@ -149,6 +134,7 @@ Page({
         // console.log(that.data.RelatedActivityList)
         resolve("成功")
       }).catch(err => {
+        console.log(err)
         reject("失败")
       })
     })
@@ -190,7 +176,7 @@ Page({
   onLoad: function (options) {
     this.MyActivity();
     // app.getOpenId()
-    // app.getToken()
+    app.getToken()
   },
 
   //比较器，根据对象的property属性进行升序排序

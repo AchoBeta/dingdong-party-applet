@@ -3,7 +3,9 @@ const app = getApp()
 const {
   getActivityDetail,
   applyParticipation,
-  getActivityPeopleNum
+  getActivityPeopleNum,
+  updateExperience,
+  getComments
 } = require("../../utils/api.js")
 Page({
 
@@ -45,6 +47,7 @@ Page({
       })
     }).catch(err => {
       //已在request.js处理
+      console.log(err)
     })
   },
 
@@ -55,6 +58,9 @@ Page({
       that.setData({
         NumOfPeople: res.data.data.items.length
       })
+    }).catch(err => {
+      //已在request.js处理
+      console.log(err)
     })
   },
 
@@ -89,6 +95,105 @@ Page({
     }
   },
 
+  //查询所有心得评论
+  async Comments(activityId) {
+    var that = this
+
+    var params = {
+      page: 1,
+      size: 20
+    }
+    getComments(activityId, params).then(res=>{
+      that.setData({
+        commentList: res.data.data.list.items
+      })
+      that.checkUpdateExperience()
+    }).catch(err=>{
+      wx.showToast({
+        title: '请重新加入页面',
+        icon: "loading"
+      })
+    })
+  },
+
+  //判断是否已发布过心得，再使用更新心得功能
+  checkUpdateExperience() {
+    let commentList = this.data.commentList
+    var userId = wx.getStorageSync('userInfo').userId
+    let updateExperience = commentList.some(v => {
+      return v.userId == userId
+    })
+    let myCommentId = ""
+    let textareaValue = ""
+
+    for (let i = 0; i < commentList.length; i++) {
+      if (commentList[i].userId == userId) {
+        myCommentId = commentList[i].id
+        textareaValue = commentList[i].content
+        // console.log(myCommentId)
+        break
+      }
+    }
+    // console.log(updateExperience)
+    this.setData({
+      updateExperience,
+      myCommentId,
+      textareaValue
+    })
+  },
+
+  //首次提交心得评论
+  async PublishExperience() {
+    var that = this
+
+    var comment = {
+      activityId: this.data.activityId,
+      content: this.data.textareaValue,
+      id: "",
+      image: "",
+      userId: wx.getStorageSync('userInfo').userId
+    }
+
+    FirstPublishExperience(comment.activityId, comment).then(res => {
+      wx.showToast({
+        title: '发布成功',
+      })
+      that.hideModal()
+      that.requestComment(that.data.activityId)
+    }).catch(err => {
+      wx.showToast({
+        title: '提交失败，请重新提交',
+        icon: "none"
+      })
+      that.hideModal()
+    })
+  },
+
+  //更新心得
+  async updateExperience() {
+    var that = this
+
+    var comment = {
+      activityId: this.data.activityId,
+      content: this.data.textareaValue,
+      id: this.data.myCommentId,
+      image: "",
+      userId: wx.getStorageSync('userInfo').userId
+    }
+
+    updateExperience(comment.activityId, comment.id, comment).then(res => {
+      wx.showToast({
+        title: '更新成功',
+      })
+      that.hideModal()
+      that.requestComment(that.data.activityId)
+    }).catch(err => {
+      wx.showToast({
+        title: '请重新提交',
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -96,6 +201,7 @@ Page({
     // console.log(options.partStatus)
     this.ActivityDetail(options.activityId)
     this.NumOfPeople(options.activityId)
+    this.Comments(options.activityId)
 
     this.setData({
       partStatus: options.partStatus,

@@ -17,7 +17,7 @@
 
 <view wx:if="{{TabIndex == 0}}" class="ListContainer">
   <view class="list" wx:for="{{MyActivityList}}" wx:key="index">
-    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}">
+    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
       <view class="list-item list-item-left">
         <image style="width:180rpx;height:180rpx;" src="../../picture/activityDetail/dang.png" />
       </view>
@@ -93,7 +93,7 @@
 
 <view wx:if="{{TabIndex == 2}}" class="ListContainer">
   <view class="list" wx:for="{{AllActivityList}}" wx:key="index">
-    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}">
+    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
       <view class="list-item list-item-left">
         <image style="width:180rpx;height:180rpx;" src="../../picture/activityDetail/dang.png" />
       </view>

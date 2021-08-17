@@ -1,13 +1,3 @@
-<!-- <view class="TOP">
-  <view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
-  <view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop">
-    <view class="topBack" bindtap="topBack"><text class="cuIcon-back"></text></view>
-    <view>活 动 详 情</view>
-  </view>
-</view>
-<view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view>
-<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view> -->
-
 <view class="main_container">
   <view class="container">
     <view class="detail-msg">
@@ -15,7 +5,7 @@
         <image src="../../picture/activityDetail/activity.png"></image>
         <view>{{activity.name}}</view>
       </view>
-      
+
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/date.svg"></image>
         <view class="activityTime">{{activity.startTime}}——{{activity.endTime}}</view>
@@ -44,6 +34,7 @@
       <view class="detail-msg__list">
         <image src="../../picture/activityDetail/peopleNum.png"></image>
         <view>{{NumOfPeople}}</view>
+        <!-- 活动人数 -->
       </view>
     </view>
   </view>
@@ -69,30 +60,121 @@
     <view class="textContainer"><text>{{activity.attention}}</text></view>
   </view>
 
+  <view class="buttonContainer">
+    <button wx:if="{{!updateExperience && activity.status==5 && TabIndex==0}}" bindtap="writeExperience" class="button"
+      size="mini" data-target="Modal">填写心得</button>
+    <!-- 已结束且是我的活动才能查看、填写心得 -->
+    <button wx:if="{{updateExperience && activity.status==5 && TabIndex==0}}" bindtap="writeExperience" class="button"
+      size="mini" data-target="Modal">更改心得</button>
+  </view>
 </view>
 
-<!-- 
+
 <view class="buttonContainer">
-  <button disabled class="button" size="mini">已参与</button>
-</view> -->
-
-<view class="buttonContainer">
-  <!-- <view class="examine">点击查看心得</view> -->
-  <button wx:if="{{activity.status==3}}" class="button" size="mini" data-target="Modal">未开始</button>
-  <button wx:if="{{activity.status==4}}" class="button" size="mini" data-target="Modal">进行中</button>
-  <button wx:if="{{activity.status==5}}" bindtap="writeExperience" class="button" size="mini" data-target="Modal">已结束</button>
-  <button wx:if="{{activity.status==6 && partStatus!=5 && partStatus!=4 && TabIndex==1}}" bindtap="applyToParticipation" class="button" size="mini" data-target="Modal">申请参与</button>
+  <button wx:if="{{activity.status==3}}" class="button" size="mini">未开始</button>
+  <button wx:if="{{activity.status==4}}" class="button" size="mini">进行中</button>
+  <button wx:if="{{activity.status==5 && (TabIndex==1 || TabIndex==2)}}" bindtap="writeExperience" class="button" size="mini">已结束</button>
+  <!-- 活动已结束且不属于我的活动，才显示已结束，否则显示心得评论区 -->
+  <button wx:if="{{activity.status==6 && partStatus!=5 && partStatus!=4 && TabIndex==1}}" bindtap="applyParticipation" class="button" size="mini">申请参与</button>
+  <!-- 申请加入-4 与申请不通过-5 状态不会显示“申请参与”按钮 ， “与我相关”的活动才能申请参与-->
 </view>
 
-<view class="ask_for_leave">
-  <view style="font-weight: bolder;" bindtap="navToleave" data-activityId="{{activity.id}}" data-activityName="{{activity.name}}" wx:if="{{partStatus==0}}">
-    去请假<text class="cuIcon-right"></text>
-  </view>
-  <view style="font-weight: bolder;" wx:if="{{partStatus==2}}">
-    请假成功
-  </view>
-  <view style="font-weight: bolder;" wx:if="{{partStatus==4}}">
-    申请加入待审核
-  </view>
-</view>
 <!-- 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过 -->
+
+<view class="ask_for_leave" wx:if="{{TabIndex==0}}">
+  <view style="font-weight: bolder;" bindtap="navToleave" data-activityId="{{activity.id}}"
+    data-activityName="{{activity.name}}" wx:if="{{partStatus==0 && activity.status==3}}">
+    去请假<text class="cuIcon-right"></text> <!-- 活动未开始才能请假 -->
+  </view>
+  <view style="font-weight: bolder;" wx:if="{{partStatus==2 && (activity.status==3 || activity.status==4)}}">
+    请假成功
+    <!-- 请假成功且活动处于未开始或进行中状态，才显示 -->
+  </view>
+  <view style="font-weight: bolder;" wx:if="{{partStatus==4 && activity.status==3}}">
+    申请加入待审核
+    <!-- 活动未开始才显示 -->
+  </view>
+</view>
+
+<!--评论区-->
+<!-- 活动已结束状态且是我的活动，才显示 -->
+<view class="main_container" wx:if="{{activity.status==5 && TabIndex==0}}">
+  <view class="commentArea">
+    <view class="tagContainer">
+      <view class="tag" style="background-color:#E9837F">心得评论区</view>
+    </view>
+  </view>
+
+  <view class="commentListContainer">
+    <!-- <view class="commentAmount">
+      <text class="c-block commentAmountText">1人评论</text>
+    </view> -->
+
+    <view class="commentListItem" wx:for="{{commentList}}" wx:key="index">
+      <!-- <navigator class="nav_userlink" hover-class="navigator-hover">
+        <view class="likeuser">
+          <image class="useravatar" mode="aspectFill"
+            src="https://img1.baidu.com/it/u=3347598173,1161261498&fm=26&fmt=auto&gp=0.jpg" />
+        </view>
+      </navigator> -->
+      <view class="c-minheight user_comment">
+        <view class="userNameContainer">
+          <view hover-class="navigator-hover" class="userName_Tags">
+            <text class="userName">{{item.name}}</text>
+            <text class="userName" wx:if="{{item.userId.length==0}}">佚名</text>
+            <text class="ListItem_Time" decode="true">&nbsp;&nbsp;({{item.time}})</text>
+          </view>
+          <!-- 删除评论功能 
+          <view class="deleteUserComment" bindtap="deleteComment" wx:if="{{userId == item.userId}}"
+            data-comment_id="{{item.id}}">
+            <image class="comment_image"
+              src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F49%2F24%2F0057445a891e4aa.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617070496&t=5cfcdd990a564ae35f858e2056fff231">
+            </image>
+          </view>-->
+        </view>
+        <text class="c-block comment_text">　{{item.content}}</text> <!--　万能空格-->
+        <view class="comment_operate">
+          <view class="comment_operate_two">
+            <!-- <view class="commentLike">
+              <view class="comment_image" bindtap="" data-comment_id="{{item.comment_id}}">
+                <text class="cuIcon-appreciate text-gray"></text>
+              </view>
+              <text>0</text>
+            </view>
+            <view class="commentLike">
+              <view class="comment_image" bindtap="" data-comment_id="{{item.comment_id}}">
+                <text class="cuIcon-comment text-gray"></text>
+              </view>
+              <text>0</text>
+            </view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 心得弹出层 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">心得体会</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="writeArea">
+      <view class="cu-form-group">
+        <textarea wx:if="{{!updateExperience}}" maxlength="1000" bindinput="textareaInput"
+          placeholder="请填写心得体会"></textarea>
+        <textarea wx:if="{{updateExperience}}" maxlength="1000" bindinput="textareaInput">{{textareaValue}}</textarea>
+      </view>
+      <view class="publishExperience" wx:if="{{!updateExperience}}">
+        <button bindtap="publishExperience" class="button" size="mini">提交</button>
+      </view>
+      <view class="publishExperience" wx:if="{{updateExperience}}">
+        <button bindtap="updateExperience" class="button" size="mini">更新</button>
+      </view>
+    </view>
+  </view>
+</view>

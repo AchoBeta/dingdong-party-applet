@@ -8,7 +8,6 @@
         "pages/newsWeb/index",
         "pages/activity/index",
         "pages/activityDetail/index",
-        "pages/activityDetailFinish/index",
         "pages/leave/index",
         "pages/userBinding/index",
         "pages/testOnly/index"

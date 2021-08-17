@@ -52,11 +52,11 @@ App({
       branch_name: undefined,
       MODES: false,
       // APIUrlHead : 'http://121.5.0.60:81'
-      APIUrlHead: 'https://www.dingdongtongxue.com/a'
+      APIUrlHead: 'https://www.dingdongtongxue.com/api/dingdong-party'
     }
     try {
       const res = wx.getSystemInfoSync()
-      console.log(res)
+      // console.log(res)
       that.globalData.windowHeight = res.windowHeight
       that.globalData.screenHeight = res.screenHeight
       wx.getSystemInfo({
@@ -97,13 +97,14 @@ App({
     var that = this
     return new Promise((resolve, reject) => {
       const userInfo = wx.getStorageSync('userInfo')
-      console.log(userInfo)
+      // console.log(userInfo)
       let token_deadtime = wx.getStorageSync('token_deadtime')
       //判断有没有进行微信的用户登录，是否有openid
       if (userInfo.openId.length != 0) {
         if ((new Date().getTime() - token_deadtime) > 1800000) { //判断token是否过期，30min
           that.requestToken()
         } else {
+          // that.requestToken()
           // console.log("token未过期")
         }
       } else {
@@ -118,9 +119,9 @@ App({
   requestToken() {
     const userInfo = wx.getStorageSync('userInfo')
     var that = this
-    // console.log(this.globalData)
+    
     wx.request({
-      url: that.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/login',
+      url: that.globalData.APIUrlHead + '/base/users/login',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -129,7 +130,8 @@ App({
         openId: userInfo.openId
       },
       success(res) {
-        if (res.data.message == "成功") {
+        console.log(res)
+        if (res.data.message == "成功") {         
           var userInfo = wx.getStorageSync('userInfo')
           userInfo.userId = res.data.data.item.userId
           userInfo.name = res.data.data.item.name
