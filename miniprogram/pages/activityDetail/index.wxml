@@ -72,10 +72,10 @@
 <view class="buttonContainer">
   <button wx:if="{{activity.status==3}}" class="button" size="mini">未开始</button>
   <button wx:if="{{activity.status==4}}" class="button" size="mini">进行中</button>
-  <button wx:if="{{activity.status==5 && (TabIndex==1 || TabIndex==2)}}" class="button" size="mini">已结束</button>
+  <!-- <button wx:if="{{activity.status==5 && (TabIndex==1 || TabIndex==2)}}" class="button" size="mini">已结束</button> -->
   <!-- 活动已结束且不属于我的活动，才显示已结束，否则显示心得评论区 -->
-  <button wx:if="{{activity.status==6 && TabIndex==1}}" bindtap="applyToParticipation" class="button" size="mini">申请参与</button>
-  <!-- 不会显示“申请参与”按钮 ， “与我相关”的活动才能申请参与-->
+  <button wx:if="{{activity.status==6 && apply=='true' && TabIndex==1 && NumOfPeople<activity.limitNum }}" bindtap="applyToParticipation" class="button" size="mini">申请参与</button>
+  <button wx:if="{{(activity.status==6 && apply=='true' && TabIndex==1)&&(NumOfPeople>=activity.limitNum)}}" class="button" size="mini">人数已满</button>
 </view>
 
 <!-- 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过 -->

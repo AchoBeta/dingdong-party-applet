@@ -223,10 +223,11 @@ Page({
     this.setData({
       partStatus: options.partStatus,
       activityId: options.activityId,
-      TabIndex: options.TabIndex
+      TabIndex: options.TabIndex,
+      apply : options.apply
     })
 
-    console.log(options.apply)
+    // console.log(options.apply)
   },
 
 
