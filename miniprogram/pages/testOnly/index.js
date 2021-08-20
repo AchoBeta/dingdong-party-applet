@@ -11,7 +11,8 @@ const {
   FirstPublishExperience,
   updateExperience,
   getComments,
-  applyForLeave
+  applyForLeave,
+  queryGroup
 } = require("../../utils/api.js")
 
 Page({
@@ -23,116 +24,116 @@ Page({
 
   },
 
-    //查看自己信息
-    async showUserInfo() {
-      await app.getToken() //判断token是否过期
-      var token = wx.getStorageSync('token')
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
-        method: 'GET',
-        header: {
-          'token': token
-        },
-        success(res) {
-          console.log(res)
-        }
-      })
-    },
-  
-    //创建用户
-    async updateUserInfo() {
-      await app.getToken() //判断token是否过期
-      var token = wx.getStorageSync('token')
-      // var studentId = wx.getStorageSync('userInfo').studentId
-  
-      var userInfo = {
-        "birthday": "",
-        "branchId": "",
-        "branchName": "",
-        "className": "",
-        "classPosition": "",
-        "dormitoryArea": "",
-        "dormitoryNo": "",
-        "familyAddress": "",
-        "gender": true,
-        "grade": 0,
-        "groupId": "",
-        "groupName": "",
-        "idCard": "",
-        "institute": "",
-        "joinLeagueTime": "",
-        "major": "",
-        "name": "asd",
-        "nation": "",
-        "origin": "",
-        "phone": "",
-        "stage": 0,
-        "stageId": 0,
-        "studentId": "201943362335",
-        "taskId": 0
+  //查看自己信息
+  async showUserInfo() {
+    await app.getToken() //判断token是否过期
+    var token = wx.getStorageSync('token')
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
+      method: 'GET',
+      header: {
+        'token': token
+      },
+      success(res) {
+        console.log(res)
       }
-  
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
-        method: 'PUT',
-        data: userInfo,
-        header: {
-          'content-type': 'application/json;charset=UTF-8',
-          'token': token
-        },
-        success(res) {
-          console.log(res)
-        }
-      })
-    },
-  
-    //修改学生信息
-    async updateStudentInfo() {
-      await app.getToken() //判断token是否过期
-      var token = wx.getStorageSync('token')
-      var studentId = wx.getStorageSync('userInfo').studentId
-  
-      var studentEntity = {
-        "birthday": "",
-        "branchId": "",
-        "branchName": "",
-        "className": "",
-        "classPosition": "",
-        "dormitoryArea": "",
-        "dormitoryNo": "",
-        "familyAddress": "",
-        "gender": true,
-        "grade": 0,
-        "groupId": "",
-        "groupName": "",
-        "idCard": "",
-        "institute": "",
-        "joinLeagueTime": "",
-        "major": "",
-        "name": "asd",
-        "nation": "",
-        "origin": "",
-        "phone": "",
-        "stage": 0,
-        "stageId": 0,
-        "studentId": studentId,
-        "taskId": 0
+    })
+  },
+
+  //创建用户
+  async updateUserInfo() {
+    await app.getToken() //判断token是否过期
+    var token = wx.getStorageSync('token')
+    // var studentId = wx.getStorageSync('userInfo').studentId
+
+    var userInfo = {
+      "birthday": "",
+      "branchId": "",
+      "branchName": "",
+      "className": "",
+      "classPosition": "",
+      "dormitoryArea": "",
+      "dormitoryNo": "",
+      "familyAddress": "",
+      "gender": true,
+      "grade": 0,
+      "groupId": "",
+      "groupName": "",
+      "idCard": "",
+      "institute": "",
+      "joinLeagueTime": "",
+      "major": "",
+      "name": "asd",
+      "nation": "",
+      "origin": "",
+      "phone": "",
+      "stage": 0,
+      "stageId": 0,
+      "studentId": "201943362335",
+      "taskId": 0
+    }
+
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
+      method: 'PUT',
+      data: userInfo,
+      header: {
+        'content-type': 'application/json;charset=UTF-8',
+        'token': token
+      },
+      success(res) {
+        console.log(res)
       }
-  
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/students/' + studentId,
-        method: 'PUT',
-        data: studentEntity,
-        header: {
-          'content-type': 'application/json;charset=UTF-8',
-          'token': token
-        },
-        success(res) {
-          console.log(res)
-        }
-      })
-    },
-  
+    })
+  },
+
+  //修改学生信息
+  async updateStudentInfo() {
+    await app.getToken() //判断token是否过期
+    var token = wx.getStorageSync('token')
+    var studentId = wx.getStorageSync('userInfo').studentId
+
+    var studentEntity = {
+      "birthday": "",
+      "branchId": "",
+      "branchName": "",
+      "className": "",
+      "classPosition": "",
+      "dormitoryArea": "",
+      "dormitoryNo": "",
+      "familyAddress": "",
+      "gender": true,
+      "grade": 0,
+      "groupId": "",
+      "groupName": "",
+      "idCard": "",
+      "institute": "",
+      "joinLeagueTime": "",
+      "major": "",
+      "name": "asd",
+      "nation": "",
+      "origin": "",
+      "phone": "",
+      "stage": 0,
+      "stageId": 0,
+      "studentId": studentId,
+      "taskId": 0
+    }
+
+    wx.request({
+      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/students/' + studentId,
+      method: 'PUT',
+      data: studentEntity,
+      header: {
+        'content-type': 'application/json;charset=UTF-8',
+        'token': token
+      },
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -174,6 +175,31 @@ Page({
     // })
     // applyForLeave("1419162725304542567", "1423870335597969136", "reason封装002").then(res => {
     //   console.log(res)
+    // })
+    // var branchId = wx.getStorageSync('userInfo').branchId
+    // console.log(branchId)
+    // queryGroup(branchId, {
+    //   page: 1,
+    //   size: 100
+    // }).then(res => {
+    //   console.log(res)
+    // })
+    // app.getToken();
+    // var data = {
+    //   page:1,
+    //   size:100
+    // }
+    // wx.request({
+    //   url: "https://www.dingdongtongxue.com/api/dingdong-party/base/branch/"+3+"/groups",
+    //   method:"GET",
+    //   data,
+    //   header:{
+    //     'content-type': "application/json",
+    //     'token': "3821-7751"
+    //   },
+    //   success(res){
+    //     console.log(res)
+    //   }
     // })
   },
 

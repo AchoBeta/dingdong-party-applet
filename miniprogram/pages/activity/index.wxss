@@ -21,11 +21,6 @@ page{
   word-spacing: -5rpx;
 }
 
-.ListContainer{
-  margin-top:120rpx
-}
-
-
 .tabs{
   /* border-top: 1rpx solid orangered; */
   width:100%;
@@ -38,7 +33,8 @@ page{
 .tabs_container{
   margin:5rpx 10rpx;
   border:5rpx solid #E9837F;
-  /* border-radius: 20rpx; */
+  border-radius: 50rpx;
+  overflow: hidden;
   height:80rpx;
   display: flex;
   font-size: 30rpx;
@@ -55,66 +51,58 @@ page{
   /* border-bottom: 5rpx solid currentColor; */
 }
 
-.list {
-  width: 100%;
-  height: 220rpx;
-  background: #fff;
+
+/* 列表卡片 */
+/* #E9837F  #ff5c5d */
+.activity_status {
+  margin-right: 30rpx;
+  font-size: 38rpx;
+  font-weight: 500;
 }
 
-.item-whole {
-  height: 100%;
-  margin: 10rpx 10rpx;
-  border:1rpx solid #ff5c5d;
-  border-radius: 15rpx;
+.activityName {
+  font-weight: bolder;
+  font-size: 38rpx;
+  width: auto;
+  max-width: 500rpx;
 }
-
-.list-item {
-  text-align: center;
-  padding: 5px;
-  float: left;
+.content{
+  left : 30rpx !important
 }
-
-.list-item-left {
-  width: 35%;
+.director_name{
+  font-size: 26rpx;
 }
-
-.list-item-right {
-  width: 20%;
-  font-size: 40rpx;
-  color: salmon;
-  font-weight: bold;
-  line-height: 40rpx;
-}
-
-.list-item-tag {
-  font-size: 25rpx;
-  color: white;
-  border: 0rpx solid #ff5c5d;
-  border-radius: 15rpx;
-  background-color: #ff5c5d;
-  margin-top: 45rpx;
+.activityUser_status {
+  width: auto;
+  color: #E9837F;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  vertical-align: center;
+  justify-content: center;
+  margin-left: 20rpx;
 }
 
-.list-item-middle {
-  width: 45%;
-  font-size: 30rpx;
-  text-align: left;
-}
-
-.status {
-  font-size: 25rpx;
-  margin-top: 15rpx;
-  color: #ff5c5d;
-  min-height: 40rpx;
+.branch {
+  background-color: #E9837F;
+  color: white;
+  padding: 0 10rpx;
+  margin-top: 5rpx;
+  margin-bottom: 10rpx;
+  padding-top:5rpx;
+  padding-bottom: 5rpx;
+  max-width: 320rpx;
+  font-size: 20rpx;
+  line-height: 30rpx;
+  /* max-height:70rpx */
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  justify-content: center;
 }
 
 .time {
   font-size: 25rpx;
-  margin-top: 30rpx
+  margin-top: 10rpx
 }
 
 .time-item {
@@ -122,7 +110,7 @@ page{
   height: 40rpx;
   flex-direction: row;
   align-items: center;
-  padding-bottom: 20rpx;
+  /* padding-bottom: 20rpx; */
 }
 
 .time-item image {
@@ -131,22 +119,40 @@ page{
   margin-right: 5rpx;
 }
 
-.f30 {
-  font-size: 30rpx;
+.cu-item {
+  box-shadow: 0rpx 0rpx 8rpx 1rpx rgb(190, 190, 190);
 }
 
-.f-bold {
-  font-weight: bold;
+.cu-tag {
+  height: 33rpx !important;
+  color: #E9837F !important;
+  font-size: 20rpx !important;
 }
 
-.f-black {
-  color: black;
+.cu-avatar {
+  background-color: white;
+  /* color:rgb(255, 157, 0); */
 }
 
-.f-gray {
-  color: gray;
+.cu-list.menu-avatar>.cu-item .content.flex-sub {
+  width: auto !important;
 }
 
-.activityName{
-  min-height: 40rpx;
+.cu-card.dynamic>.cu-item>.text-content {
+  padding: 0 30rpx 0;
+  max-height: 10.4em;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.cu-list.menu-avatar>.cu-item .content {
+  width : auto !important
+}
+
+.text-content{
+  margin-bottom: 0rpx !important;
+}
+.padding {
+  padding: 0 30rpx 30rpx 30rpx !important;
+  /* margin-top : -10rpx */
 }

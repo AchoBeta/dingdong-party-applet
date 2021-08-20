@@ -16,7 +16,10 @@ Page({
     topLLL: app.globalData.StatusBar,
     topKKK: app.globalData.screenHeight,
     activity: {},
-    partStatus: null //请假状态
+    partStatus: null, //请假状态
+    commentList: [],
+    updateExperience: false,
+    myCommentId: "",
   },
 
   topBack(e) {
@@ -31,9 +34,21 @@ Page({
     })
   },
 
-  textareaAInput(e) {
+  hideModal(e) {
     this.setData({
-      textareaAValue: e.detail.value
+      modalName: null
+    })
+  },
+
+  writeExperience(e) { //显示心得弹出层
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+
+  textareaInput(e) {
+    this.setData({
+      textareaValue: e.detail.value
     })
   },
 
@@ -47,7 +62,7 @@ Page({
       })
     }).catch(err => {
       //已在request.js处理
-      console.log(err)
+      // console.log(err)
     })
   },
 
@@ -55,6 +70,7 @@ Page({
   async NumOfPeople(activityId) {
     var that = this
     getActivityPeopleNum(activityId).then(res => {
+      // console.log(res)
       that.setData({
         NumOfPeople: res.data.data.items.length
       })
@@ -87,6 +103,7 @@ Page({
           })
         }, 1500)
       }).catch(err => {
+        console.log(err)
         wx.showToast({
           title: '提交失败',
           icon : "error"
@@ -208,6 +225,8 @@ Page({
       activityId: options.activityId,
       TabIndex: options.TabIndex
     })
+
+    console.log(options.apply)
   },
 
 

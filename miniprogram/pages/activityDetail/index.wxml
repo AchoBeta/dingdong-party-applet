@@ -63,20 +63,19 @@
   <view class="buttonContainer">
     <button wx:if="{{!updateExperience && activity.status==5 && TabIndex==0}}" bindtap="writeExperience" class="button"
       size="mini" data-target="Modal">填写心得</button>
-    <!-- 已结束且是我的活动才能查看、填写心得 -->
+    <!-- 已结束且是我的活动才能填写心得 -->
     <button wx:if="{{updateExperience && activity.status==5 && TabIndex==0}}" bindtap="writeExperience" class="button"
       size="mini" data-target="Modal">更改心得</button>
   </view>
 </view>
 
-
 <view class="buttonContainer">
   <button wx:if="{{activity.status==3}}" class="button" size="mini">未开始</button>
   <button wx:if="{{activity.status==4}}" class="button" size="mini">进行中</button>
-  <button wx:if="{{activity.status==5 && (TabIndex==1 || TabIndex==2)}}" bindtap="writeExperience" class="button" size="mini">已结束</button>
+  <button wx:if="{{activity.status==5 && (TabIndex==1 || TabIndex==2)}}" class="button" size="mini">已结束</button>
   <!-- 活动已结束且不属于我的活动，才显示已结束，否则显示心得评论区 -->
-  <button wx:if="{{activity.status==6 && partStatus!=5 && partStatus!=4 && TabIndex==1}}" bindtap="applyParticipation" class="button" size="mini">申请参与</button>
-  <!-- 申请加入-4 与申请不通过-5 状态不会显示“申请参与”按钮 ， “与我相关”的活动才能申请参与-->
+  <button wx:if="{{activity.status==6 && TabIndex==1}}" bindtap="applyToParticipation" class="button" size="mini">申请参与</button>
+  <!-- 不会显示“申请参与”按钮 ， “与我相关”的活动才能申请参与-->
 </view>
 
 <!-- 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过 -->
@@ -98,7 +97,7 @@
 
 <!--评论区-->
 <!-- 活动已结束状态且是我的活动，才显示 -->
-<view class="main_container" wx:if="{{activity.status==5 && TabIndex==0}}">
+<view class="main_container" wx:if="{{activity.status==5}}">
   <view class="commentArea">
     <view class="tagContainer">
       <view class="tag" style="background-color:#E9837F">心得评论区</view>

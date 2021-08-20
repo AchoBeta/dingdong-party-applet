@@ -132,7 +132,7 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 
 .ask_for_leave{
   margin-top:10rpx;
-  margin-left: 550rpx;
+  margin-left: 500rpx;
   margin-right: 30rpx;
   /* margin-bottom: 10rpx; */
   color:#E9837F;
@@ -246,7 +246,7 @@ view, scroll-view, swiper, button, input, textarea, label, navigator, image {
 }
 
 .comment_text {
-  font-size: 31rpx;
+  font-size: 28rpx;
   color: rgb(84, 84, 84);
   line-height: 1.5em;
   margin-bottom: 15rpx;

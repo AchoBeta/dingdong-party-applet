@@ -7,124 +7,95 @@
 <view style="width:100%;height:{{topLLL*2}}rpx;background-color:#f2f2f2" class="toptop"></view><!-- 撑开高度 -->
 <view style="width:100%;height:{{topKKK * 0.12}}rpx;background-color:#f2f2f2" class="toptop"></view>
 
-<view class="tabs" style="top:{{topLLL*2 + topKKK * 0.12}}rpx">
+<view class="tabs" style="top:{{topLLL*2 + topKKK * 0.11}}rpx">
   <view class="tabs_container">
-    <view wx:for="{{Tab}}" wx:key="id" class="tabs_item {{item.isActive ? 'active' : ''}} " bindtap="handleItemChange" data-index="{{index}}">
+    <view wx:for="{{Tab}}" wx:key="id" class="tabs_item {{item.isActive ? 'active' : ''}} " bindtap="handleItemChange"
+      data-index="{{index}}">
       <view>{{item.name}}</view>
     </view>
   </view>
 </view>
 
-<view wx:if="{{TabIndex == 0}}" class="ListContainer">
-  <view class="list" wx:for="{{MyActivityList}}" wx:key="index">
-    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
-      <view class="list-item list-item-left">
-        <image style="width:180rpx;height:180rpx;" src="../../picture/activityDetail/dang.png" />
+
+<view class="cu-card dynamic" style="margin-top:{{topLLL*2 + topKKK * 0.1}}rpx">
+  <!-- 我的活动 -->
+  <view wx:if="{{TabIndex == 0}}" class="cu-item shadow card_container" wx:for="{{MyActivityList}}" wx:key="index" bindtap="navToDetail" data-id="{{item.id}}" 
+      data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item" style="height:80rpx">
+        <view class="activityName content">{{item.name}}</view>
+        <view class="activity_status" style="color:#e9837f" wx:if="{{item.status==3 || item.status==6}}">未开始</view>
+        <view class="activity_status" style="color:rgb(255, 157, 0)" wx:if="{{item.status==4}}">进行中</view>
+        <view class="activity_status" style="color:#ff5c5d" wx:if="{{item.status==5}}">已结束</view>
       </view>
-      <view class="list-item list-item-middle">
-        <view class="f-bold f-black activityName">{{item.name}}</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==1}}">请假申请中</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==2}}">请假成功</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==3}}">请假审批不通过</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==4}}">申请加入活动中</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==5}}">申请不通过</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==0}}">已参与</view>
-        <!-- 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过 -->
-        <view class="status" wx:if="{{TabIndex==1}}"><!-- 占位 --></view>
-        <view class="time">
-          <view class="time-item">
-            <image src="../../picture/activityDetail/date.svg"></image>
-            <view>报名截止：{{item.endTime}}</view>
-          </view>
-          <view class="time-item">
-            <image src="../../picture/activityDetail/date.svg"></image>
-            <view>活动时间：{{item.startTime}}</view>
-          </view>
+    </view>
+    <view class="text-content">
+      <view style="display:flex">
+        <view class="text-gray director_name" >{{item.directorName}}</view>
+        <view class="activityUser_status">
+          <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==1}}">请假申请中</view>
+          <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==2}}">请假成功</view>
+          <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==3}}">请假审批不通过</view>
+          <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==4}}">申请加入活动中</view>
+          <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==5}}">申请不通过</view>
+          <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==6}}">已参与</view>
         </view>
       </view>
-      <view class="list-item list-item-right">
-        <view class="list-item-tag" wx:if="{{item.status==3}}"><text>未开始</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==4}}"><text>进行中</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==5}}"><text>已结束</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==6 && TabIndex==0}}"><text>未开始</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==6 && TabIndex==1}}"><text>可报名</text></view>
+      <view>
+        <view class="branch">{{item.party}}</view>
+        <!-- group是党支部, branch是党委 -->
+      </view>
+      <view class="text-gray" style="font-size:26rpx">{{item.summary}}
+      </view>
+    </view>
+    <view class="text-gray text-sm text-left padding">
+      <view class="time">
+        <view class="time-item">
+          <image src="../../picture/endTime.png"></image>
+          <view>报名截止：{{item.endTime}}</view>
+
+          <image style="margin-left:10rpx" src="../../picture/startTime.png"></image>
+          <view>活动开始：{{item.startTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 全部活动（与我相关的活动） -->
+  <view wx:if="{{TabIndex == 1}}" class="cu-item shadow card_container" wx:for="{{RelatedActivityList}}" wx:key="index" bindtap="navToDetail" data-id="{{item.id}}" 
+  data-apply="{{item.status==6 && ((item.groupId==null ) || (item.party==userInfo.groupName))}}"
+      data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item" style="height:80rpx">
+        <view class="activityName content">{{item.name}}</view>
+        <view class="activity_status" style="color:#e9837f" wx:if="{{item.status==3}}">未开始</view>
+        <view class="activity_status" style="color:rgb(255, 157, 0)" wx:if="{{item.status==4}}">进行中</view>
+        <view class="activity_status" style="color:#ff5c5d" wx:if="{{item.status==5}}">已结束</view>
+        <view class="activity_status" style="color:green" wx:if="{{item.status==6 && ((item.groupId==null ) || (item.party==userInfo.groupName))}}">可报名</view>
+        <view class="activity_status" style="color:gray" wx:if="{{item.status==6 && !((item.groupId==null ) || (item.party==userInfo.groupName))}}">不可报名</view>
+        <!-- 党支部id为空时可报名；党支部不为空时，需要活动党支部id=自己党支部id才能报名 -->
+      </view>
+    </view>
+    <view class="text-content">
+      <view style="display:flex">
+        <view class="text-gray director_name" >{{item.directorName}}</view>
+      </view>
+      <view>
+        <view class="branch">{{item.party}}</view>
+      </view>
+      <view class="text-gray" style="font-size:26rpx">{{item.summary}}
+      </view>
+    </view>
+    <view class="text-gray text-sm text-left padding">
+      <view class="time">
+        <view class="time-item">
+          <image src="../../picture/endTime.png"></image>
+          <view>报名截止：{{item.endTime}}</view>
+          <image style="margin-left:10rpx" src="../../picture/startTime.png"></image>
+          <view>活动开始：{{item.startTime}}</view>
+        </view>
       </view>
     </view>
   </view>
 </view>
 
-<view wx:if="{{TabIndex == 1}}" class="ListContainer">
-  <view class="list" wx:for="{{RelatedActivityList}}" wx:key="index">
-    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
-      <view class="list-item list-item-left">
-        <image style="width:180rpx;height:180rpx;" src="../../picture/activityDetail/dang.png" />
-      </view>
-      <view class="list-item list-item-middle">
-        <view class="f-bold f-black activityName">{{item.name}}</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==1}}">请假申请中</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==2}}">请假成功</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==3}}">请假审批不通过</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==4}}">申请加入活动中</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==5}}">申请不通过</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==0}}">已参与</view>
-        <!-- 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过 -->
-        <view class="status" wx:if="{{TabIndex==1}}"><!-- 占位 --></view>
-        <view class="time">
-          <view class="time-item">
-            <image src="../../picture/activityDetail/date.svg"></image>
-            <view>报名截止：{{item.endTime}}</view>
-          </view>
-          <view class="time-item">
-            <image src="../../picture/activityDetail/date.svg"></image>
-            <view>活动时间：{{item.startTime}}</view>
-          </view>
-        </view>
-      </view>
-      <view class="list-item list-item-right">
-        <view class="list-item-tag" wx:if="{{item.status==3}}"><text>未开始</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==4}}"><text>进行中</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==5}}"><text>已结束</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==6 && TabIndex==0}}"><text>未开始</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==6 && TabIndex==1}}"><text>可报名</text></view>
-      </view>
-    </view>
-  </view>
-</view>
-
-<view wx:if="{{TabIndex == 2}}" class="ListContainer">
-  <view class="list" wx:for="{{AllActivityList}}" wx:key="index">
-    <view class="item-whole" bindtap="navToDetail" data-id="{{item.id}}" data-status="{{item.status}}" data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
-      <view class="list-item list-item-left">
-        <image style="width:180rpx;height:180rpx;" src="../../picture/activityDetail/dang.png" />
-      </view>
-      <view class="list-item list-item-middle">
-        <view class="f-bold f-black activityName">{{item.name}}</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==1}}">请假申请中</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==2}}">请假成功</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==3}}">请假审批不通过</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==4}}">申请加入活动中</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==5}}">申请不通过</view>
-        <view class="status" wx:if="{{TabIndex==0 && item.partStatus==0}}">已参与</view>
-        <!-- 状态 0：正常 1：请假 2:审批通过 3：审批不通过 4: 申请加入 5：申请不通过 -->
-        <view class="status" wx:if="{{TabIndex==1 || TabIndex==2}}"><!-- 占位 --></view>
-        <view class="time">
-          <view class="time-item">
-            <image src="../../picture/activityDetail/date.svg"></image>
-            <view>报名截止：{{item.endTime}}</view>
-          </view>
-          <view class="time-item">
-            <image src="../../picture/activityDetail/date.svg"></image>
-            <view>活动时间：{{item.startTime}}</view>
-          </view>
-        </view>
-      </view>
-      <view class="list-item list-item-right">
-        <view class="list-item-tag" wx:if="{{item.status==3}}"><text>未开始</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==4}}"><text>进行中</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==5}}"><text>已结束</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==6 && (TabIndex==0 || TabIndex==2)}}"><text>未开始</text></view>
-        <view class="list-item-tag" wx:if="{{item.status==6 && TabIndex==1}}"><text>可报名</text></view>
-      </view>
-    </view>
-  </view>
-</view>

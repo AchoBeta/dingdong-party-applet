@@ -4,6 +4,7 @@ const {
   getAllActivity,
   getRelatedActivity,
   getMyActivity,
+  queryGroup
 } = require("../../utils/api.js")
 
 Page({
@@ -15,18 +16,20 @@ Page({
     topLLL: app.globalData.StatusBar,
     topKKK: app.globalData.screenHeight,
     Tab: [{
-      name: "我的活动",
-      id: 0,
-      isActive: true
-    }, {
-      name: "与我相关",
-      id: 1,
-      isActive: false
-    }, {
-      name: "全部活动",
-      id: 2,
-      isActive: false
-    }],
+        name: "我的活动",
+        id: 0,
+        isActive: true
+      }, {
+        name: "全部活动", //与我相关
+        id: 1,
+        isActive: false
+      }
+      // , {
+      //   name: "全部活动",
+      //   id: 2,
+      //   isActive: false
+      // }
+    ],
     TabIndex: 0,
     MyActivityList: [], //我的活动列表
     RelatedActivityList: [], //与我相关活动列表
@@ -65,9 +68,9 @@ Page({
   },
 
 
-  navToDetail(e){
+  navToDetail(e) {
     wx.navigateTo({
-      url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus +'&TabIndex=' + e.currentTarget.dataset.tabindex,
+      url: '../activityDetail/index?activityId=' + e.currentTarget.dataset.id + '&partStatus=' + e.currentTarget.dataset.partstatus + '&TabIndex=' + e.currentTarget.dataset.tabindex + '&apply=' + e.currentTarget.dataset.apply,
     })
   },
 
@@ -83,9 +86,26 @@ Page({
         let MyActivityList = res.data.data.items
         MyActivityList.sort(that.compare1("status")) //升序排序
 
-        for (var i = 0; i < res.data.data.items.length; i++) {
+        for (let i = 0; i < res.data.data.items.length; i++) {
           MyActivityList[i].startTime = res.data.data.items[i].startTime.substring(0, 10)
-          MyActivityList[i].endTime = res.data.data.items[i].endTime.substring(0, 10)
+          MyActivityList[i].endTime = res.data.data.items[i].endTime.substring(0, 16)
+          //显示党委或党支部信息
+          for(let j=0 ; j<that.data.groupList.length ; j++){
+            if((MyActivityList[i].branchId == that.data.groupList[j].branchId)&&(MyActivityList[i].groupId==null)){
+              //党委id相同，党支部id为空，显示党委名字
+              MyActivityList[i].party = that.data.groupList[j].branchName
+              break
+            }
+            else if((MyActivityList[i].branchId == that.data.groupList[j].branchId)&&(MyActivityList[i].groupId == that.data.groupList[j].id)){
+              //党委id相同，党支部id相同，显示党支部名字
+              MyActivityList[i].party = that.data.groupList[j].name
+              // console.log(MyActivityList[i].name+" : "+MyActivityList[i].groupId+" : "+that.data.groupList[j].id)
+              break
+            }
+            else{
+              MyActivityList[i].party = "党支部"
+            }
+          }
         }
         that.setData({
           MyActivityList
@@ -97,14 +117,14 @@ Page({
     })
   },
 
-  //请求与我相关的活动数据
+  //请求与我相关的活动数据(全部活动)
   async RelatedActivity(page) {
     var that = this
 
     var branchIdParams = {
       branchId: wx.getStorageSync('userInfo').branchId,
       page: page,
-      size: "10"
+      size: "7"
     }
     var groupIdParams = {
       groupId: wx.getStorageSync('userInfo').groupId,
@@ -113,31 +133,68 @@ Page({
     }
 
     return new Promise((resolve, reject) => {
-      const branchPromise = getRelatedActivity(branchIdParams).catch(err=>{})
-      const groupPromise = getRelatedActivity(groupIdParams).catch(err=>{})
-      Promise.all([branchPromise, groupPromise]).then(res => {
-        // console.log(res)
-        let RelatedActivityList = that.data.RelatedActivityList
-        let branchList = res[0].data.data.list.items;
-        let groupList = res[1].data.data.list.items;
-        let concatList = branchList.concat(groupList); //拼接两个数组
-
-        for (var i = 0; i < concatList.length; i++) {
-          concatList[i].startTime = concatList[i].startTime.substring(0, 10);
-          concatList[i].endTime = concatList[i].endTime.substring(0, 10);
+      var RelatedActivityList = that.data.RelatedActivityList
+      //获取自己党委的所有活动
+      getRelatedActivity(branchIdParams).then(res => {
+        let newList = res.data.data.list.items
+        for (var i = 0; i < res.data.data.list.items.length; i++) {
+          newList[i].startTime = res.data.data.list.items[i].startTime.substring(0, 10)
+          newList[i].endTime = res.data.data.list.items[i].endTime.substring(0, 16)
+          //显示党委或党支部信息
+          for(let j=0 ; j<that.data.groupList.length ; j++){
+            if((newList[i].branchId == that.data.groupList[j].branchId)&&(newList[i].groupId==null)){
+              //党委id相同，党支部id为空，显示党委名字
+              newList[i].party = that.data.groupList[j].branchName
+              break
+            }
+            else if(newList[i].groupId == that.data.groupList[j].id){
+              //党委id相同，党支部id相同，显示党支部名字
+              newList[i].party = that.data.groupList[j].name
+              break
+            }
+            else{
+              newList[i].party = "党支部"
+            }
+          }
         }
-        if(concatList.length != 0){
+        if (newList.length != 0) {
           that.setData({
-            RelatedActivityList: [...RelatedActivityList, ...concatList]
+            RelatedActivityList: [...RelatedActivityList, ...newList] //拼接两个数组
           })
         }
-        // console.log(that.data.RelatedActivityList)
         resolve("成功")
       }).catch(err => {
-        console.log(err)
         reject("失败")
+        // console.log(err)
       })
     })
+
+    // return new Promise((resolve, reject) => {
+    //   const branchPromise = getRelatedActivity(branchIdParams).catch(err => {})
+    //   const groupPromise = getRelatedActivity(groupIdParams).catch(err => {})
+    //   Promise.all([branchPromise, groupPromise]).then(res => {
+    //     // console.log(res)
+    //     let RelatedActivityList = that.data.RelatedActivityList
+    //     let branchList = res[0].data.data.list.items;
+    //     let groupList = res[1].data.data.list.items;
+    //     let concatList = branchList.concat(groupList); //拼接两个数组
+
+    //     for (var i = 0; i < concatList.length; i++) {
+    //       concatList[i].startTime = concatList[i].startTime.substring(0, 10);
+    //       concatList[i].endTime = concatList[i].endTime.substring(0, 10);
+    //     }
+    //     if (concatList.length != 0) {
+    //       that.setData({
+    //         RelatedActivityList: [...RelatedActivityList, ...concatList]
+    //       })
+    //     }
+    //     // console.log(that.data.RelatedActivityList)
+    //     resolve("成功")
+    //   }).catch(err => {
+    //     console.log(err)
+    //     reject("失败")
+    //   })
+    // })
   },
 
   //请求全部数据
@@ -164,7 +221,7 @@ Page({
           // AllActivityList.sort(that.compare1("startTime")) //按时间排序
         }
         resolve("成功")
-      }).catch(err=>{
+      }).catch(err => {
         reject("失败")
       })
     })
@@ -173,10 +230,28 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.MyActivity();
+  onLoad: async function (options) {
     // app.getOpenId()
-    app.getToken()
+    // app.getToken()
+    this.setData({
+      userInfo : wx.getStorageSync('userInfo')
+    })
+
+    const that = this
+
+    //获取用户所属党委下的所有党支部
+    await queryGroup(wx.getStorageSync('userInfo').branchId, {
+      page: 1,
+      size: 100
+    }).then(res => {
+      // console.log(res)
+      that.setData({
+        groupList: res.data.data.list.items
+      })
+    })
+    //看一下用户登录怎么说，再修改是否用缓存
+
+    this.MyActivity();
   },
 
   //比较器，根据对象的property属性进行升序排序
