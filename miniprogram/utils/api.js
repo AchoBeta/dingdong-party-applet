@@ -27,5 +27,10 @@ module.exports = {
   //请假申请
   applyForLeave : (userId,activityId,reason) => request('/organization/activities/' + activityId + '/users/' + userId + '/leave', {reason:reason} , 'application/x-www-form-urlencoded' , "POST"),
   //查询用户党委下所有党支部  //branch是党委, group是党支部
-  queryGroup : (branchId,params)=> request('/base/branch/'+branchId+'/groups',params)
+  queryGroup : (branchId,params)=> request('/base/branch/'+branchId+'/groups',params),
+  
+  //获取token
+  requestToken : (openId) => request('/base/users/login',{openId:openId},'application/x-www-form-urlencoded' , "POST"),
+
+  
 }
