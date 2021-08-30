@@ -22,7 +22,7 @@
 
 <view class="user">
 	<view class="topText">
-		<text>所属党支部： XX党支部 （实例）</text>
+		<text class="infoText">所属党支部： {{groupName?groupName:'XX党支部 （实例）'}}</text>
 	</view>
 	<view class="Info">
 		<view class="InfoCell" style="margin-right: 70rpx">
@@ -64,12 +64,12 @@
 
 
 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl radius bg-white application" style="top: 590rpx">
-	<view class="cu-item" style="background-color:#ffffff" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/入党申请书.pdf">
-		<view class="content" hover-class="cyans">
+	<view class="cu-item" style="background-color:#ffffff" bindtap="toActivity">
+		<button class="cu-btn content" hover-class="cyans">
 			<!-- <text class="cuIcon-file text-yellow"></text> -->
 			<image src="../../picture/book.png"></image>
-			<text class="text-grey">入党申请书(示例)</text>
-		</view>
+			<text class="text-grey">我的历史活动</text>
+		</button>
 	</view>
 	<!-- <view class="cu-item" style="background-color:#ffffff" bindtap="previewFile" data-path="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20-入党申请人培养考察手册（参考样本）.pdf">
       <view class="content"  hover-class="none">
@@ -77,11 +77,11 @@
         <text class="text-grey">入党申请人考察手册</text>
       </view>
     </view> -->
-	<view class="cu-item" bindtap="Login" style="background-color:#ffffff">
+	<view class="cu-item" bindtap="bindInfo" style="background-color:#ffffff">
 		<button class="cu-btn content">
 			<!-- <text class="cuIcon-link text-cyan"></text> -->
 			<image src="../../picture/bind.png"></image>
-			<text class="text-grey">用户绑定</text>
+			<text class="text-grey">基本信息管理</text>
 		</button>
 	</view>
 
@@ -89,7 +89,7 @@
 		<button class="cu-btn content" open-type="">
 			<!-- <text class="cuIcon-command text-cyan"></text> -->
 			<image src="../../picture/join.png"></image>
-			<text class="text-grey">申请入驻</text>
+			<text class="text-grey">联系我们</text>
 		</button>
 	</view>
 

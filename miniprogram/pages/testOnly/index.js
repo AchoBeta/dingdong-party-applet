@@ -12,7 +12,13 @@ const {
   updateExperience,
   getComments,
   applyForLeave,
+
+  getBranches,
+  getGroups,
+  getInfo,
+
   queryGroup
+
 } = require("../../utils/api.js")
 
 Page({
@@ -21,9 +27,154 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo : wx.getStorageSync('userInfo'),
+    grade : []
   },
 
+
+  getNowDate() {
+    var timeStamp =  Date.parse(new Date())
+    var date = new Date(timeStamp)
+    var year = date.getFullYear()
+    var list = this.data.grade
+    console.log(year)
+    for(let i = 0; i < 4; i++){
+      list.push(year)
+      year--
+    }
+  },
+    //查看自己信息
+    async showUserInfo() {
+      await app.getToken() //判断token是否过期
+      var token = wx.getStorageSync('token')
+      wx.request({
+        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
+        method: 'GET',
+        header: {
+          'token': token
+        },
+        success(res) {
+          console.log(res)
+        }
+      })
+    },
+    //获取用户信息
+    async StudentInfo() {
+      var userInfo = this.data.userInfo
+      var userId = userInfo.userId
+      var studentId = userInfo.studentId
+      getInfo(userId).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
+    //创建用户
+    async updateUserInfo() {
+      await app.getToken() //判断token是否过期
+      var token = wx.getStorageSync('token')
+      // var studentId = wx.getStorageSync('userInfo').studentId
+  
+      var userInfo = {
+        "birthday": "",
+        "branchId": "",
+        "branchName": "",
+        "className": "",
+        "classPosition": "",
+        "dormitoryArea": "",
+        "dormitoryNo": "",
+        "familyAddress": "",
+        "gender": true,
+        "grade": 0,
+        "groupId": "",
+        "groupName": "",
+        "idCard": "",
+        "institute": "",
+        "joinLeagueTime": "",
+        "major": "",
+        "name": "asd",
+        "nation": "",
+        "origin": "",
+        "phone": "",
+        "stage": 0,
+        "stageId": 0,
+        "studentId": "201943362335",
+        "taskId": 0
+      }
+  
+      wx.request({
+        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
+        method: 'PUT',
+        data: userInfo,
+        header: {
+          'content-type': 'application/json;charset=UTF-8',
+          'token': token
+        },
+        success(res) {
+          console.log(res)
+        }
+      })
+    },
+    //查询所有党组
+    async Groups(branchId) {
+      var that = this
+      var params = {
+        page: 1,
+        size: 20
+      }
+      getGroups(branchId, params).then(res=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+    //查询所有党支部
+    async Branches() {
+      var that = this
+      var params = {
+        page: 1,
+        size: 20
+      }
+      getBranches(params).then(res=>{
+        console.log(res.data.data.list)
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+    //修改学生信息
+    async updateStudentInfo() {
+      await app.getToken() //判断token是否过期
+      var token = wx.getStorageSync('token')
+      var studentId = wx.getStorageSync('userInfo').studentId
+  
+      var studentEntity = {
+        "birthday": "",
+        "branchId": "",
+        "branchName": "",
+        "className": "",
+        "classPosition": "",
+        "dormitoryArea": "",
+        "dormitoryNo": "",
+        "familyAddress": "",
+        "gender": true,
+        "grade": 0,
+        "groupId": "",
+        "groupName": "",
+        "idCard": "",
+        "institute": "",
+        "joinLeagueTime": "",
+        "major": "",
+        "name": "asd",
+        "nation": "",
+        "origin": "",
+        "phone": "",
+        "stage": 0,
+        "stageId": 0,
+        "studentId": studentId,
+        "taskId": 0
+      }
+    },
   //查看自己信息
   async showUserInfo() {
     await app.getToken() //判断token是否过期
@@ -130,6 +281,7 @@ Page({
       },
       success(res) {
         console.log(res)
+
       }
     })
   },
@@ -139,6 +291,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var id = 1
+    // console.log(options)
+    // this.Groups(1)
+    // this.Branches()
+    app.requestToken()
+    app.getOpenId()
+    this.StudentInfo()
+    this.getNowDate()
     // getAllActivity({page:1,size:5}).then(res=>{
     //   console.log(res)
     // })

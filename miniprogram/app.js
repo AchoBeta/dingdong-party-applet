@@ -86,7 +86,7 @@ App({
       name: 'getOpenID',
       data: {}
     }).then((res) => {
-      //console.log('[云函数] [getOpenID] user openid: ', res.result.openid);
+      // console.log('[云函数] [getOpenID] user openid: ', res.result.openid);
       userInfo.openId = res.result.openid
     }).catch((err) => {
       console.log(err)
@@ -142,6 +142,58 @@ App({
       } else {
         //无openid
         //引导用户重新执行getOpenId
+
+        this.getOpenId()
+      }
+      resolve('成功')
+    })
+  },
+
+  //使用接口获取token
+  requestToken() {
+    const userInfo = wx.getStorageSync('userInfo')
+    var that = this
+    
+    wx.request({
+      url: that.globalData.APIUrlHead + '/base/users/login',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+      },
+      data: {
+        openId: userInfo.openId
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.message == "成功") {         
+          var userInfo = wx.getStorageSync('userInfo')
+          userInfo.userId = res.data.data.item.userId
+          userInfo.name = res.data.data.item.name
+          userInfo.studentId = res.data.data.item.studentId
+          userInfo.teacherId = res.data.data.item.teacherId
+          userInfo.branchId = res.data.data.item.branchId
+          userInfo.branchName = res.data.data.item.branchName
+          userInfo.groupId = res.data.data.item.groupId
+          userInfo.groupName = res.data.data.item.groupName
+          userInfo.stageId = res.data.data.item.stageId
+          userInfo.stage = res.data.data.item.stage
+          userInfo.taskId = res.data.data.item.taskId
+          userInfo.status = res.data.data.item.status
+          userInfo.statusReason = res.data.data.item.statusReason
+          userInfo = res.data.data.item
+          // console.log(res.data.data.item.userId)
+          wx.setStorageSync('userInfo', userInfo)
+
+          //设置token的缓存和过期时间
+          wx.setStorageSync('token', res.data.data.token)
+          wx.setStorageSync('token_deadtime', (new Date().getTime()))
+        } else {
+          wx.showToast({
+            title: '请重新登录',
+            icon: "error"
+          })
+        }
+
       }
       
     })

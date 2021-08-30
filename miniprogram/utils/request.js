@@ -1,4 +1,4 @@
-const baseUrl = 'https://www.dingdongtongxue.com/api/dingdong-party'
+const baseUrl = 'https://api.dingdongtongxue.com/dingdong-party'
 
 function request(url, data = {}, content_type = 'application/json', method = 'GET') {
   return new Promise((resolve, reject) => {

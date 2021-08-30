@@ -1,5 +1,5 @@
 <!-- <view class="topText">{{process[rightLeftKey].name}}</view> -->
-<view wx:if="{{MODE == true}}">
+<view wx:if="{{MODE == false}}">
   <view class="top" style="position:fixed;top:0;z-index:6;width:100%;height:12.3%;background:#ff5c5d;">
     <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px">
       <text>身份认证</text>
@@ -14,6 +14,7 @@
     </view>
   </view>
 </view>
+
 <view wx:else>
   <swiper style="height:{{windowHeight}}px;" bindchange="changeRightLeft" current="{{nowKey}}">
   <block wx:for="{{process}}" wx:key="name" wx:for-index="rightLeftIDX">
@@ -30,7 +31,9 @@
           </view>
           <view class="card">
             <image class="cardPng" src="{{mainPngSrc + (rightLeftIDX + 1) + gender + '.png'}}" mode="aspectFit"></image>
-            <view class="cardBot" style="font-weight:bold;"><text>所 属 党 支 部：xx 党 支 部（示例）</text></view>
+            <view class="cardBot" style="font-weight:bold;">
+              <text style="letter-spacing:5rpx">所属党支部：{{groupName?groupName:'xx党支部（示例）'}}</text>
+            </view>
           </view>
           <view class="shake">
             左右滑动查看更多
@@ -58,7 +61,7 @@
               <view class="downCardTip" bindtap="downToStep" data-s="{{stepIDX}}" data-r="{{rightLeftKey}}"
                 style="border-radius:20rpx">
                 <image wx:if="{{((stepIDX + 1) < nowStepKey && rightLeftIDX <= nowKey) || rightLeftIDX < nowKey }}"
-                  class="hasFinish" src="../../picture/finish.png" mode="aspectFit">
+                  class="hasFinish" src="" mode="aspectFit">
                 </image>
                 <image mode="scaleToFill" wx:if="{{rightLeftIDX == nowKey}}"
                   class="{{(stepIDX + 1) > nowStepKey?'downCardTipNoImg':'downCardTipHadImg'}}"
@@ -122,7 +125,7 @@
     </swiper>
   </swiper-item> -->
 </swiper>
-<view class="toRemindFixed" bindtap="toLogin" wx:if="{{!MODE}}">
+<!-- <view class="toRemindFixed" bindtap="toLogin" wx:if="{{!MODE}}">
   <text class="toRemindIcon">登录</text>
-</view>
+</view> -->
 </view>

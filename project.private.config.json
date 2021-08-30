@@ -1,5 +1,4 @@
 {
-  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -96,27 +95,8 @@
           "scene": null
         },
         {
-          "name": "党建活动",
-          "pathName": "pages/activity/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "活动详情页",
-          "pathName": "pages/activityDetail/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "请假",
-          "pathName": "pages/leave/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "测试专用",
-          "pathName": "pages/testOnly/index",
-          "query": "",
+          "name": "党建管理",
+          "pathName": "pages/index/index",
           "scene": null
         }
       ]

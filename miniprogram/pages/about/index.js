@@ -1,20 +1,36 @@
-//index.js
+//about/index.js
 
 const api = require("../../style/api")
 
 //获取应用实例
 const app = getApp()
+const {
+  getAllActivity,
+  getRelatedActivity,
+  getMyActivity,
+  getActivityDetail,
+  getActivityPeopleNum,
+  applyParticipation,
+  FirstPublishExperience,
+  updateExperience,
+  getComments,
+  applyForLeave,
+  getBranches,
+  getGroups,
+  getInfo
+} = require("../../utils/api.js")
 
 Page({
   data: {
     motto: 'Hello World',
-    userInfo: {},
+    userInfo: wx.getStorageSync('userInfo'),
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    keyName: undefined,
-    casid: undefined,
-    name: undefined,
-    class: undefined,
+    keyName: undefined, //身份（入党阶段）
+    casid: undefined,   //学号/工号
+    name: undefined,    //姓名
+    class: undefined,   //班级
+    groupName: undefined,//党支部
     topLLL: app.globalData.StatusBar,
     topKKK: app.globalData.screenHeight
   },
@@ -24,7 +40,29 @@ Page({
       url: '/pages/login/index'
     })
   },
+  async StudentInfo() {
+    var userInfo = this.data.userInfo
+    var userId = userInfo.userId
+    getInfo(userId).then(res => {
+      console.log(res)
+      var mainInfo = res.data.data.item.main
+      var detailInfo = res.data.data.item.details
+      if(mainInfo.studentId){
+        this.setData({
+          name : userInfo.name,
+          casid : userInfo.studentId,
+          groupName : userInfo.groupName,
+          class : detailInfo.className
+        })
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  },
   onLoad: function () {
+    app.getToken()
+    app.requestToken()
+    this.StudentInfo()
     this.setData({
       keyName: app.globalData.keyName,
       name: app.globalData.name,
@@ -78,9 +116,14 @@ Page({
       }
     })
   },
-  Login(e) {
+  bindInfo(e) {
+    wx.navigateTo({
+      url: '../userBinding/index',
+    })
+  },
+  toActivity(e) {
     wx.reLaunch({
-      url: '/pages/login/index',
+      url: '../activity/index',
     })
   },
   toApplication(e) {

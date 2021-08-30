@@ -26,11 +26,24 @@ module.exports = {
   getComments : (activityId,params) => request('/organization/activities/' + activityId + '/comments', params),
   //请假申请
   applyForLeave : (userId,activityId,reason) => request('/organization/activities/' + activityId + '/users/' + userId + '/leave', {reason:reason} , 'application/x-www-form-urlencoded' , "POST"),
+
+  //添加学生信息
+  bindStudent : (studentEntity) => request('/base/users/student-info', studentEntity, 'application/json;charset=UTF-8', 'POST'),
+  //添加教师信息
+  bindTeacher : (teacherEntity) => request('/base/users/teacher-info', teacherEntity,'application/json;charset=UTF-8', 'POST'),
+  //党支部查询
+  getBranches : (params) => request('/base/branches/', params),
+  //党组查询
+  getGroups : (branchId, params) => request('/base/branch/' + branchId + '/groups', params),
+  //获取用户信息
+  getStudentInfo : (studentNo) => request('/base/students/' + studentNo),
+  getTeacherInfo : (teacherNo) => request('/base/instructors/' + teacherNo),
+  getInfo : (userId) => request('/base/users/' + userId + '/info'),
+
   //查询用户党委下所有党支部  //branch是党委, group是党支部
   queryGroup : (branchId,params)=> request('/base/branch/'+branchId+'/groups',params),
   
   //获取token
   requestToken : (openId) => request('/base/users/login',{openId:openId},'application/x-www-form-urlencoded' , "POST"),
 
-  
 }
