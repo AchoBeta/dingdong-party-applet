@@ -1,8 +1,22 @@
 {
-    "setting": {},
-    "condition": {
-        "plugin": {
-            "list": []
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
         },
         "game": {
             "list": []
@@ -10,109 +24,79 @@
         "gamePlugin": {
             "list": []
         },
-        "miniprogram": {
-            "list": [
-                {
-                    "id": -1,
-                    "name": "db guide",
-                    "pathName": "pages/databaseGuide/databaseGuide",
-                    "query": ""
-                },
-                {
-                    "id": -1,
-                    "name": "pages/nowStep/index",
-                    "pathName": "pages/nowStep/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/nextStep/index",
-                    "pathName": "pages/nextStep/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/news/index",
-                    "pathName": "pages/news/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/about/index",
-                    "pathName": "pages/about/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": 5,
-                    "name": "packageA/pages/h/index",
-                    "pathName": "packageA/pages/h/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": 6,
-                    "name": "packageB/pages/b/index",
-                    "pathName": "packageB/pages/b/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": 7,
-                    "name": "packageC/pages/q/index",
-                    "pathName": "packageC/pages/q/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": 8,
-                    "name": "packageE/pages/a/index",
-                    "pathName": "packageE/pages/a/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/login/index",
-                    "pathName": "pages/login/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "pages/application/index",
-                    "pathName": "pages/application/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "id": -1,
-                    "name": "packageF/pages/a/index",
-                    "pathName": "packageF/pages/a/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "党建管理",
-                    "pathName": "pages/index/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/testOnly/index",
-                    "pathName": "pages/testOnly/index",
-                    "query": "",
-                    "scene": null
-                },
-                {
-                    "name": "pages/about/index",
-                    "pathName": "pages/about/index",
-                    "scene": null
-                }
-            ]
+        {
+          "id": -1,
+          "name": "pages/news/index",
+          "pathName": "pages/news/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/about/index",
+          "pathName": "pages/about/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "packageA/pages/h/index",
+          "pathName": "packageA/pages/h/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "packageB/pages/b/index",
+          "pathName": "packageB/pages/b/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "packageC/pages/q/index",
+          "pathName": "packageC/pages/q/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 8,
+          "name": "packageE/pages/a/index",
+          "pathName": "packageE/pages/a/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/login/index",
+          "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/application/index",
+          "pathName": "pages/application/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "packageF/pages/a/index",
+          "pathName": "packageF/pages/a/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "党建管理",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "测试",
+          "pathName": "pages/testOnly/index",
+          "scene": null
         }
     }
 }

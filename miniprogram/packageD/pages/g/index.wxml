@@ -7,7 +7,9 @@
 <view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
 	<view class="textBack" style="height:{{textBack}}px"></view>
 	<view class="textView" id="the-textView">
-		<text space decode class="text22">{{(nowKey == 3 && nowStep == 7)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在预备期满前一周需要写 1 篇《转正申请书》，请各位预备党员于规定时间内认真完成电子版相关材料并提交审核。 ':'用户未到此步骤或转正申请书已提交待管理员审核中'}}
+		<!-- <text space decode class="text22">{{(nowKey == 3 && nowStep == 7)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在预备期满前一周需要写 1 篇《转正申请书》，请各位预备党员于规定时间内认真完成电子版相关材料并提交审核。 ':'用户未到此步骤或转正申请书已提交待管理员审核中'}}
+    </text> -->
+    <text space decode class="text22">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在预备期满前一周需要写 1 篇《转正申请书》，请各位预备党员于规定时间内认真完成电子版相关材料并提交审核。 
     </text>
 	</view>
 

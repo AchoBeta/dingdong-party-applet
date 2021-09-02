@@ -7,7 +7,9 @@
 <view class="textDiv" style="top:{{ topKKK * 0.14 }}px">
 	<view class="textBack" style="height:{{textBack}}px"></view>
 	<view class="textView" id="the-textView">
-		<text space decode class="text22">{{(nowKey == 3 && nowStep == 9)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;需要在《入党积极分子培养考察手册》中补充参加教育培训及社会实践活动情况、参加学校党校培训情况等内容。':'用户未到此步骤或考察手册已提交待管理员审核中'}}
+		<!-- <text space decode class="text22">{{(nowKey == 3 && nowStep == 9)?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;需要在《入党积极分子培养考察手册》中补充参加教育培训及社会实践活动情况、参加学校党校培训情况等内容。':'用户未到此步骤或考察手册已提交待管理员审核中'}}
+		</text> -->
+		<text space decode class="text22">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预备期满之后，预备党员转正需要征求入党联系人意见、党小组意见和群众意见并记录在《入党积极分子培养考察手册》中。此外，还需要在《预备党员培养考察手册》中补充参加教育培训及社会实践活动情况等内容。
     </text>
 	</view>
 

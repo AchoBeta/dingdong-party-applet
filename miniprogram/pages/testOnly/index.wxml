@@ -1,76 +1,11 @@
-
-<view class="cu-card dynamic">
-  <view class="cu-item shadow card_container">
-    <view class="cu-list menu-avatar">
-      <view class="cu-item" style="height:100rpx">
-        <view class="cu-avatar round lg" style="background-image:url(../../picture/myIcon.png);"></view>
-        <view class="content flex-sub">
-          <view>
-            <view class="text-gray">负责人</view>
-            <view class="branch">计科党支部</view>
-          </view>
-        </view>
-        <view class="activity_status" style="color:rgb(255, 157, 0)">进行中</view>
-      </view>
+<view class="step_container">
+  <view wx:for="{{testStep}}" class="step_item">
+    <view class="step_finish">
+      <image class="hasFinish" src="../../picture/finish.png" mode="aspectFit">
+      </image>
     </view>
-    <view class="text-content">
-      <view style="display:flex">
-        <view class="activityName">活动名称</view>
-        <view class="activityUser_status">
-          <view class="cu-tag line-red round">请假申请中</view>
-        </view>
-
-      </view>
-      <view class="text-gray" style="font-size:26rpx">活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要
-      </view>
-    </view>
-    <view class="text-gray text-sm text-left padding">
-      <view class="time">
-        <view class="time-item">
-          <image src="../../picture/endTime.png"></image>
-          <view>报名截止：2021.8.24 12:00</view>
-
-          <image style="margin-left:10rpx" src="../../picture/startTime.png"></image>
-          <view>活动开始：2021.08.27</view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view class="cu-item shadow card_container">
-    <view class="cu-list menu-avatar">
-      <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url(../../picture/myIcon.png);"></view>
-        <view class="content flex-sub">
-          <view>
-            <view class="text-gray">负责人</view>
-            <view class="branch">计科党支部</view>
-          </view>
-        </view>
-        <view class="activity_status" style="color:rgb(255, 157, 0)">进行中</view>
-      </view>
-    </view>
-    <view class="text-content">
-      <view style="display:flex">
-        <view class="activityName">活动名称</view>
-        <view class="activityUser_status">
-          <view class="cu-tag line-red round">请假申请中</view>
-        </view>
-
-      </view>
-      <view class="text-gray" style="font-size:26rpx">活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要活动摘要
-      </view>
-    </view>
-    <view class="text-gray text-sm text-left padding">
-      <view class="time">
-        <view class="time-item">
-          <image src="../../picture/endTime.png"></image>
-          <view>报名截止：2021.8.24 12:00</view>
-
-          <image style="margin-left:10rpx" src="../../picture/startTime.png"></image>
-          <view>活动开始：2021.08.27</view>
-        </view>
-      </view>
+    <view class="step_img">
+      <image src="{{item.url}}" mode="widthFix"></image>
     </view>
   </view>
 </view>

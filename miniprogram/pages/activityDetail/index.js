@@ -218,7 +218,7 @@ Page({
     // console.log(options.partStatus)
     this.ActivityDetail(options.activityId)
     this.NumOfPeople(options.activityId)
-    this.Comments(options.activityId)
+    this.Comments(options.activityId)//改为已完成再发请求
 
     this.setData({
       partStatus: options.partStatus,
