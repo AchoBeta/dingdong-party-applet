@@ -291,14 +291,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var id = 1
+    // var id = 1
     // console.log(options)
     // this.Groups(1)
     // this.Branches()
-    app.requestToken()
-    app.getOpenId()
-    this.StudentInfo()
-    this.getNowDate()
+    // app.getOpenId()
+    // app.getToken()
+    // this.StudentInfo()
+    // this.getNowDate()
     // getAllActivity({page:1,size:5}).then(res=>{
     //   console.log(res)
     // })

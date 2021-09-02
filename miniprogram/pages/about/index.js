@@ -24,6 +24,7 @@ Page({
   data: {
     motto: 'Hello World',
     userInfo: wx.getStorageSync('userInfo'),
+    // userInfo: app.globalData.userInfo,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     keyName: undefined, //身份（入党阶段）
@@ -37,11 +38,12 @@ Page({
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
-      url: '/pages/login/index'
+      url: '../userBinding/index'
     })
   },
   async StudentInfo() {
     var userInfo = this.data.userInfo
+    console.log(userInfo)
     var userId = userInfo.userId
     getInfo(userId).then(res => {
       console.log(res)
@@ -49,9 +51,9 @@ Page({
       var detailInfo = res.data.data.item.details
       if(mainInfo.studentId){
         this.setData({
-          name : userInfo.name,
-          casid : userInfo.studentId,
-          groupName : userInfo.groupName,
+          name : mainInfo.name,
+          casid : mainInfo.studentId,
+          groupName : mainInfo.groupName,
           class : detailInfo.className
         })
       }
@@ -60,19 +62,19 @@ Page({
     })
   },
   onLoad: function () {
-    app.getToken()
-    app.requestToken()
+    // app.getToken()
+    // app.requestToken()
     this.StudentInfo()
-    this.setData({
-      keyName: app.globalData.keyName,
-      name: app.globalData.name,
-      casid: app.globalData.casid,
-      class: app.globalData.class
-    })
+    // this.setData({
+    //   keyName: app.globalData.keyName,
+    //   name: app.globalData.name,
+    //   casid: app.globalData.casid,
+    //   class: app.globalData.class
+    // })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        // hasUserInfo: true
       })
       console.log(app.globalData.userInfo);
     } else if (this.data.canIUse) {
@@ -81,7 +83,7 @@ Page({
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
-          hasUserInfo: true
+          // hasUserInfo: true
         })
       }
     } else {
@@ -91,7 +93,7 @@ Page({
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
-            hasUserInfo: true
+            // hasUserInfo: true
           })
         }
       })
@@ -102,7 +104,7 @@ Page({
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
-      hasUserInfo: true
+      // hasUserInfo: true
     })
   },
   previewFile(e) {

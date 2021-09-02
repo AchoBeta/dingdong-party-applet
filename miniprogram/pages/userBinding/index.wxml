@@ -6,7 +6,7 @@
 <form>
 	<view class="cu-form-group margin-top">
 		<view class="title">姓名</view>
-		<input placeholder="请输入姓名" bindinput="inputName"></input>
+		<input value="{{name}}" placeholder="请输入姓名" bindinput="inputName"></input>
 	</view>
 
 	<view class="cu-form-group">
@@ -26,7 +26,7 @@
 			</view>
 		</picker>
 	</view>
-	<view class="cu-form-group" wx:if="{{index == 0}}">
+	<view class="cu-form-group" wx:if="{{index == 0 && userInfo.studentId}}">
 		<view class="title">审核状态</view>
 		<input placeholder="" disabled=""></input>
 		<!-- <view class="padding-xs" wx:for="{{ColorList}}" wx:key  wx:if="{{status == 0}}">
@@ -47,7 +47,7 @@
 	<block wx:if="{{index==0}}">
 		<view class="cu-form-group">
 			<view class="title">学号</view>
-			<input placeholder="请输入学号" bindinput="inputStudentId"></input>
+			<input value="{{studentId}}" placeholder="请输入学号" bindinput="inputStudentId"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">党委</view>
@@ -85,7 +85,7 @@
 			<view class="title">籍贯</view>
 			<picker mode="region" bindchange="RegionChange" value="{{region}}" custom-item="{{customItem}}">
 				<view class="picker">
-					{{region[0]}} {{region[1]}} {{region[2]}}
+					{{origin?origin:'请选择籍贯'}}
 				</view>
 			</picker>
 		</view>
@@ -100,11 +100,11 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">专业</view>
-			<input placeholder="请输入专业" bindinput="inputMajor"></input>
+			<input value="{{major}}" placeholder="请输入专业" bindinput="inputMajor"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">班级</view>
-			<input placeholder="请输入班级" bindinput="inputClass"></input>
+			<input value="{{className}}" placeholder="请输入班级" bindinput="inputClass"></input>
 		</view>
 		<!-- <view class="cu-form-group">
 			<view class="title">邮箱</view>
@@ -112,7 +112,7 @@
 		</view> -->
 		<view class="cu-form-group">
 			<view class="title">电话</view>
-			<input placeholder="请输入电话" bindinput="inputPhone"></input>
+			<input value="{{phone}}" placeholder="请输入电话" bindinput="inputPhone"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">宿舍社区</view>
@@ -124,11 +124,11 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">宿舍号</view>
-			<input placeholder="请输入宿舍号" bindinput="inputDormNo"></input>
+			<input value="{{dormitoryNo}}" placeholder="请输入宿舍号" bindinput="inputDormNo"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">家庭住址</view>
-			<input placeholder="请选择家庭住址" bindtap="inputAddress" value="{{familyAddress}}"></input>
+			<input value="{{familyAddress}}" placeholder="请选择家庭住址" bindtap="inputAddress" value="{{familyAddress}}"></input>
 		</view>
 		<view class="binding-btn" bindtap="bindSubmitStudent">{{buttonText}}</view>
 	</block>
@@ -136,19 +136,19 @@
 	<block wx:if="{{index==1}}">
 		<view class="cu-form-group">
 			<view class="title">学工号</view>
-			<input placeholder="请输入学工号" bindinput="inputTeacherId"></input>
+			<input value="{{teacherId}}" placeholder="请输入学工号" bindinput="inputTeacherId"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">邮箱</view>
-			<input placeholder="请输入邮箱" bindinput="inputEmail"></input>
+			<input value="{{email}}" placeholder="请输入邮箱" bindinput="inputEmail"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">电话</view>
-			<input placeholder="请输入电话" bindinput="inputPhone"></input>
+			<input value="{{phone}}" placeholder="请输入电话" bindinput="inputPhone"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">党龄</view>
-			<input placeholder="请输入党龄" bindinput="inputPartyAge"></input>
+			<input value="{{partyAge}}" placeholder="请输入党龄" bindinput="inputPartyAge"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">党委</view>

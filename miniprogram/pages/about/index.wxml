@@ -9,8 +9,8 @@
 
 
 <view class="Icon">
-	<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
-		<image src="../../picture/myIcon.png" class="img"></image>
+	<button wx:if="{{!userInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
+		<image src="../../picture/my.png" class="img"></image>
 		<text class="imgText">请登录~</text>
 	</button>
 	<view wx:else class="userImg">

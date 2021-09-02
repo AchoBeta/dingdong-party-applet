@@ -430,12 +430,15 @@ Page({
   onLoad: function (options) {
     // this.MyActivity();
     var status = this.data.status
-    // app.getOpenId()
-    app.getToken()
-    this.inputOpenId()
+    // app.getToken()
+    // this.inputOpenId()
     this.Branches()
     this.getNowDate()
-    this.inputInfo()
+    if(this.data.userInfo.studentId){
+      this.inputInfo()
+      console.log('填充信息')
+    }
+    // this.inputInfo()
 
     // this.inputInfo()
   },
@@ -492,8 +495,14 @@ Page({
         console.log(this.data)
       } else if (mainInfo.teacherId) {
         this.setData({
-
+          name: mainInfo.name,
+          phone: detailInfo.phone,
+          branchId: mainInfo.branchId,
+          branchName: mainInfo.branchName,
+          groupId: mainInfo.groupId,
+          groupIndex: mainInfo.groupId - 1 + "",
         })
+        console.log(this.data)
       }
     }).catch(err => {
       console.log(err)
@@ -610,7 +619,6 @@ Page({
       dormitoryNo: e.detail.value
     })
     console.log(this.data)
-    this.stringToByte(this.data.dormitoryNo)
   },
   stringToByte: function (str) {
     var bytes = new Array();
@@ -881,6 +889,7 @@ Page({
     })
   },
   bindSubmitStudent(e) {
+    this.stringToByte(this.data.dormitoryNo)
     var studentEntity = {
       name: this.data.name,
       gender: this.data.gender,
@@ -906,8 +915,8 @@ Page({
 
     // console.log(typeof(studentEntity))
     console.log(studentEntity)
-    console.log(e.detail.value)
-
+    // console.log(e.detail.value)
+    // this.stringToByte(this.data.dormitoryNo)
     //student
 
     if (studentEntity['name'] && studentEntity['gender'] && studentEntity['studentId'] && studentEntity['branchId'] && studentEntity['branchName'] && studentEntity['origin'] && studentEntity['nation']) {
@@ -921,7 +930,14 @@ Page({
               console.log(res)
               wx.showToast({
                 title: '绑定成功',
-                icon: 'success'
+                icon: 'success',
+                success: function() {
+                  setTimeout(function() {
+                    wx.navigateBack({
+                      delta: 1,
+                    })
+                  }, 1500)
+                }
               })
             }).catch(err => {
               console.log(err)

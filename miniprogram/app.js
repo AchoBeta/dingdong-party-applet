@@ -94,6 +94,7 @@ App({
 
     // console.log(userInfo)
     wx.setStorageSync("userInfo", userInfo); //存入缓存
+    console.log(userInfo)
   },
 
   //判断token是否过期
@@ -103,8 +104,11 @@ App({
       var userInfo = wx.getStorageSync('userInfo')
       // console.log(userInfo)
       let token_deadtime = wx.getStorageSync('token_deadtime')
+      // console.log(userInfo)
       //判断有没有进行微信的用户登录，是否有openid
-      if (userInfo.openId.length != 0) {
+      //if (userInfo.openId.length != 0)
+      if (userInfo.openId) {
+        console.log('userInfo有openid')
         if ((new Date().getTime() - token_deadtime) > 1800000) { //判断token是否过期，30min
           //已过期，重新请求
           requestToken(userInfo.openId).then(res => {
@@ -137,13 +141,13 @@ App({
           })
         } else {
           //token未过期
-          // console.log("token未过期")
+          console.log("token未过期")
         }
       } else {
         //无openid
-        //引导用户重新执行getOpenId
-
-        this.getOpenId()
+        console.log('引导用户执行getOpenId')
+        that.getOpenId()
+        console.log(userInfo)
       }
       resolve('成功')
     })

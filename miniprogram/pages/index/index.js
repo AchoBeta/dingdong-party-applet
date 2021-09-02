@@ -45,13 +45,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.getToken()
+    app.requestToken()
     // console.log(app.globalData)
     const that = this
     var step = ''
     var key = ''
     var user = app.globalData.user
-    var userInfo = this.data.userInfo
+    var userInfo = wx.getStorageSync('userInfo')
     var userId = userInfo.userId
     wx.showLoading({
       title: '数据加载中..',
@@ -60,8 +60,8 @@ Page({
       wx.hideLoading()
     }, 1000)
     console.log(userInfo)
-    if(userInfo.studentId != null || userInfo.teacherId != null){
-      this.setData({
+    if(userInfo.studentId){
+      that.setData({
         MODE : true
       })
       getInfo(userId).then(res => {
