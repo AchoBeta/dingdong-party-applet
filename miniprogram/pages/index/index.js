@@ -45,6 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // app.getOpenId()
     app.getToken()
     // console.log(app.globalData)
     const that = this
@@ -65,13 +66,14 @@ Page({
         MODE : true
       })
       getInfo(userId).then(res => {
-        console.log(res)
-        key = res.data.id - 1
-        step = res.data.order
+        // console.log(res)
+        key = res.data.data.item.main.stageId - 1
+        step = res.data.order 
         try {
           if (typeof key === 'undefined' || typeof step === 'undefined') {
-            key = 3
-            step = 11
+            // key = 3
+            // step = 11
+            step=1
           }
           that.setData({
             nowKey: key,
@@ -203,7 +205,10 @@ Page({
       topTextSize: mbb.height,
       windowHeight: sysInfo.windowHeight
     })
+
+    
   },
+  
   toNowStep(e) {
     let R = String.fromCharCode(this.data.nowKey + 65)
     let S = String.fromCharCode(this.data.nowStepKey + 96)
@@ -221,6 +226,7 @@ Page({
         nowStepKey: app.globalData.nowStep,
       })
     }
+    // console.log(app.globalData.nowKey)
   },
   downToStep(e) {
     console.log(e)

@@ -1,6 +1,7 @@
-// pages/test/index.js
-
+// pages/index/index.js
 const app = getApp()
+const api = require("../../style/api.js")
+const sData = require("../../utils/testData.js")
 const {
   getAllActivity,
   getRelatedActivity,
@@ -12,15 +13,10 @@ const {
   updateExperience,
   getComments,
   applyForLeave,
-
   getBranches,
   getGroups,
-  getInfo,
-
-  queryGroup
-
+  getInfo
 } = require("../../utils/api.js")
-
 Page({
 
   /**
@@ -28,387 +24,93 @@ Page({
    */
   data: {
     userInfo : wx.getStorageSync('userInfo'),
-    grade : []
+    groupName : wx.getStorageSync('userInfo').groupName,
+    rightLeftKey: app.globalData.nowKey,
+    upDownKey: 0,
+    finish: true,
+    nowKey: app.globalData.nowKey,
+    nowStepKey: app.globalData.nowStep,
+    windowHeight: undefined,
+    statusBar: undefined,
+    process: sData.process,
+    step: sData.step,
+    nowProcess: 0,
+    waitMain: 0,
+    mainPngSrc: "cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405mainStepPic/",
+    gender: 0,
+    MODE: undefined,
+    testStep:[
+      {url:"cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405stepNewPng/入党申请人/1.png"},
+      {url:"cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405stepNewPng/入党申请人/2.png"},
+      {url:"cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405stepNewPng/入党申请人/3.png"},
+      {url:"cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405stepNewPng/入党申请人/4.png"},
+      {url:"cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405stepNewPng/入党申请人/5.png"}
+    ]
   },
-
-
-  getNowDate() {
-    var timeStamp =  Date.parse(new Date())
-    var date = new Date(timeStamp)
-    var year = date.getFullYear()
-    var list = this.data.grade
-    console.log(year)
-    for(let i = 0; i < 4; i++){
-      list.push(year)
-      year--
-    }
-  },
-    //查看自己信息
-    async showUserInfo() {
-      await app.getToken() //判断token是否过期
-      var token = wx.getStorageSync('token')
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
-        method: 'GET',
-        header: {
-          'token': token
-        },
-        success(res) {
-          console.log(res)
-        }
-      })
-    },
-    //获取用户信息
-    async StudentInfo() {
-      var userInfo = this.data.userInfo
-      var userId = userInfo.userId
-      var studentId = userInfo.studentId
-      getInfo(userId).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-
-    //创建用户
-    async updateUserInfo() {
-      await app.getToken() //判断token是否过期
-      var token = wx.getStorageSync('token')
-      // var studentId = wx.getStorageSync('userInfo').studentId
-  
-      var userInfo = {
-        "birthday": "",
-        "branchId": "",
-        "branchName": "",
-        "className": "",
-        "classPosition": "",
-        "dormitoryArea": "",
-        "dormitoryNo": "",
-        "familyAddress": "",
-        "gender": true,
-        "grade": 0,
-        "groupId": "",
-        "groupName": "",
-        "idCard": "",
-        "institute": "",
-        "joinLeagueTime": "",
-        "major": "",
-        "name": "asd",
-        "nation": "",
-        "origin": "",
-        "phone": "",
-        "stage": 0,
-        "stageId": 0,
-        "studentId": "201943362335",
-        "taskId": 0
-      }
-  
-      wx.request({
-        url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
-        method: 'PUT',
-        data: userInfo,
-        header: {
-          'content-type': 'application/json;charset=UTF-8',
-          'token': token
-        },
-        success(res) {
-          console.log(res)
-        }
-      })
-    },
-    //查询所有党组
-    async Groups(branchId) {
-      var that = this
-      var params = {
-        page: 1,
-        size: 20
-      }
-      getGroups(branchId, params).then(res=>{
-        console.log(res)
-      }).catch(err=>{
-        console.log(err)
-      })
-    },
-    //查询所有党支部
-    async Branches() {
-      var that = this
-      var params = {
-        page: 1,
-        size: 20
-      }
-      getBranches(params).then(res=>{
-        console.log(res.data.data.list)
-      }).catch(err=>{
-        console.log(err)
-      })
-    },
-    //修改学生信息
-    async updateStudentInfo() {
-      await app.getToken() //判断token是否过期
-      var token = wx.getStorageSync('token')
-      var studentId = wx.getStorageSync('userInfo').studentId
-  
-      var studentEntity = {
-        "birthday": "",
-        "branchId": "",
-        "branchName": "",
-        "className": "",
-        "classPosition": "",
-        "dormitoryArea": "",
-        "dormitoryNo": "",
-        "familyAddress": "",
-        "gender": true,
-        "grade": 0,
-        "groupId": "",
-        "groupName": "",
-        "idCard": "",
-        "institute": "",
-        "joinLeagueTime": "",
-        "major": "",
-        "name": "asd",
-        "nation": "",
-        "origin": "",
-        "phone": "",
-        "stage": 0,
-        "stageId": 0,
-        "studentId": studentId,
-        "taskId": 0
-      }
-    },
-  //查看自己信息
-  async showUserInfo() {
-    await app.getToken() //判断token是否过期
-    var token = wx.getStorageSync('token')
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users/info',
-      method: 'GET',
-      header: {
-        'token': token
-      },
-      success(res) {
-        console.log(res)
-      }
-    })
-  },
-
-  //创建用户
-  async updateUserInfo() {
-    await app.getToken() //判断token是否过期
-    var token = wx.getStorageSync('token')
-    // var studentId = wx.getStorageSync('userInfo').studentId
-
-    var userInfo = {
-      "birthday": "",
-      "branchId": "",
-      "branchName": "",
-      "className": "",
-      "classPosition": "",
-      "dormitoryArea": "",
-      "dormitoryNo": "",
-      "familyAddress": "",
-      "gender": true,
-      "grade": 0,
-      "groupId": "",
-      "groupName": "",
-      "idCard": "",
-      "institute": "",
-      "joinLeagueTime": "",
-      "major": "",
-      "name": "asd",
-      "nation": "",
-      "origin": "",
-      "phone": "",
-      "stage": 0,
-      "stageId": 0,
-      "studentId": "201943362335",
-      "taskId": 0
-    }
-
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/users',
-      method: 'PUT',
-      data: userInfo,
-      header: {
-        'content-type': 'application/json;charset=UTF-8',
-        'token': token
-      },
-      success(res) {
-        console.log(res)
-      }
-    })
-  },
-
-  //修改学生信息
-  async updateStudentInfo() {
-    await app.getToken() //判断token是否过期
-    var token = wx.getStorageSync('token')
-    var studentId = wx.getStorageSync('userInfo').studentId
-
-    var studentEntity = {
-      "birthday": "",
-      "branchId": "",
-      "branchName": "",
-      "className": "",
-      "classPosition": "",
-      "dormitoryArea": "",
-      "dormitoryNo": "",
-      "familyAddress": "",
-      "gender": true,
-      "grade": 0,
-      "groupId": "",
-      "groupName": "",
-      "idCard": "",
-      "institute": "",
-      "joinLeagueTime": "",
-      "major": "",
-      "name": "asd",
-      "nation": "",
-      "origin": "",
-      "phone": "",
-      "stage": 0,
-      "stageId": 0,
-      "studentId": studentId,
-      "taskId": 0
-    }
-
-    wx.request({
-      url: app.globalData.APIUrlHead + '/api/dingdong-party/v1/base/students/' + studentId,
-      method: 'PUT',
-      data: studentEntity,
-      header: {
-        'content-type': 'application/json;charset=UTF-8',
-        'token': token
-      },
-      success(res) {
-        console.log(res)
-
-      }
-    })
-  },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var id = 1
-    // console.log(options)
-    // this.Groups(1)
-    // this.Branches()
-    app.requestToken()
-    app.getOpenId()
-    this.StudentInfo()
-    this.getNowDate()
-    // getAllActivity({page:1,size:5}).then(res=>{
-    //   console.log(res)
-    // })
-    // getRelatedActivity({branchId:1,page:1,size:5}).then(res=>{
-    //   console.log(res)
-    // })
-    // getMyActivity("1425629310860935169").then(res=>{
-    //   console.log(res)
-    // })
-    // getActivityDetail("1419572434029355010").then(res => {
-    //   console.log(res)
-    // })
-    // getActivityPeopleNum("1419572434029355010").then(res => {
-    //   console.log(res)
-    // })
-    // applyParticipation("1425629310860935169","1419572434029355010").then(res => {
-    //   console.log(res)
-    // })
-    var comment = {
-      activityId: "1419572434029355010",
-      content: "gx封装心得评论",
-      id: "",
-      image: "",
-      userId: "1425629310860935169"
+    
+  },
+  toNowStep(e) {
+    let R = String.fromCharCode(this.data.nowKey + 65)
+    let S = String.fromCharCode(this.data.nowStepKey + 96)
+    wx.navigateTo({
+      url: '/package' + R + '/pages/' + S + '/index',
+    })
+  },
+  onShow(options) {
+    /**
+     * 测试状态刷新动态效果
+     */
+    if (this.data.nowKey != app.globalData.nowKey) {
+      this.setData({
+        nowKey: app.globalData.nowKey,
+        nowStepKey: app.globalData.nowStep,
+      })
     }
-    // FirstPublishExperience("1419572434029355010",comment).then(res=>{
-    //   console.log(res)
-    // })
-    // updateExperience("1419572434029355010", "1426480504579829762", comment).then(res => {
-    //   console.log(res)
-    // })
-    // getComments("1419572434029355010", {page:1,size:5}).then(res => {
-    //   console.log(res)
-    // })
-    // applyForLeave("1419162725304542567", "1423870335597969136", "reason封装002").then(res => {
-    //   console.log(res)
-    // })
-    // var branchId = wx.getStorageSync('userInfo').branchId
-    // console.log(branchId)
-    // queryGroup(branchId, {
-    //   page: 1,
-    //   size: 100
-    // }).then(res => {
-    //   console.log(res)
-    // })
-    // app.getToken();
-    // var data = {
-    //   page:1,
-    //   size:100
-    // }
-    // wx.request({
-    //   url: "https://www.dingdongtongxue.com/api/dingdong-party/base/branch/"+3+"/groups",
-    //   method:"GET",
-    //   data,
-    //   header:{
-    //     'content-type': "application/json",
-    //     'token': "3821-7751"
-    //   },
-    //   success(res){
-    //     console.log(res)
-    //   }
-    // })
+    // console.log(app.globalData.nowKey)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  downToStep(e) {
+    console.log(e)
+    let R = String.fromCharCode(e.currentTarget.dataset.r + 65)
+    let S = String.fromCharCode(e.currentTarget.dataset.s + 97)
+    wx.navigateTo({
+      url: '/package' + R + '/pages/' + S + '/index',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  toBeforeStep(e) {
+    wx.navigateTo({
+      url: '/pages/beforeStep/index',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  toNextStep(e) {
+    wx.navigateTo({
+      url: '/pages/nextStep/index',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  changeRightLeft(e) {
+    const that = this
+    that.setData({
+      rightLeftKey: e.detail.current
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  changeUpDown(e) {
+    const that = this
+    that.setData({
+      upDownKey: e.detail.current
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  toLogin(e) {
+    wx.reLaunch({
+      url: '/pages/login/index',
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  toBinding(e) {
+    wx.navigateTo({
+      url: '../userBinding/index',
+    })
   }
 })

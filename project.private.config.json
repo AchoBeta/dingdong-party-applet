@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -97,6 +98,12 @@
         {
           "name": "党建管理",
           "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "测试",
+          "pathName": "pages/testOnly/index",
           "scene": null
         }
       ]

@@ -33,6 +33,7 @@
       <view style="display:flex">
         <view class="text-gray director_name" >{{item.directorName}}</view>
         <view class="activityUser_status">
+          <!-- TabIndex==0表示为 我的活动 -->
           <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==1}}">请假申请中</view>
           <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==2}}">请假成功</view>
           <view class="cu-tag line-red round" wx:if="{{TabIndex==0 && item.partStatus==3}}">请假审批不通过</view>

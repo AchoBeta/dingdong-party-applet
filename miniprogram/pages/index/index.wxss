@@ -166,7 +166,7 @@
 
 .downCardTip {
   margin: 3%;
-  margin-top: 6%;
+  margin-top: 3%;
   border-radius: 20rpx;
   width: 94%;
   height: 13.7%;
