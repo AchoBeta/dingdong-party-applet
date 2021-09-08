@@ -17,13 +17,12 @@
 
 .topText {
 	position: fixed;
-	z-index: 7;
+	z-index: 0;
 	font-size: 150%;
 	text-align: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 0 auto;
 	left: 0;
 	right: 0;
 	color: white;
@@ -31,8 +30,10 @@
 }
 
 .box {
-    width: 130%;
-    height: 620rpx;
+    width: 150%;
+    height: 630rpx;
+    position: absolute;
+    top: 3%;
     background-color: #ff5c5d;
     border-radius: 50%;
     display: flex;
@@ -78,7 +79,7 @@
     color: white;
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 170rpx;
+    top: 190rpx;
     right: 40rpx;
     border-radius: 40px 40px 40px 40px;
     width: 155rpx;

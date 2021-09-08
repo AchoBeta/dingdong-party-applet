@@ -6,8 +6,12 @@ const {
   getBranches,
   getGroups,
   getInfo,
+  getAllStage,
+  getMaxStage,
+  getGrade,
   getStudentInfo,
   getTeacherInfo,
+  updateStudent,
 } = require("../../utils/api.js")
 Page({
   data: {
@@ -140,8 +144,12 @@ Page({
     openId: "", //微信openid
     partyAge: 0, //
     phone: "", //手机号
-    stage: 0, //期数
-    stageId: 0, //所属阶段
+    stage: 6, //期数
+    stageIdIndex: 0,
+    batchIndex: 0,
+    stageList: [],
+    batchList: [],
+    stageId: 1, //所属阶段
     status: 0, //审核状态（1通过2不通过）
     statusReason: "", //不通过原因
     studentId: "", //学号
@@ -429,17 +437,20 @@ Page({
   },
   onLoad: function (options) {
     // this.MyActivity();
+    app.requestToken()
     var status = this.data.status
     // app.getToken()
     // this.inputOpenId()
     this.Branches()
-    this.getNowDate()
+    this.Stages()
+    this.Grade()
+    this.maxBatch()
     if(this.data.userInfo.studentId){
       this.inputInfo()
       console.log('填充信息')
     }
     // this.inputInfo()
-
+    console.log(this.data)
     // this.inputInfo()
   },
   onShow: function () {
@@ -456,6 +467,7 @@ Page({
     var userInfo = this.data.userInfo
     var userId = userInfo.userId
     getInfo(userId).then(res => {
+      console.log(res)
       var mainInfo = res.data.data.item.main
       var detailInfo = res.data.data.item.details
       var timeStamp = Date.parse(new Date())
@@ -463,8 +475,13 @@ Page({
       var year = date.getFullYear()
       console.log(mainInfo)
       console.log(detailInfo)
-      this.byteToString(detailInfo.dormitoryNo)
+      // this.byteToString(detailInfo.dormitoryNo)
       this.Groups(userInfo.branchId)
+      if(mainInfo.status == 2){
+        this.setData({
+          buttonText: '完成修改'
+        })
+      }
       if (mainInfo.studentId) {
         this.setData({
           index: "0",
@@ -479,8 +496,13 @@ Page({
           branchName: mainInfo.branchName,
           groupId: mainInfo.groupId,
           groupIndex: mainInfo.groupId - 1 + "",
+          groupName: mainInfo.groupName,
+          stage: mainInfo.stage,
+          batchIndex: mainInfo.stage - 1 + "",
+          stageId: mainInfo.stageId,
+          stageIdIndex: mainInfo.stageId - 1 + "",
           nation: detailInfo.nation,
-          nationIndex: "0",
+          nationIndex: this.data.nationArray.findIndex(item => item.name == detailInfo.nation),
           origin: detailInfo.origin,
           gradeIndex: year - detailInfo.grade + "",
           grade: detailInfo.grade,
@@ -490,17 +512,26 @@ Page({
           dormitoryArea: detailInfo.dormitoryArea,
           dormitoryNo: detailInfo.dormitoryNo,
           familyAddress: detailInfo.familyAddress,
-
+          dormitoryAreaIndex: this.data.dormitoryAreaList.findIndex(item => item.name == detailInfo.dormitoryArea)
         })
         console.log(this.data)
+        // console.log(this.data.dormitoryAreaList.findIndex(item => item.name == detailInfo.dormitoryArea))
       } else if (mainInfo.teacherId) {
         this.setData({
+          index: "1",
           name: mainInfo.name,
+          teacherId: mainInfo.teacherId,
+          status: mainInfo.status,
+          statusReason: mainInfo.statusReason,
+          email: detailInfo.email,
           phone: detailInfo.phone,
+          partyAge: detailInfo.partyAge,
           branchId: mainInfo.branchId,
+          branchIndex: mainInfo.branchId - 1 + "",
           branchName: mainInfo.branchName,
           groupId: mainInfo.groupId,
           groupIndex: mainInfo.groupId - 1 + "",
+          groupName: mainInfo.groupName,
         })
         console.log(this.data)
       }
@@ -509,21 +540,56 @@ Page({
     })
   },
   //年级
-  async getNowDate() {
-    var timeStamp = Date.parse(new Date())
-    var date = new Date(timeStamp)
-    var year = date.getFullYear()
-    var list = this.data.gradeList
-    console.log(year)
-    for (let i = 0; i < 4; i++) {
-      var item = year + ""
-      list.push({
-        item
+  async Grade() {
+    var list = []
+    getGrade().then(res => {
+      // console.log(res.data.data.num)
+      var maxGrade = res.data.data.num
+      for (let i = 0; i < 4; i++) {
+        var name = maxGrade + ""
+        list.push({
+          name
+        })
+        maxGrade--
+      }
+      console.log(list)
+      this.setData({
+        gradeList: list
       })
-      year--
-    }
-    this.setData({
-      gradeList: list
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  //查询所有期数
+  async maxBatch() {
+    var list = []
+    getMaxStage().then(res => {
+      // console.log(res.data.data)
+      var maxBatch = res.data.data.num
+      for(let i = 0; i < maxBatch; i++){
+        var name = "第" + (i + 1) + "期"
+        // console.log(name)
+        list.push({
+          name
+        })
+      }
+      this.setData({
+        batchList: list
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  //查询所有阶段
+  async Stages() {
+    var that = this
+    getAllStage().then(res => {
+      console.log(res)
+      that.setData({
+        stageList: res.data.data.items
+      })
+    }).catch(err => {
+      console.log(err)
     })
   },
   //查询所有党委
@@ -714,6 +780,18 @@ Page({
     })
     console.log(this.data)
   },
+  PickerStageId: function (e) {
+    this.setData({
+      stageIdIndex: e.detail.value,
+      stageId: e.detail.value * 1 + 1
+    })
+  },
+  PickerStage: function (e) {
+    this.setData({
+      batchIndex: e.detail.value,
+      stage: e.detail.value * 1 + 1
+    })
+  },
   PickerGrade: function (e) {
     var _grade = this.data.gradeList[e.detail.value].item
     this.setData({
@@ -889,7 +967,10 @@ Page({
     })
   },
   bindSubmitStudent(e) {
-    this.stringToByte(this.data.dormitoryNo)
+    if(typeof(this.data.dormitoryNo) == 'string'){
+      this.stringToByte(this.data.dormitoryNo)
+    }
+    console.log(typeof(this.data.dormitoryNo))
     var studentEntity = {
       name: this.data.name,
       gender: this.data.gender,
@@ -899,6 +980,8 @@ Page({
       groupId: this.data.groupId,
       groupName: this.data.groupName,
       institude: this.data.institute,
+      stageId: this.data.stageId,
+      stage: this.data.stage,
       // birthday : this.data.birthday,
       nation: this.data.nation,
       origin: this.data.origin,
@@ -906,30 +989,78 @@ Page({
       major: this.data.major,
       className: this.data.className,
       phone: this.data.phone,
-      email: this.data.email,
+      // email: this.data.email,
       familyAddress: this.data.familyAddress,
       dormitoryArea: this.data.dormitoryArea,
       dormitoryNo: this.data.dormitoryNo,
       status: this.data.status
     }
-
+    var updateStudentEntity = {
+      studentId: this.data.studentId,
+      name: this.data.name,
+      grade: this.data.grade,
+      major: this.data.major,
+      className: this.data.className,
+      phone: this.data.phone,
+      dormitoryArea: this.data.dormitoryArea,
+      dormitoryNo: this.data.dormitoryNo,
+      familyAddress: this.data.familyAddress,
+    }
     // console.log(typeof(studentEntity))
     console.log(studentEntity)
+    console.log(updateStudentEntity)
     // console.log(e.detail.value)
     // this.stringToByte(this.data.dormitoryNo)
     //student
-
-    if (studentEntity['name'] && studentEntity['gender'] && studentEntity['studentId'] && studentEntity['branchId'] && studentEntity['branchName'] && studentEntity['origin'] && studentEntity['nation']) {
+    if(this.data.status != 2){
+      if (studentEntity['name'] && studentEntity['gender'] && studentEntity['studentId'] && studentEntity['branchId'] && studentEntity['branchName'] && studentEntity['groupId'] && studentEntity['groupName'] && studentEntity['origin'] && studentEntity['nation']) {
+        wx.showModal({
+          title: '提示',
+          content: '请确认信息填写无误',
+          success(res) {
+            if (res.confirm) {
+              console.log('确定')
+              bindStudent(studentEntity).then(res => {
+                console.log(res)
+                wx.showToast({
+                  title: '绑定成功',
+                  icon: 'success',
+                  success: function() {
+                    setTimeout(function() {
+                      wx.navigateBack({
+                        delta: 1,
+                      })
+                    }, 1500)
+                  }
+                })
+              }).catch(err => {
+                console.log(err)
+                wx.showToast({
+                  title: '绑定失败，请重新提交',
+                  icon: 'none'
+                })
+              })
+            } else if (res.cancel) {
+              console.log('取消')
+            }
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '请填写信息',
+          icon: 'none'
+        })
+      }
+    } else {
       wx.showModal({
         title: '提示',
         content: '请确认信息填写无误',
-        success(res) {
-          if (res.confirm) {
-            console.log('确定')
-            bindStudent(studentEntity).then(res => {
+        success (res) {
+          if(res.confirm){
+            updateStudent(updateStudentEntity.studentId, updateStudentEntity).then(res => {
               console.log(res)
               wx.showToast({
-                title: '绑定成功',
+                title: '修改成功',
                 icon: 'success',
                 success: function() {
                   setTimeout(function() {
@@ -942,21 +1073,18 @@ Page({
             }).catch(err => {
               console.log(err)
               wx.showToast({
-                title: '绑定失败，请重新提交',
+                title: '修改失败，请重新提交',
                 icon: 'none'
               })
             })
-          } else if (res.cancel) {
+          } else if(res.cancel) {
             console.log('取消')
           }
         }
       })
-    } else {
-      wx.showToast({
-        title: '请填写信息',
-        icon: 'none'
-      })
+
     }
+
   },
   bindSubmitTeacher(e) {
     var teacherEntity = {
@@ -970,6 +1098,7 @@ Page({
       branchName: this.data.branchName,
       groupId: this.data.groupId,
       groupName: this.data.groupName,
+      status: this.data.status,
     }
     console.log(teacherEntity)
     //teacher

@@ -1,6 +1,6 @@
 <view class="TOP">
-	<view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
-	<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop"><text>个人中心</text></view>
+	<view style="width:100%;height:{{topLLL * 0.8}}px;background-color:#ff5c5d" class="toptop"></view>
+	<view style="width:100%;height:{{topKKK * 0.07}}px;background-color:#ff5c5d" class="toptop"><text style="letter-spacing: 3px;">个人中心</text></view>
 </view>
 <view class="top-bg">
 	<image style="height:{{topKKK * 0.375}}px;width:100%;top:{{topKKK * 0.025}}px" src="/picture/mineTop.png" mode='widthFix'> </image>
@@ -9,14 +9,34 @@
 
 
 <view class="Icon">
-	<button wx:if="{{!userInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
-		<image src="../../picture/my.png" class="img"></image>
-		<text class="imgText">请登录~</text>
-	</button>
-	<view wx:else class="userImg">
-		<image bindtap="bindViewTap" class="userIcon" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+	<block wx:if="{{!hasUserInfo}}" class="InfoBtn">
+		<button wx:if="{{canIUseGetUserProfile}}" class="InfoBtn" hover-class="none" bindtap="getUserProfile" style="height: 100rpx; width:400rpx">
+			<image src="{{wxInfo.avatarUrl?wxInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image>
+			<text class="imgText">{{wxInfo.nickName?wxInfo.nickName:'请登录~'}}</text>
+		</button>
+		<button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn" style="height: 100rpx; width:400rpx">
+			<image src="{{wxInfo.avatarUrl?wxInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image>
+			<text class="imgText">{{wxInfo.nickName?wxInfo.nickName:'请登录~'}}</text>
+		</button>
+		<!-- <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+		<button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+		<!-- <image src="{{userInfo?userInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image> -->
+		
+	</block>
+	<block wx:else class="userImg">
+		<button class="InfoBtn" style="height: 100rpx; width:400rpx" hover-class="none" >
+			<image bindtap="bindViewTap" class="img" src="{{wxInfo.avatarUrl}}" mode="cover"></image>
+			<text class="imgText">{{wxInfo.nickName}}</text>
+		</button>
+	</block>
+	<!-- <button wx:if="{{canIUseGetUserProfile}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
+		<image src="{{userInfo?userInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image>
+		<text class="imgText">{{userInfo?userInfo.nickName:'请登录~'}}</text>
+	</button> -->
+	<!-- <view wx:else class="userImg">
+		<image bindtap="bindViewTap" class="userIcon" src="../../picture/my.png" mode="cover"></image>
 		<text class="username">{{userInfo.nickName}}</text>
-	</view>
+	</view> -->
 	<!-- <image src="cloud://studentdata-ypct0.7374-studentdata-ypct0-1301212128/wave.gif" mode="scaleToFill" class="gif-wave" style="background-color:transparent"></image> -->
 </view>
 

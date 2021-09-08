@@ -16,7 +16,7 @@ page{
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  font-size: 130%;
+  font-size: 150%;
   color: white;
   word-spacing: -5rpx;
 }
@@ -25,7 +25,7 @@ page{
   /* border-top: 1rpx solid orangered; */
   width:100%;
   background-color:white;
-  padding-top:10rpx;
+  /* padding-top:10rpx; */
   padding-bottom: 20rpx;
   position: fixed;
   z-index: 500;

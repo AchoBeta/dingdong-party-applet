@@ -16,8 +16,11 @@ const {
   getBranches,
   getGroups,
   getInfo,
-
-  queryGroup
+  getStage,
+  getAllStage,
+  queryGroup,
+  getGrade,
+  getMaxStage
 
 } = require("../../utils/api.js")
 
@@ -70,6 +73,54 @@ Page({
       })
     },
 
+    async Stage(){
+      var id = this.data.userInfo.stageId
+      console.log(id)
+      getStage(id).then(res => {
+        console.log(res.data.data.item.name)
+        this.setData({
+          keyName : res.data.data.item.name
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
+    async Grade() {
+      var list = []
+      getGrade().then(res => {
+        // console.log(res.data.data.num)
+        var maxGrade = res.data.data.num
+        for (let i = 0; i < 4; i++) {
+          var name = maxGrade + ""
+          list.push({
+            name
+          })
+          maxGrade--
+        }
+        console.log(list)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+
+    async maxBatch() {
+      var list = this.data.batchList
+      getMaxStage().then(res => {
+        // console.log(res.data.data)
+        var maxBatch = res.data.data.num
+        for(let i = 0; i < maxBatch; i++){
+          var name = "第" + (i + 1) + "期"
+          // console.log(name)
+          list.push({
+            name
+          })
+        }
+        console.log(list)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     //创建用户
     async updateUserInfo() {
       await app.getToken() //判断token是否过期
@@ -298,6 +349,9 @@ Page({
     // app.getOpenId()
     // app.getToken()
     // this.StudentInfo()
+    // this.Stage()
+    this.Grade()
+    this.maxBatch()
     // this.getNowDate()
     // getAllActivity({page:1,size:5}).then(res=>{
     //   console.log(res)

@@ -37,10 +37,11 @@ Page({
     nowProcess: 0,
     waitMain: 0,
     mainPngSrc: "cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405mainStepPic/",
-    gender: 0,
+    gender: wx.getStorageSync('wxInfo').gender,
     MODE: undefined
   },
 
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -51,20 +52,23 @@ Page({
     var step = ''
     var key = ''
     var user = app.globalData.user
-    var userInfo = wx.getStorageSync('userInfo')
-    var userId = userInfo.userId
+    var userInfo = that.data.userInfo
+    var groupName = userInfo.groupName
     wx.showLoading({
-      title: '数据加载中..',
+      title: '数据加载中',
     })
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 1000)
+
     console.log(userInfo)
-    if(userInfo.studentId){
+    if(wx.getStorageSync('userInfo').studentId){
       that.setData({
         MODE : true
       })
+      var userId = userInfo.userId
       getInfo(userId).then(res => {
+        // console.log(res)
+        this.setData({
+          gender: res.data.data.item.details.gender * 1
+        })
         // console.log(res)
         key = res.data.data.item.main.stageId - 1
         step = res.data.order 
@@ -88,6 +92,9 @@ Page({
           app.globalData.nowKey = 3
           app.globalData.nowStep = 11
         }
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
       }).catch(err => {
         console.log(err)
       })
@@ -219,6 +226,7 @@ Page({
     /**
      * 测试状态刷新动态效果
      */
+    // app.requestToken()
     if (this.data.nowKey != app.globalData.nowKey) {
       this.setData({
         nowKey: app.globalData.nowKey,

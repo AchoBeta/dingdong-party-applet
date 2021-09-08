@@ -26,7 +26,7 @@
 			</view>
 		</picker>
 	</view>
-	<view class="cu-form-group" wx:if="{{index == 0 && userInfo.studentId}}">
+	<view class="cu-form-group" wx:if="{{(index == 0 && userInfo.studentId) || (index == 1 && userInfo.teacherId)}}">
 		<view class="title">审核状态</view>
 		<input placeholder="" disabled=""></input>
 		<!-- <view class="padding-xs" wx:for="{{ColorList}}" wx:key  wx:if="{{status == 0}}">
@@ -65,6 +65,22 @@
 				</view>
 			</picker>
 		</view>
+		<view class="cu-form-group">
+			<view class="title">发展阶段</view>
+			<picker bindchange="PickerStageId" value="{{stageIdIndex}}" range="{{stageList}}" range-key="name">
+				<view class="picker" value="{{stageList[stageIdIndex].name}}">
+					{{stageIdIndex?stageList[stageIdIndex].name:'请选择所在发展阶段'}}
+				</view>
+			</picker>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">期数</view>
+			<picker bindchange="PickerStage" value="{{batchIndex}}" range="{{batchList}}" range-key="name">
+				<view class="picker" value="{{batchList[batchIndex].name}}">
+					{{batchIndex?batchList[batchIndex].name:'请选择所在期数'}}
+				</view>
+			</picker>
+		</view>
 		<!-- <view class="cu-form-group">
 		    <view class="title">出生日期</view>
 		    <picker mode="date" value="{{birthday}}" start="1900-01-01" end="2020-01-01" bindchange="DateChange">
@@ -77,7 +93,7 @@
 			<view class="title">民族</view>
 			<picker bindchange="PickerNation" value="{{nationIndex}}" range="{{nationArray}}" range-key="name">
 				<view class="picker" value='{{nationArray[nationIndex].name}}'>
-					{{nationIndex?nationArray[nationIndex].name:'请选择民族'}}
+					{{nation?nationArray[nationIndex].name:'请选择民族'}}
 				</view>
 			</picker>
 		</view>
@@ -92,9 +108,9 @@
 
 		<view class="cu-form-group margin-top">
 			<view class="title">年级</view>
-			<picker bindchange="PickerGrade" value="{{gradeIndex}}" range="{{gradeList}}" range-key="item">
-				<view class="picker" value='{{gradeList[gradeIndex].item}}'>
-					{{gradeIndex?gradeList[gradeIndex].item:'请选择年级'}}
+			<picker bindchange="PickerGrade" value="{{gradeIndex}}" range="{{gradeList}}" range-key="name">
+				<view class="picker" value='{{gradeList[gradeIndex].name}}'>
+					{{gradeIndex?gradeList[gradeIndex].name:'请选择年级'}}
 				</view>
 			</picker>
 		</view>
@@ -118,7 +134,7 @@
 			<view class="title">宿舍社区</view>
 			<picker bindchange="PickerDorm" value="{{dormitoryAreaIndex}}" range="{{dormitoryAreaList}}" range-key="name">
 				<view class="picker" value="{{dormitoryAreaList[dormitoryAreaIndex].name}}">
-					{{dormitoryAreaIndex?dormitoryAreaList[dormitoryAreaIndex].name:'请选择所在社区'}}
+					{{dormitoryArea?dormitoryAreaList[dormitoryAreaIndex].name:'请选择所在社区'}}
 				</view>
 			</picker>
 		</view>
