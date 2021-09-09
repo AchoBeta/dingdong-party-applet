@@ -13,6 +13,11 @@
         "pages/userBinding/index",
         "pages/testOnly/index"
     ],
+    "permission": {
+        "scope.userLocation": {
+          "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+    },
     "window": {
         "backgroundColor": "#F6F6F6",
         "backgroundTextStyle": "light",

@@ -16,7 +16,7 @@
 </view>
 
 
-<view class="cu-card dynamic" style="margin-top:{{topLLL*2}}rpx; display: flex; flex-direction: column; align-items: center;">
+<view class="cu-card dynamic" style="margin-top:88rpx; display: flex; flex-direction: column; align-items: center;">
   <!-- 我的活动 -->
   <view wx:if="{{TabIndex == 0}}" class="cu-item shadow card_container" wx:for="{{MyActivityList}}" wx:key="index" bindtap="navToDetail" data-id="{{item.id}}" 
       data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">

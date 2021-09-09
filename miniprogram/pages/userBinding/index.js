@@ -742,15 +742,53 @@ Page({
     console.log(this.data)
   },
   inputAddress: function (e) {
-    var _page = this;
+    var that = this;
     wx.chooseLocation({
       success: (res) => {
-        _page.setData({
+        that.setData({
           familyAddress: res.address
         })
       },
-      fail: function (err) {
-        console.log(err)
+      fail: function () {
+        wx.getSetting({
+          success: function (res) {
+            if(!res.authSetting['scope.userLocation']) {
+              wx.showModal({
+                title: '授权位置信息',
+                content: '需要获取您的地理位置，请确认授权，否则地址功能将无法使用',
+                success: function(res){
+                  if(res.confirm) {
+                    wx.openSetting({
+                      success: function(data) {
+                        if(data.authSetting['scope.userLocation'] == true){
+                          console.log('授权成功')
+                          wx.chooseLocation({
+                            success: (res) => {
+                              that.setData({
+                                familyAddress: res.address
+                              })
+                            }
+                          })
+                        } else {
+                          wx.showToast({
+                            title: '授权失败',
+                            duration: 1000
+                          })
+                        }
+                      }
+                    })
+                  }
+                }
+              })
+            }
+          },
+          fail: function(res) {
+            wx.showToast({
+              title: '授权位置信息失败',
+              duration: 1000
+            })
+          }
+        })
       }
     })
   },
