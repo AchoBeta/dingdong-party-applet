@@ -1,6 +1,6 @@
 <view class="backImg"></view>
 <view class="top2"></view>
-<view class="topText">确定培养联系人</view>
+<view class="topText">指定入党介绍人</view>
 <view bindtap="backNav">
 	<text class="cuIcon-back toBack"></text>
 </view>

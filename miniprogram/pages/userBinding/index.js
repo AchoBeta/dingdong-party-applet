@@ -6,8 +6,13 @@ const {
   getBranches,
   getGroups,
   getInfo,
+  getAllStage,
+  getMaxStage,
+  getGrade,
   getStudentInfo,
   getTeacherInfo,
+  updateStudent,
+  getUserStage
 } = require("../../utils/api.js")
 Page({
   data: {
@@ -140,18 +145,17 @@ Page({
     openId: "", //微信openid
     partyAge: 0, //
     phone: "", //手机号
-    stage: 0, //期数
-    stageId: 0, //所属阶段
+    stage: 6, //期数
+    stageIdIndex: 0,
+    batchIndex: 0,
+    stageList: [],
+    batchList: [],
+    stageId: 1, //所属阶段
     status: 0, //审核状态（1通过2不通过）
     statusReason: "", //不通过原因
     studentId: "", //学号
     teacherId: "", //工号
     taskId: 0, //阶段任务
-    multiArray: [
-      ['无脊柱动物', '脊柱动物'],
-      ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'],
-      ['猪肉绦虫', '吸血虫']
-    ],
     nationIndex: 0,
     nationArray: [{
         id: '0',
@@ -378,47 +382,6 @@ Page({
         name: '高山族'
       }
     ],
-    objectMultiArray: [
-      [{
-          id: 0,
-          name: '无脊柱动物'
-        },
-        {
-          id: 1,
-          name: '脊柱动物'
-        }
-      ],
-      [{
-          id: 0,
-          name: '扁性动物'
-        },
-        {
-          id: 1,
-          name: '线形动物'
-        },
-        {
-          id: 2,
-          name: '环节动物'
-        },
-        {
-          id: 3,
-          name: '软体动物'
-        },
-        {
-          id: 3,
-          name: '节肢动物'
-        }
-      ],
-      [{
-          id: 0,
-          name: '猪肉绦虫'
-        },
-        {
-          id: 1,
-          name: '吸血虫'
-        }
-      ]
-    ],
     multiIndex: [0, 0, 0],
     time: '12:01',
     region: ['广东省', '广州市', '海珠区'],
@@ -429,19 +392,25 @@ Page({
   },
   onLoad: function (options) {
     // this.MyActivity();
+    app.requestToken()
     var status = this.data.status
-    // app.getOpenId()
-    app.getToken()
-    this.inputOpenId()
+    // app.getToken()
+    // this.inputOpenId()
     this.Branches()
-    this.getNowDate()
-    this.inputInfo()
-
-    // this.inputInfo()
+    this.Stages()
+    this.Grade()
+    this.maxBatch()
+    this.userStage()//获取用户五个阶段和对应的时间
+    if (this.data.userInfo.studentId) {
+      this.inputInfo()
+    }
   },
   onShow: function () {
     var that = this
     app.getToken()
+    if (this.data.userInfo.studentId) {
+      this.inputInfo()
+    }
     wx.showLoading({
       title: '加载中',
     })
@@ -458,10 +427,13 @@ Page({
       var timeStamp = Date.parse(new Date())
       var date = new Date(timeStamp)
       var year = date.getFullYear()
-      console.log(mainInfo)
-      console.log(detailInfo)
-      this.byteToString(detailInfo.dormitoryNo)
+      // this.byteToString(detailInfo.dormitoryNo)
       this.Groups(userInfo.branchId)
+      if (mainInfo.status == 2) {
+        this.setData({
+          buttonText: '完成修改'
+        })
+      }
       if (mainInfo.studentId) {
         this.setData({
           index: "0",
@@ -476,8 +448,13 @@ Page({
           branchName: mainInfo.branchName,
           groupId: mainInfo.groupId,
           groupIndex: mainInfo.groupId - 1 + "",
+          groupName: mainInfo.groupName,
+          stage: mainInfo.stage,
+          batchIndex: mainInfo.stage - 1 + "",
+          stageId: mainInfo.stageId,
+          stageIdIndex: mainInfo.stageId - 1 + "",
           nation: detailInfo.nation,
-          nationIndex: "0",
+          nationIndex: this.data.nationArray.findIndex(item => item.name == detailInfo.nation),
           origin: detailInfo.origin,
           gradeIndex: year - detailInfo.grade + "",
           grade: detailInfo.grade,
@@ -487,34 +464,77 @@ Page({
           dormitoryArea: detailInfo.dormitoryArea,
           dormitoryNo: detailInfo.dormitoryNo,
           familyAddress: detailInfo.familyAddress,
-
+          dormitoryAreaIndex: this.data.dormitoryAreaList.findIndex(item => item.name == detailInfo.dormitoryArea)
         })
-        console.log(this.data)
+        // console.log(this.data.dormitoryAreaList.findIndex(item => item.name == detailInfo.dormitoryArea))
       } else if (mainInfo.teacherId) {
         this.setData({
-
+          index: "1",
+          name: mainInfo.name,
+          teacherId: mainInfo.teacherId,
+          status: mainInfo.status,
+          statusReason: mainInfo.statusReason,
+          email: detailInfo.email,
+          phone: detailInfo.phone,
+          partyAge: detailInfo.partyAge,
+          branchId: mainInfo.branchId,
+          branchIndex: mainInfo.branchId - 1 + "",
+          branchName: mainInfo.branchName,
+          groupId: mainInfo.groupId,
+          groupIndex: mainInfo.groupId - 1 + "",
+          groupName: mainInfo.groupName,
         })
       }
     }).catch(err => {
-      console.log(err)
+      // console.log(err)
     })
   },
   //年级
-  async getNowDate() {
-    var timeStamp = Date.parse(new Date())
-    var date = new Date(timeStamp)
-    var year = date.getFullYear()
-    var list = this.data.gradeList
-    console.log(year)
-    for (let i = 0; i < 4; i++) {
-      var item = year + ""
-      list.push({
-        item
+  async Grade() {
+    var list = []
+    getGrade().then(res => {
+      // console.log(res.data.data.num)
+      var maxGrade = res.data.data.num
+      for (let i = 0; i < 4; i++) {
+        var name = maxGrade + ""
+        list.push({
+          name
+        })
+        maxGrade--
+      }
+      this.setData({
+        gradeList: list
       })
-      year--
-    }
-    this.setData({
-      gradeList: list
+    }).catch(err => {
+    })
+  },
+  //查询所有期数
+  async maxBatch() {
+    var list = []
+    getMaxStage().then(res => {
+      // console.log(res.data.data)
+      var maxBatch = res.data.data.num
+      for (let i = 0; i < maxBatch; i++) {
+        var name = "第" + (i + 1) + "期"
+        // console.log(name)
+        list.push({
+          name
+        })
+      }
+      this.setData({
+        batchList: list
+      })
+    }).catch(err => {
+    })
+  },
+  //查询所有阶段
+  async Stages() {
+    var that = this
+    getAllStage().then(res => {
+      that.setData({
+        stageList: res.data.data.items
+      })
+    }).catch(err => {
     })
   },
   //查询所有党委
@@ -530,9 +550,7 @@ Page({
       that.setData({
         branchNameList: branchList
       })
-      console.log(this.data.branchNameList)
     }).catch(err => {
-      console.log(err)
     })
   },
   //查询所有党支部
@@ -547,10 +565,50 @@ Page({
       that.setData({
         groupNameList: groupList
       })
-      console.log(this.data.groupNameList)
     }).catch(err => {
       console.log(err)
     })
+  },
+  //查询用户所处阶段及时间
+  async userStage() {
+    var that = this
+    var params = {
+      page: 1,
+      size: 20,
+      userId : this.data.userInfo.userId
+    }
+    // console.log(params.userId)
+    getUserStage(params).then(res=>{
+      var userStage = res.data.data.list.items
+      for(let i=0 ; i<userStage.length ; i++){
+        if(userStage[i].stageId == 1){
+          that.setData({
+            userStage1Time : userStage[i].time.substring(0, 10)
+          })
+        }
+        else if(userStage[i].stageId == 2){
+          that.setData({
+            userStage2Time : userStage[i].time.substring(0, 10)
+          })
+        }
+        else if(userStage[i].stageId == 3){
+          that.setData({
+            userStage3Time : userStage[i].time.substring(0, 10)
+          })
+        }
+        else if(userStage[i].stageId == 4){
+          that.setData({
+            userStage4Time : userStage[i].time.substring(0, 10)
+          })
+        }
+        else if(userStage[i].stageId == 5){
+          that.setData({
+            userStage5Time : userStage[i].time.substring(0, 10)
+          })
+        }
+      }
+    })
+    
   },
 
   inputOpenId: function () {
@@ -558,7 +616,6 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success(res) {
-        console.log(res.data.openId)
         that.setData({
           openId: res.data.openId
         })
@@ -569,19 +626,16 @@ Page({
     this.setData({
       name: e.detail.value
     })
-    console.log(this.data);
   },
   inputStudentId: function (e) {
     this.setData({
       studentId: e.detail.value
     })
-    console.log(this.data)
   },
   inputTeacherId: function (e) {
     this.setData({
       teacherId: e.detail.value
     })
-    console.log(this.data)
   },
   inputMajor: function (e) {
     this.setData({
@@ -597,20 +651,17 @@ Page({
     this.setData({
       email: e.detail.value
     })
-    console.log(this.data)
   },
   inputPhone: function (e) {
     this.setData({
       phone: e.detail.value
     })
-    console.log(this.data)
   },
   inputDormNo: function (e) {
+    let dormitoryNo = parseInt(e.detail.value)
     this.setData({
-      dormitoryNo: e.detail.value
+      dormitoryNo
     })
-    console.log(this.data)
-    this.stringToByte(this.data.dormitoryNo)
   },
   stringToByte: function (str) {
     var bytes = new Array();
@@ -659,25 +710,25 @@ Page({
         str += String.fromCharCode(_arr[i]);
       }
     }
-    console.log(str);
   },
   inputPartyAge: function (e) {
     this.setData({
       partyAge: e.detail.value * 1
     })
-    console.log(this.data)
   },
   inputAddress: function (e) {
-    var _page = this;
-    wx.chooseLocation({
-      success: (res) => {
-        _page.setData({
-          familyAddress: res.address
-        })
-      },
-      fail: function (err) {
-        console.log(err)
-      }
+    // var _page = this;
+    // wx.chooseLocation({
+    //   success: (res) => {
+    //     _page.setData({
+    //       familyAddress: res.address
+    //     })
+    //   },
+    //   fail: function (err) {
+    //   }
+    // })
+    this.setData({
+      familyAddress: e.detail.value
     })
   },
   PickerInstitude: function (e) {
@@ -695,7 +746,6 @@ Page({
       branchName: _branchName
     })
     this.Groups(this.data.branchId)
-    console.log(this.data)
   },
   PickerGroup: function (e) {
     var _groupName = this.data.groupNameList[e.detail.value].name
@@ -704,7 +754,18 @@ Page({
       groupId: e.detail.value * 1 + 1,
       groupName: _groupName
     })
-    console.log(this.data)
+  },
+  PickerStageId: function (e) {
+    this.setData({
+      stageIdIndex: e.detail.value,
+      stageId: e.detail.value * 1 + 1
+    })
+  },
+  PickerStage: function (e) {
+    this.setData({
+      batchIndex: e.detail.value,
+      stage: e.detail.value * 1 + 1
+    })
   },
   PickerGrade: function (e) {
     var _grade = this.data.gradeList[e.detail.value].item
@@ -712,7 +773,6 @@ Page({
       gradeIndex: e.detail.value,
       grade: _grade * 1
     })
-    console.log(this.data)
   },
   PickerNation: function (e) {
     var _nation = this.data.nationArray[e.detail.value].name
@@ -720,7 +780,6 @@ Page({
       nationIndex: e.detail.value,
       nation: _nation
     })
-    console.log(this.data)
   },
   PickerDorm: function (e) {
     var _dormitoryArea = this.data.dormitoryAreaList[e.detail.value].name
@@ -728,17 +787,14 @@ Page({
       dormitoryAreaIndex: e.detail.value,
       dormitoryArea: _dormitoryArea
     })
-    console.log(this.data)
   },
   PickerSex: function (e) {
     this.setData({
       genderIndex: e.detail.value,
       gender: e.detail.value * 1
     });
-    console.log(this.data);
   },
   PickerChange(e) {
-    console.log(e);
     this.setData({
       index: e.detail.value
     })
@@ -747,67 +803,6 @@ Page({
     this.setData({
       multiIndex: e.detail.value
     })
-  },
-  MultiColumnChange(e) {
-    let data = {
-      multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex
-    };
-    data.multiIndex[e.detail.column] = e.detail.value;
-    switch (e.detail.column) {
-      case 0:
-        switch (data.multiIndex[0]) {
-          case 0:
-            data.multiArray[1] = ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'];
-            data.multiArray[2] = ['猪肉绦虫', '吸血虫'];
-            break;
-          case 1:
-            data.multiArray[1] = ['鱼', '两栖动物', '爬行动物'];
-            data.multiArray[2] = ['鲫鱼', '带鱼'];
-            break;
-        }
-        data.multiIndex[1] = 0;
-        data.multiIndex[2] = 0;
-        break;
-      case 1:
-        switch (data.multiIndex[0]) {
-          case 0:
-            switch (data.multiIndex[1]) {
-              case 0:
-                data.multiArray[2] = ['猪肉绦虫', '吸血虫'];
-                break;
-              case 1:
-                data.multiArray[2] = ['蛔虫'];
-                break;
-              case 2:
-                data.multiArray[2] = ['蚂蚁', '蚂蟥'];
-                break;
-              case 3:
-                data.multiArray[2] = ['河蚌', '蜗牛', '蛞蝓'];
-                break;
-              case 4:
-                data.multiArray[2] = ['昆虫', '甲壳动物', '蛛形动物', '多足动物'];
-                break;
-            }
-            break;
-          case 1:
-            switch (data.multiIndex[1]) {
-              case 0:
-                data.multiArray[2] = ['鲫鱼', '带鱼'];
-                break;
-              case 1:
-                data.multiArray[2] = ['青蛙', '娃娃鱼'];
-                break;
-              case 2:
-                data.multiArray[2] = ['蜥蜴', '龟', '壁虎'];
-                break;
-            }
-            break;
-        }
-        data.multiIndex[2] = 0;
-        break;
-    }
-    this.setData(data);
   },
   TimeChange(e) {
     this.setData({
@@ -818,7 +813,6 @@ Page({
     this.setData({
       birthday: e.detail.value
     })
-    console.log(this.data)
   },
   RegionChange: function (e) {
     this.setData({
@@ -828,7 +822,6 @@ Page({
       // city : e.detail.value[1],
       // county : e.detail.value[2]
     })
-    console.log(this.data)
   },
   ChooseImage() {
     wx.chooseImage({
@@ -848,28 +841,6 @@ Page({
       }
     });
   },
-  ViewImage(e) {
-    wx.previewImage({
-      urls: this.data.imgList,
-      current: e.currentTarget.dataset.url
-    });
-  },
-  DelImg(e) {
-    wx.showModal({
-      title: '召唤师',
-      content: '确定要删除这段回忆吗？',
-      cancelText: '再看看',
-      confirmText: '再见',
-      success: res => {
-        if (res.confirm) {
-          this.data.imgList.splice(e.currentTarget.dataset.index, 1);
-          this.setData({
-            imgList: this.data.imgList
-          })
-        }
-      }
-    })
-  },
   textareaAInput(e) {
     this.setData({
       textareaAValue: e.detail.value
@@ -881,6 +852,9 @@ Page({
     })
   },
   bindSubmitStudent(e) {
+    // if(typeof(this.data.dormitoryNo) == 'string'){
+    //   this.stringToByte(this.data.dormitoryNo)
+    // }
     var studentEntity = {
       name: this.data.name,
       gender: this.data.gender,
@@ -890,6 +864,8 @@ Page({
       groupId: this.data.groupId,
       groupName: this.data.groupName,
       institude: this.data.institute,
+      stageId: this.data.stageId,
+      stage: this.data.stage,
       // birthday : this.data.birthday,
       nation: this.data.nation,
       origin: this.data.origin,
@@ -897,50 +873,97 @@ Page({
       major: this.data.major,
       className: this.data.className,
       phone: this.data.phone,
-      email: this.data.email,
+      // email: this.data.email,
       familyAddress: this.data.familyAddress,
       dormitoryArea: this.data.dormitoryArea,
       dormitoryNo: this.data.dormitoryNo,
       status: this.data.status
     }
-
-    // console.log(typeof(studentEntity))
-    console.log(studentEntity)
-    console.log(e.detail.value)
+    var updateStudentEntity = {
+      studentId: this.data.studentId,
+      name: this.data.name,
+      grade: this.data.grade,
+      major: this.data.major,
+      className: this.data.className,
+      phone: this.data.phone,
+      dormitoryArea: this.data.dormitoryArea,
+      dormitoryNo: this.data.dormitoryNo,
+      familyAddress: this.data.familyAddress,
+    }
 
     //student
-
-    if (studentEntity['name'] && studentEntity['gender'] && studentEntity['studentId'] && studentEntity['branchId'] && studentEntity['branchName'] && studentEntity['origin'] && studentEntity['nation']) {
+    if (this.data.status != 2) {
+      if (studentEntity['name'] && studentEntity['gender'] && studentEntity['studentId'] && studentEntity['branchId'] && studentEntity['branchName'] && studentEntity['groupId'] && studentEntity['groupName'] && studentEntity['origin'] && studentEntity['nation']) {
+        wx.showModal({
+          title: '提示',
+          content: '请确认信息填写无误',
+          success(res) {
+            if (res.confirm) {
+              console.log("走新增")
+              bindStudent(studentEntity).then(res => {
+                wx.showToast({
+                  title: '绑定成功',
+                  icon: 'success',
+                  success: function () {
+                    setTimeout(function () {
+                      wx.navigateBack({
+                        delta: 1,
+                      })
+                    }, 1500)
+                  }
+                })
+              }).catch(err => {
+                // console.log(err)
+                wx.showToast({
+                  title: '绑定失败，请重新提交',
+                  icon: 'none'
+                })
+              })
+            } else if (res.cancel) {
+              // console.log('取消')
+            }
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '请完善必填信息',
+          icon: 'none'
+        })
+      }
+    } else {
       wx.showModal({
         title: '提示',
         content: '请确认信息填写无误',
         success(res) {
           if (res.confirm) {
-            console.log('确定')
-            bindStudent(studentEntity).then(res => {
-              console.log(res)
+            console.log("走更新")
+            updateStudent(updateStudentEntity.studentId, updateStudentEntity).then(res => {
+              // console.log(res)
               wx.showToast({
-                title: '绑定成功',
-                icon: 'success'
+                title: '修改成功',
+                icon: 'success',
+                success: function () {
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: 1,
+                    })
+                  }, 1500)
+                }
               })
             }).catch(err => {
-              console.log(err)
               wx.showToast({
-                title: '绑定失败，请重新提交',
+                title: '修改失败，请重新提交',
                 icon: 'none'
               })
             })
           } else if (res.cancel) {
-            console.log('取消')
+            // console.log('取消')
           }
         }
       })
-    } else {
-      wx.showToast({
-        title: '请填写信息',
-        icon: 'none'
-      })
+
     }
+
   },
   bindSubmitTeacher(e) {
     var teacherEntity = {
@@ -954,8 +977,9 @@ Page({
       branchName: this.data.branchName,
       groupId: this.data.groupId,
       groupName: this.data.groupName,
+      status: this.data.status,
     }
-    console.log(teacherEntity)
+    // console.log(teacherEntity)
     //teacher
 
     if (teacherEntity['name'] && teacherEntity['gender'] && teacherEntity['teacherId'] && teacherEntity['branchId'] && teacherEntity['branchName'] && teacherEntity['email'] && teacherEntity['phone'] && teacherEntity['partyAge']) {
@@ -966,13 +990,13 @@ Page({
           if (res.confirm) {
             console.log('确定')
             bindTeacher(teacherEntity).then(res => {
-              console.log(res)
+              // console.log(res)
               wx.showToast({
                 title: '绑定成功',
                 icon: 'success'
               })
             }).catch(err => {
-              console.log(err)
+              // console.log(err)
               wx.showToast({
                 title: '绑定失败，请重新提交',
                 icon: 'none'
@@ -985,7 +1009,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '请填写信息',
+        title: '请完善必填信息',
         icon: 'none'
       })
     }

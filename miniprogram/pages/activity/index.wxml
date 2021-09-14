@@ -1,13 +1,12 @@
 <view class="TOP">
-  <view style="width:100%;height:{{topLLL*2}}rpx;background-color:#ff5c5d" class="toptop"></view>
-  <view style="width:100%;height:{{topKKK * 0.12}}rpx;background-color:#ff5c5d" class="toptop">
-    <text>党 建 活 动</text>
+  <view style="width:100%;height:{{topLLL * 0.8}}px;background-color:#ff5c5d" class="toptop"></view>
+  <view style="width:100%;height:{{topKKK * 0.07}}px;background-color:#ff5c5d" class="toptop"><text style="letter-spacing: 3px;">党建活动</text>
   </view>
 </view>
-<view style="width:100%;height:{{topLLL*2}}rpx;background-color:#f2f2f2" class="toptop"></view><!-- 撑开高度 -->
-<view style="width:100%;height:{{topKKK * 0.12}}rpx;background-color:#f2f2f2" class="toptop"></view>
+<view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view>
+<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view>
 
-<view class="tabs" style="top:{{topLLL*2 + topKKK * 0.11}}rpx">
+<view class="tabs" style="top:{{topLLL*2 + topKKK * 0.13}}rpx">
   <view class="tabs_container">
     <view wx:for="{{Tab}}" wx:key="id" class="tabs_item {{item.isActive ? 'active' : ''}} " bindtap="handleItemChange"
       data-index="{{index}}">
@@ -17,7 +16,7 @@
 </view>
 
 
-<view class="cu-card dynamic" style="margin-top:{{topLLL*2 + topKKK * 0.1}}rpx">
+<view class="cu-card dynamic" style="margin-top:{{topLLL*2.1}}rpx; display: flex; flex-direction: column; align-items: center;">
   <!-- 我的活动 -->
   <view wx:if="{{TabIndex == 0}}" class="cu-item shadow card_container" wx:for="{{MyActivityList}}" wx:key="index" bindtap="navToDetail" data-id="{{item.id}}" 
       data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
@@ -92,11 +91,21 @@
         <view class="time-item">
           <image src="../../picture/endTime.png"></image>
           <view>报名截止：{{item.endTime}}</view>
-          <image style="margin-left:10rpx" src="../../picture/startTime.png"></image>
+          <image style="margin-left:1rpx" src="../../picture/startTime.png"></image>
           <view>活动开始：{{item.startTime}}</view>
         </view>
       </view>
     </view>
   </view>
+</view>
+
+<view wx:if="{{(MyActivityList.length == 0 && TabIndex == 0)}}" class="cu-card dynamic" style="margin-bottom: 50rpx; display: flex; flex-direction: column; align-items: center;">
+  <image src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/emptyActivity.png" mode="aspectFill"></image>
+  <text style="margin-top: -50rpx; color: darkgrey;">没有更多活动</text>
+</view>
+
+<view wx:if="{{(RelatedActivityList.length == 0 && TabIndex == 1)}}" class="cu-card dynamic" style="margin-bottom: 50rpx; display: flex; flex-direction: column; align-items: center;">
+  <image src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/emptyActivity.png" mode="aspectFill"></image>
+  <text style="margin-top: -50rpx; color: darkgrey;">没有更多活动</text>
 </view>
 

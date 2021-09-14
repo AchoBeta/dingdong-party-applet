@@ -23,8 +23,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo : wx.getStorageSync('userInfo'),
-    groupName : wx.getStorageSync('userInfo').groupName,
+    userInfo: wx.getStorageSync('userInfo'),
+    groupName: wx.getStorageSync('userInfo').groupName,
     rightLeftKey: app.globalData.nowKey,
     upDownKey: 0,
     finish: true,
@@ -37,64 +37,78 @@ Page({
     nowProcess: 0,
     waitMain: 0,
     mainPngSrc: "cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/20210405mainStepPic/",
-    gender: 0,
+    gender: wx.getStorageSync('wxInfo').gender,
     MODE: undefined
   },
+
+  setMode(){
+    this.setData({
+      MODE : true
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // app.getOpenId()
-    app.getToken()
+    app.requestToken()
     // console.log(app.globalData)
     const that = this
     var step = ''
     var key = ''
     var user = app.globalData.user
-    var userInfo = this.data.userInfo
-    var userId = userInfo.userId
+    var userInfo = that.data.userInfo
+    var groupName = userInfo.groupName
     wx.showLoading({
-      title: '数据加载中..',
+      title: '数据加载中',
     })
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 1000)
+
     console.log(userInfo)
-    if(userInfo.studentId != null || userInfo.teacherId != null){
-      this.setData({
-        MODE : true
+    if (wx.getStorageSync('userInfo').studentId) {
+      that.setData({
+        MODE: true
       })
+      var userId = userInfo.userId
       getInfo(userId).then(res => {
+        // console.log(res.data.data.item.details.gender)
+        this.setData({
+          // gender: res.data.data.item.details.gender * 1
+        })
         // console.log(res)
         key = res.data.data.item.main.stageId - 1
-        step = res.data.order 
+        step = res.data.order
         try {
           if (typeof key === 'undefined' || typeof step === 'undefined') {
             // key = 3
             // step = 11
-            step=1
+            step = 1
           }
           that.setData({
-            nowKey: key,
+            nowKey: key+2,
             nowStepKey: step
           })
           app.globalData.nowKey = key
           app.globalData.nowStep = step
         } catch {
           that.setData({
-            nowKey: 3,
+            nowKey: 2,
             nowStepKey: 11
           })
-          app.globalData.nowKey = 3
+          app.globalData.nowKey = 2
           app.globalData.nowStep = 11
         }
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 2000)
+
+
       }).catch(err => {
         console.log(err)
       })
-    }else{
+    } else {
       this.setData({
-        MODE : false
+        MODE: false
       })
       wx.showToast({
         title: '您未绑定信息',
@@ -206,11 +220,11 @@ Page({
       windowHeight: sysInfo.windowHeight
     })
 
-    
+
   },
-  
+
   toNowStep(e) {
-    let R = String.fromCharCode(this.data.nowKey + 65)
+    let R = String.fromCharCode(this.data.nowKey + 63)
     let S = String.fromCharCode(this.data.nowStepKey + 96)
     wx.navigateTo({
       url: '/package' + R + '/pages/' + S + '/index',
@@ -220,17 +234,23 @@ Page({
     /**
      * 测试状态刷新动态效果
      */
-    if (this.data.nowKey != app.globalData.nowKey) {
+    // app.requestToken()
+    // if (this.data.nowKey != app.globalData.nowKey) {
+    //   this.setData({
+    //     nowKey: app.globalData.nowKey,
+    //     nowStepKey: app.globalData.nowStep,
+    //   })
+    // }
+    if (wx.getStorageSync('userInfo').studentId) {
       this.setData({
-        nowKey: app.globalData.nowKey,
-        nowStepKey: app.globalData.nowStep,
+        MODE: true
       })
     }
     // console.log(app.globalData.nowKey)
   },
   downToStep(e) {
     console.log(e)
-    let R = String.fromCharCode(e.currentTarget.dataset.r + 65)
+    let R = String.fromCharCode(e.currentTarget.dataset.r + 63)
     let S = String.fromCharCode(e.currentTarget.dataset.s + 97)
     wx.navigateTo({
       url: '/package' + R + '/pages/' + S + '/index',

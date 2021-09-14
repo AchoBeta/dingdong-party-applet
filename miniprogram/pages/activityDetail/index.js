@@ -176,7 +176,7 @@ Page({
         title: '发布成功',
       })
       that.hideModal()
-      that.requestComment(that.data.activityId)
+      that.Comments(that.data.activityId)
     }).catch(err => {
       wx.showToast({
         title: '提交失败，请重新提交',
@@ -203,8 +203,9 @@ Page({
         title: '更新成功',
       })
       that.hideModal()
-      that.requestComment(that.data.activityId)
+      that.Comments(that.data.activityId)
     }).catch(err => {
+      console.log(err)
       wx.showToast({
         title: '请重新提交',
       })

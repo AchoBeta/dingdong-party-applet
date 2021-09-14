@@ -1,22 +1,46 @@
 <view class="TOP">
-	<view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
-	<view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop"><text>个人中心</text></view>
+	<view style="width:100%;height:{{topLLL * 0.8}}px;background-color:#ff5c5d" class="toptop"></view>
+	<view style="width:100%;height:{{topKKK * 0.07}}px;background-color:#ff5c5d" class="toptop"><text
+			style="letter-spacing: 3px;">个人中心</text></view>
 </view>
 <view class="top-bg">
-	<image style="height:{{topKKK * 0.375}}px;width:100%;top:{{topKKK * 0.025}}px" src="/picture/mineTop.png" mode='widthFix'> </image>
+	<image style="height:{{topKKK * 0.375}}px;width:100%;top:{{topKKK * 0.025}}px" src="/picture/mineTop.png"
+		mode='widthFix'> </image>
 	<!-- <image src="cloud://studentdata-ypct0.7374-studentdata-ypct0-1301212128/wave.gif" mode="scaleToFill" class="gif-wave" style="background-color:transparent"></image> -->
 </view>
 
 
 <view class="Icon">
-	<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
-		<image src="../../picture/myIcon.png" class="img"></image>
-		<text class="imgText">请登录~</text>
-	</button>
-	<view wx:else class="userImg">
-		<image bindtap="bindViewTap" class="userIcon" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+	<block wx:if="{{!hasUserInfo}}" class="InfoBtn">
+		<button wx:if="{{canIUseGetUserProfile}}" class="InfoBtn" hover-class="none" bindtap="getUserProfile"
+			style="height: 100rpx; width:400rpx">
+			<image src="{{wxInfo.avatarUrl?wxInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image>
+			<text class="imgText">{{wxInfo.nickName?wxInfo.nickName:'请登录~'}}</text>
+		</button>
+		<button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="InfoBtn"
+			style="height: 100rpx; width:400rpx">
+			<image src="{{wxInfo.avatarUrl?wxInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image>
+			<text class="imgText">{{wxInfo.nickName?wxInfo.nickName:'请登录~'}}</text>
+		</button>
+		<!-- <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+		<button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+		<!-- <image src="{{userInfo?userInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image> -->
+
+	</block>
+	<block wx:else class="userImg">
+		<button class="InfoBtn" style="height: 100rpx; width:400rpx" hover-class="none">
+			<image bindtap="bindViewTap" class="img" src="{{wxInfo.avatarUrl}}" mode="cover"></image>
+			<text class="imgText">{{wxInfo.nickName}}</text>
+		</button>
+	</block>
+	<!-- <button wx:if="{{canIUseGetUserProfile}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="InfoBtn" hover-class="none" style="height: 100rpx; width:400rpx">
+		<image src="{{userInfo?userInfo.avatarUrl:'../../picture/my.png'}}" class="img"></image>
+		<text class="imgText">{{userInfo?userInfo.nickName:'请登录~'}}</text>
+	</button> -->
+	<!-- <view wx:else class="userImg">
+		<image bindtap="bindViewTap" class="userIcon" src="../../picture/my.png" mode="cover"></image>
 		<text class="username">{{userInfo.nickName}}</text>
-	</view>
+	</view> -->
 	<!-- <image src="cloud://studentdata-ypct0.7374-studentdata-ypct0-1301212128/wave.gif" mode="scaleToFill" class="gif-wave" style="background-color:transparent"></image> -->
 </view>
 
@@ -24,8 +48,9 @@
 	<view class="topText">
 		<text class="infoText">所属党支部： {{groupName?groupName:'XX党支部 （实例）'}}</text>
 	</view>
+	
 	<view class="Info">
-		<view class="InfoCell" style="margin-right: 70rpx">
+		<view class="InfoCell" style="margin-right: -100rpx;">
 			<view style="display:flex;align-items:center">
 				<image src="../../picture/name.png" class="smallImg"></image>
 				<label>姓名</label>
@@ -40,10 +65,9 @@
 			</view>
 			<text class="infoText">{{casid}}</text>
 		</view>
-
 	</view>
 	<view class="Info">
-		<view class="InfoCell">
+		<view class="InfoCell" style="margin-right: -100rpx;">
 			<view style="display:flex;align-items:center">
 				<image src="../../picture/class.png" class="smallImg"></image>
 				<label>班级</label>
@@ -58,12 +82,18 @@
 			</view>
 			<text class="infoText">{{keyName}}</text>
 		</view>
+	</view>
 
+	<view class='Info'>
+		<view class="improveUserInfo">
+			<!-- <button class="cu-btn line-black">请完善个人党建身份信息</button> -->
+			<button plain size="mini" bindtap="bindInfo">完善个人党建身份信息</button>
+		</view>
 	</view>
 </view>
 
 
-<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl radius bg-white application" style="top: 590rpx">
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl radius bg-white application" style="top: 690rpx">
 	<view class="cu-item" style="background-color:#ffffff" bindtap="toActivity">
 		<button class="cu-btn content" hover-class="cyans">
 			<!-- <text class="cuIcon-file text-yellow"></text> -->
@@ -76,14 +106,15 @@
         <text class="cuIcon-file text-red"></text>
         <text class="text-grey">入党申请人考察手册</text>
       </view>
-    </view> -->
-	<view class="cu-item" bindtap="bindInfo" style="background-color:#ffffff">
+		</view> -->
+
+	<!-- <view class="cu-item" bindtap="bindInfo" style="background-color:#ffffff">
 		<button class="cu-btn content">
-			<!-- <text class="cuIcon-link text-cyan"></text> -->
+			<text class="cuIcon-link text-cyan"></text>
 			<image src="../../picture/bind.png"></image>
 			<text class="text-grey">基本信息管理</text>
 		</button>
-	</view>
+	</view> -->
 
 	<view class="cu-item" style="background-color:#ffffff" bindtap="toApplication">
 		<button class="cu-btn content" open-type="">

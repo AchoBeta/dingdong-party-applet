@@ -43,9 +43,10 @@ function request(url, data = {}, content_type = 'application/json', method = 'GE
           })
         }
       },
-      fail() {
+      fail(err) {
+        console.log("request失败"+err)
         wx.showToast({
-          title: '接口请求错误',
+          title: 'fail'+err,
           icon: 'none'
         })
         reject('接口请求错误')

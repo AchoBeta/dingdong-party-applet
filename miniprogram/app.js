@@ -6,7 +6,7 @@ const {
 } = require("utils/api.js")
 
 App({
-  onLaunch: function () {
+  onLaunch: async function () {
     const that = this
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -40,13 +40,12 @@ App({
       }
     })
 
-
     this.globalData = {
       userInfo: null,
       windowHeight: undefined,
       statusBar: undefined,
       nowStep: 11,
-      nowKey: 3,
+      nowKey: 2,
       fileList: [1],
       baseUrl: 'https://www.dingdongtongxue.com/Party/public/index.php',
       keyName: undefined,
@@ -56,7 +55,7 @@ App({
       branch_name: undefined,
       MODES: false,
       // APIUrlHead : 'http://121.5.0.60:81'
-      APIUrlHead: 'https://www.dingdongtongxue.com/api/dingdong-party'
+      APIUrlHead: 'https://api.dingdongtongxue.com/dingdong-party', //以此为准
     }
     try {
       const res = wx.getSystemInfoSync()
@@ -75,25 +74,33 @@ App({
       // Do something when catch error
     }
 
-    this.getToken() //判断token是否过期
+    if (wx.getStorageSync('userInfo').openId) {
+      this.getToken()
+    } else {
+      await this.getOpenId()
+      this.getToken()
+    }
   },
 
   //获取openid
   async getOpenId() {
-    var userInfo = {}
+    return new Promise((resolve, reject) => {
+      var userInfo = {}
 
-    await wx.cloud.callFunction({
-      name: 'getOpenID',
-      data: {}
-    }).then((res) => {
-      // console.log('[云函数] [getOpenID] user openid: ', res.result.openid);
-      userInfo.openId = res.result.openid
-    }).catch((err) => {
-      console.log(err)
+      wx.cloud.callFunction({
+        name: 'getOpenID',
+        data: {}
+      }).then((res) => {
+        // console.log('[云函数] [getOpenID] user openid: ', res.result.openid);
+        userInfo.openId = res.result.openid
+        wx.setStorageSync("userInfo", userInfo); //存入缓存
+        resolve('success')
+      }).catch((err) => {
+        console.log(err)
+        reject('fail')
+      })
     })
 
-    // console.log(userInfo)
-    wx.setStorageSync("userInfo", userInfo); //存入缓存
   },
 
   //判断token是否过期
@@ -103,8 +110,11 @@ App({
       var userInfo = wx.getStorageSync('userInfo')
       // console.log(userInfo)
       let token_deadtime = wx.getStorageSync('token_deadtime')
+      // console.log(userInfo)
       //判断有没有进行微信的用户登录，是否有openid
-      if (userInfo.openId.length != 0) {
+      //if (userInfo.openId.length != 0)
+      if (userInfo.openId) {
+        // console.log('userInfo有openid')
         if ((new Date().getTime() - token_deadtime) > 1800000) { //判断token是否过期，30min
           //已过期，重新请求
           requestToken(userInfo.openId).then(res => {
@@ -131,19 +141,18 @@ App({
             wx.setStorageSync('token_deadtime', (new Date().getTime()))
 
             resolve('成功')
-          }).catch(err=>{
+          }).catch(err => {
             reject('失败')
             //接口请求失败
           })
         } else {
           //token未过期
-          // console.log("token未过期")
+          console.log("token未过期")
         }
       } else {
         //无openid
-        //引导用户重新执行getOpenId
-
-        this.getOpenId()
+        console.log('无openid')
+        that.getOpenId()
       }
       resolve('成功')
     })
@@ -153,7 +162,7 @@ App({
   requestToken() {
     const userInfo = wx.getStorageSync('userInfo')
     var that = this
-    
+
     wx.request({
       url: that.globalData.APIUrlHead + '/base/users/login',
       method: 'POST',
@@ -164,8 +173,8 @@ App({
         openId: userInfo.openId
       },
       success(res) {
-        console.log(res)
-        if (res.data.message == "成功") {         
+        // console.log(res)
+        if (res.data.message == "成功") {
           var userInfo = wx.getStorageSync('userInfo')
           userInfo.userId = res.data.data.item.userId
           userInfo.name = res.data.data.item.name
@@ -195,7 +204,7 @@ App({
         }
 
       }
-      
+
     })
   },
 
@@ -229,7 +238,7 @@ App({
                       code: res.code
                     }, //data
                   ).then((e) => {
-                    console.log(e)
+                    // console.log(e)
                     api.getStorage
                     var token = e.data.Authorization
                     api.setStorage('Authorization', token)

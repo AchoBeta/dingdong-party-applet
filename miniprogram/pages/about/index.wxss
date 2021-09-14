@@ -118,7 +118,7 @@ button::after {
   height: 50px;
   border-radius: 50%;
   position: absolute;
-  top: 1%;
+  top: 15%;
   bottom: 0;
   left: 3%;
 }
@@ -147,8 +147,10 @@ button::after {
   font-size: 20px;
   color: white;
   position: absolute;
-  margin-top: 5px;
-  left: 45%;
+  /* margin-top: 5px; */
+  /* left: 45%; */
+  left: 40%;
+  top: 20%;
 }
 
 
@@ -201,13 +203,12 @@ button::after {
 .user{
   background-color: white;
   position: absolute;
-  height: 250rpx;
+  height: 350rpx;
   width: 94%;
   top: 340rpx;
   left: 3%;
   border:2rpx solid #cccccc;
   border-radius: 16rpx;
-
 }
 
 .topText{
@@ -215,7 +216,7 @@ button::after {
   text-align: center;
   position: relative;
   color: #f25657;
-  margin-bottom: 30rpx;
+  margin-bottom: 40rpx;
 }
 
 .Info{
@@ -227,10 +228,21 @@ button::after {
 }
 
 .InfoCell{
-  width:auto;
+  width:48%;
   display: flex;
   flex-direction: row;
   align-items:center
+}
+
+.improveUserInfo{
+  margin-top: 20rpx;
+}
+.improveUserInfo button{
+  width:400rpx !important;
+  font-weight: 600;
+  font-size: small !important;
+  border-color: #cccccc;
+  border-radius: 16rpx !important;
 }
 
 label{

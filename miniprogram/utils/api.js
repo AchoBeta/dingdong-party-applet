@@ -29,6 +29,8 @@ module.exports = {
 
   //添加学生信息
   bindStudent : (studentEntity) => request('/base/users/student-info', studentEntity, 'application/json;charset=UTF-8', 'POST'),
+  //更新学生信息
+  updateStudent : (studentId, updateStudentEntity) => request('/base/students/' + studentId, updateStudentEntity, 'application/json;charset=UTF-8', "PUT"),
   //添加教师信息
   bindTeacher : (teacherEntity) => request('/base/users/teacher-info', teacherEntity,'application/json;charset=UTF-8', 'POST'),
   //党支部查询
@@ -39,11 +41,19 @@ module.exports = {
   getStudentInfo : (studentNo) => request('/base/students/' + studentNo),
   getTeacherInfo : (teacherNo) => request('/base/instructors/' + teacherNo),
   getInfo : (userId) => request('/base/users/' + userId + '/info'),
+  //获取用户五个阶段及时间
+  getUserStage:(params)=> request('base/user-stages',params),
 
   //查询用户党委下所有党支部  //branch是党委, group是党支部
   queryGroup : (branchId,params)=> request('/base/branch/'+branchId+'/groups',params),
   
   //获取token
   requestToken : (openId) => request('/base/users/login',{openId:openId},'application/x-www-form-urlencoded' , "POST"),
-
+  //获取入党阶段
+  getStage : (id) => request('/base/stages/' + id),
+  getAllStage : () => request('/base/stages/'),
+  //获取最高年级
+  getGrade : () => request('/base/others/max-grade'),
+  //获取最高期数
+  getMaxStage : () => request('/base/others/max-periods'),
 }

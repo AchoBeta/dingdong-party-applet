@@ -1,5 +1,5 @@
 <!-- <view class="topText">{{process[rightLeftKey].name}}</view> -->
-<view wx:if="{{MODE == false}}">
+<!-- <view wx:if="{{MODE == false}}">
   <view class="top" style="position:fixed;top:0;z-index:6;width:100%;height:12.3%;background:#ff5c5d;">
     <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px">
       <text>身份认证</text>
@@ -9,16 +9,21 @@
   <view class="card"
     style="position:fixed;	border-radius:20rpx;top:13%;left:3%;z-index:1;background:#fffbed;width:94%;	height:58%;	display:flex;	justify-items:center;	align-items:center;	flex-direction:column;color:#999;">
     <image class="cardPng" src="../../picture/wenhao.png" mode="aspectFit" style="height: 65%;width: 65%;"></image>
-    <text>您当前尚未绑定身份信息</text>
+    <text>入党前请先完善个人信息</text>
     <view class="cardBot"
       style="position: absolute;bottom: 0%;	height: 16%;width: 100%;background-color: #e26d6e;	border-radius: 20rpx 20rpx 20rpx 20rpx;	border: 3rpx solid #ecebeb;	display: flex;align-items: center;	justify-content: center;font-size:130%;font-weight:600;color:#fff;word-spacing:-5rpx;font-weight:bold;"
       bindtap="toBinding">
       <text>点击此处完成身份认证</text>
     </view>
+    <view class="cardBot"
+      style="position: absolute;bottom: 0%;	height: 10%;width: 60%;background-color: #e26d6e;	top:800rpx;border-radius: 20rpx 20rpx 20rpx 20rpx;	border: 3rpx solid #ecebeb;	display: flex;align-items: center;	justify-content: center;font-size:80%;font-weight:300;color:#fff;word-spacing:-5rpx;font-weight:bold;"
+      bindtap="setMode">
+      <text>暂不绑定，点击查看入党百科全书</text>
+    </view>
   </view>
-</view>
+</view> -->
 
-<view wx:else>
+<view>
   <swiper style="height:{{windowHeight}}px;" bindchange="changeRightLeft" current="{{nowKey}}">
     <block wx:for="{{process}}" wx:key="name" wx:for-index="rightLeftIDX">
       <swiper-item current="{{nowKey}}">
@@ -33,30 +38,31 @@
               <!-- <view class="nextText">东莞理工学院网络空间安全学院学生党支部</view> -->
             </view>
             <view class="card">
-              <image class="cardPng" src="{{mainPngSrc + (rightLeftIDX + 1) + gender + '.png'}}" mode="aspectFit">
+              <image class="cardPng" src="{{mainPngSrc + (rightLeftIDX + 1) + '1.png'}}" mode="aspectFit">
               </image>
-              <view class="cardBot" style="font-weight:bold;">
+              <view class="cardBot" style="font-weight:bold;" wx:if="{{rightLeftIDX >= 2}}">
                 <text style="letter-spacing:5rpx">所属党支部：{{groupName?groupName:'xx党支部（示例）'}}</text>
               </view>
             </view>
             <view class="shake">
               左右滑动查看更多
             </view>
-            <view class="allPro">总进度</view>
-            <progress wx:if="{{rightLeftKey>=nowKey}}" class="progressTip"
-              percent="{{rightLeftKey==nowKey?nowStepKey / step[rightLeftKey].step.numStep * 100:0}}"
-              border-radius="2.4%" stroke-width="20rpx" activeColor="#ffe7e7"></progress>
-            <progress wx:if="{{rightLeftKey<nowKey}}" class="progressTip" percent="100" border-radius="2.4%"
-              stroke-width="20rpx" activeColor="#ffe7e7"></progress>
-            <view bindtap="{{rightLeftKey==nowKey?'toNowStep':''}}">
-              <image
-                src="{{rightLeftIDX == nowKey?step[nowKey].step.url+nowStepKey+'.png':step[rightLeftIDX].step.url+'1.png'}}"
-                mode="scaleToFill" class="nowCardTipPng" >
-              </image>
+            <view wx:if="{{rightLeftIDX >= 2 }}">
+              <view class="allPro">总进度</view>
+              <progress wx:if="{{rightLeftKey>=nowKey}}" class="progressTip"
+                percent="{{rightLeftKey==nowKey?nowStepKey / step[rightLeftKey].step.numStep * 100:0}}"
+                border-radius="2.4%" stroke-width="20rpx" activeColor="#ffe7e7"></progress>
+              <progress wx:if="{{rightLeftKey<nowKey}}" class="progressTip" percent="100" border-radius="2.4%"
+                stroke-width="20rpx" activeColor="#ffe7e7"></progress>
+              <view><!-- bindtap="{{rightLeftKey==nowKey?'toNowStep':''}}" -->
+                <image
+                  src="{{rightLeftIDX == nowKey?step[nowKey].step.url+nowStepKey+'.png':step[rightLeftIDX].step.url+'1.png'}}"
+                  mode="scaleToFill" class="nowCardTipPng">
+                </image>
+              </view>
+              <view class="toDown" >下滑查看更多</view>
             </view>
-            <view class="toDown">下滑查看更多</view>
           </swiper-item>
-
 
           <swiper-item class="head2">
             <scroll-view class="downScroll" scroll-y>

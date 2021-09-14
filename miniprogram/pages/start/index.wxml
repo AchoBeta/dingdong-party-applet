@@ -1,7 +1,7 @@
 <!--miniprogram/pages/start/index.wxml-->
 <!-- <text>miniprogram/pages/start/index.wxml</text> -->
 <view class="page">
-    <view class="top" style="position:fixed;top:0;z-index:6;width:100%;height:12.3%;background:#ff5c5d;">
+    <view class="top" style="position:fixed;top:0;z-index:6;width:100%;height:10%;background:#ff5c5d;">
         <view class="topText" style="top:{{topText}}px;height:{{topTextSize}}px">
             <text>叮咚党建</text>
         </view>
@@ -13,11 +13,11 @@
             <image src="../../picture/backIMG.png" mode="aspectFill"></image>
         </view>
     </view>
-    <view>
-        <image src="../../picture/start.jpg" mode="aspectFit" style="width:600rpx"></image>
+    <view style="position: absolute; top: 50%;">
+        <image src="../../picture/start.jpg" mode="aspectFit" ></image>
     </view>
     <view class="time" bindtap="toHome">跳过 {{countDownNum}}</view>
-    <view class="cardBot" bindtap="toStage">查看流程</view>
+    <view class="cardBot" bindtap="toStage">查看入党流程</view>
 </view>
 
 

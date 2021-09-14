@@ -1,6 +1,6 @@
 <view class="backImg"></view>
 <view class="top2"></view>
-<view class="topText">党支部派人进行谈话</view>
+<view class="topText">团组织推优</view>
 <view bindtap="backNav">
 	<text class="cuIcon-back toBack"></text>
 </view>

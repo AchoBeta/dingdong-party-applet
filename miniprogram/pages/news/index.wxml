@@ -4,8 +4,9 @@
 </cu-custom> -->
 <!-- <view class="topTitleText">党建</view> -->
 <view class="TOP">
-  <view style="width:100%;height:{{topLLL}}px;background-color:#ff5c5d" class="toptop"></view>
-  <view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#ff5c5d" class="toptop"><text>党 建 动 态</text></view>
+  <view style="width:100%;height:{{topLLL * 0.8}}px;background-color:#ff5c5d" class="toptop"></view>
+  <view style="width:100%;height:{{topKKK * 0.07}}px;background-color:#ff5c5d" class="toptop"><text style="letter-spacing: 3px;">党建动态</text>
+  </view>
 </view>
 <view style="width:100%;height:{{topLLL}}px;background-color:#f2f2f2" class="toptop"></view>
 <view style="width:100%;height:{{topKKK * 0.06}}px;background-color:#f2f2f2" class="toptop"></view>

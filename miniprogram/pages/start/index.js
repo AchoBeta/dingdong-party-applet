@@ -1,4 +1,5 @@
 // miniprogram/pages/start/index.js
+const app = getApp()
 Page({
 
     /**
@@ -47,6 +48,7 @@ Page({
      */
     onLoad: function (options) {
         this.countDown()
+        // app.getToken()
     },
 
     /**

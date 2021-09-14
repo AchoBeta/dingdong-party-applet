@@ -96,14 +96,20 @@
           "scene": null
         },
         {
-          "name": "党建管理",
-          "pathName": "pages/index/index",
+          "name": "pages/userBinding/index",
+          "pathName": "pages/userBinding/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "测试",
+          "name": "pages/testOnly/index",
           "pathName": "pages/testOnly/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "党建管理",
+          "pathName": "pages/index/index",
           "scene": null
         }
       ]
