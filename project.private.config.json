@@ -1,37 +1,16 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "id": -1,
-          "name": "pages/nowStep/index",
-          "pathName": "pages/nowStep/index",
-          "query": "",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "id": -1,
-          "name": "pages/nextStep/index",
-          "pathName": "pages/nextStep/index",
-          "query": "",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
+<<<<<<< HEAD
         {
           "id": -1,
           "name": "pages/news/index",
@@ -111,8 +90,106 @@
           "name": "党建管理",
           "pathName": "pages/index/index",
           "scene": null
+=======
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "db guide",
+                    "pathName": "pages/databaseGuide/databaseGuide",
+                    "query": ""
+                },
+                {
+                    "id": -1,
+                    "name": "pages/nowStep/index",
+                    "pathName": "pages/nowStep/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/nextStep/index",
+                    "pathName": "pages/nextStep/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/news/index",
+                    "pathName": "pages/news/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/about/index",
+                    "pathName": "pages/about/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 5,
+                    "name": "packageA/pages/h/index",
+                    "pathName": "packageA/pages/h/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 6,
+                    "name": "packageB/pages/b/index",
+                    "pathName": "packageB/pages/b/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 7,
+                    "name": "packageC/pages/q/index",
+                    "pathName": "packageC/pages/q/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 8,
+                    "name": "packageE/pages/a/index",
+                    "pathName": "packageE/pages/a/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/index",
+                    "pathName": "pages/login/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/application/index",
+                    "pathName": "pages/application/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "packageF/pages/a/index",
+                    "pathName": "packageF/pages/a/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/userBinding/index",
+                    "pathName": "pages/userBinding/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/testOnly/index",
+                    "pathName": "pages/testOnly/index",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+>>>>>>> 59c8a7b36180bed613394ca213bb382052ef5fea
         }
-      ]
     }
-  }
 }
