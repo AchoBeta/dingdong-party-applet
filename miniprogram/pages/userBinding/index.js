@@ -407,8 +407,8 @@ Page({
   },
   onShow: function () {
     var that = this
-    app.getToken()
-    if (this.data.userInfo.studentId) {
+    app.requestToken()
+    if (this.data.userInfo.studentId || this.data.userInfo.teacherId) {
       this.inputInfo()
     }
     wx.showLoading({
@@ -607,6 +607,12 @@ Page({
           })
         }
       }
+    }).catch(err => {
+      console.log(err)
+      wx.showToast({
+        title: '暂无用户阶段信息',
+        icon: 'none'
+      })
     })
     
   },
@@ -768,7 +774,7 @@ Page({
     })
   },
   PickerGrade: function (e) {
-    var _grade = this.data.gradeList[e.detail.value].item
+    var _grade = this.data.gradeList[e.detail.value].name
     this.setData({
       gradeIndex: e.detail.value,
       grade: _grade * 1

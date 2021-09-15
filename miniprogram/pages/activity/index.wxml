@@ -16,7 +16,7 @@
 </view>
 
 
-<view class="cu-card dynamic" style="margin-top:{{topLLL*2.1}}rpx; display: flex; flex-direction: column; align-items: center;">
+<view class="cu-card dynamic" style="margin-top:{{topKKK * 0.13}}rpx; display: flex; flex-direction: column; align-items: center;">
   <!-- 我的活动 -->
   <view wx:if="{{TabIndex == 0}}" class="cu-item shadow card_container" wx:for="{{MyActivityList}}" wx:key="index" bindtap="navToDetail" data-id="{{item.id}}" 
       data-partStatus="{{item.partStatus}}" data-TabIndex="{{TabIndex}}">
@@ -99,7 +99,7 @@
   </view>
 </view>
 
-<view wx:if="{{(MyActivityList.length == 0 && TabIndex == 0)}}" class="cu-card dynamic" style="margin-bottom: 50rpx; display: flex; flex-direction: column; align-items: center;">
+<view wx:if="{{(MyActivityList.length == 0 && TabIndex == 0)}}" class="cu-card dynamic" style="margin-top: 20rpx; margin-bottom: 50rpx; display: flex; flex-direction: column; align-items: center;">
   <image src="cloud://partybuilding-ap3rs.7061-partybuilding-ap3rs-1301916504/emptyActivity.png" mode="aspectFill"></image>
   <text style="margin-top: -50rpx; color: darkgrey;">没有更多活动</text>
 </view>

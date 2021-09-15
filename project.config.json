@@ -28,14 +28,12 @@
             "outputPath": ""
         },
         "enableEngineNative": false,
-        "bundle": false,
         "useIsolateContext": true,
-        "useCompilerModule": false,
-        "userConfirmedUseCompilerModuleSwitch": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": true
+        "minifyWXSS": true,
+        "showES6CompileOption": false
     },
     "appid": "wxb5922ce236fc32c4",
     "projectname": "%E5%85%9A%E5%BB%BA%E5%B0%8F%E5%8A%A9%E6%89%8B",

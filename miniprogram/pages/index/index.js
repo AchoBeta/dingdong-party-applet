@@ -65,7 +65,7 @@ Page({
     })
 
     console.log(userInfo)
-    if (wx.getStorageSync('userInfo').studentId) {
+    if (wx.getStorageSync('userInfo').studentId || wx.getStorageSync('userInfo').teacherId) {
       that.setData({
         MODE: true
       })

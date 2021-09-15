@@ -67,6 +67,12 @@ Page({
         }).catch(err => {
           console.log(err)
         })
+      }else if(mainInfo.teacherId){
+        this.setData({
+          name : mainInfo.name,
+          casid : mainInfo.teacherId,
+          groupName : mainInfo.groupName,
+        })
       }
     }).catch(err => {
       console.log(err)
@@ -84,9 +90,10 @@ Page({
         this.setData({
           hasUserInfo: true,
         })
+        this.StudentInfo()
       }
     }
-    this.StudentInfo()
+    
     // this.setData({
     //   keyName: app.globalData.keyName,
     //   name: app.globalData.name,
@@ -107,6 +114,7 @@ Page({
           wxInfo: res.userInfo,
           hasUserInfo: true
         })
+        this.StudentInfo()
         wx.setStorageSync('wxInfo', res.userInfo)
       }
     })
