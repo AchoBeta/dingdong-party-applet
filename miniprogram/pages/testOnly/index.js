@@ -110,11 +110,11 @@ Page({
         // console.log(res.data.data)
         var maxBatch = res.data.data.num
         for(let i = 0; i < maxBatch; i++){
-          var name = "第" + (i + 1) + "期"
-          // console.log(name)
-          list.push({
-            name
-          })
+          // var name = "第" + (i + 1) + "期"
+          // // console.log(name)
+          // list.push({
+          //   name
+          // })
         }
         console.log(list)
       }).catch(err => {

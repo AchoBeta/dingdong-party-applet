@@ -54,7 +54,7 @@
           <image src="../../picture/endTime.png"></image>
           <view>报名截止：{{item.endTime}}</view>
 
-          <image style="margin-left:10rpx" src="../../picture/startTime.png"></image>
+          <image src="../../picture/startTime.png"></image>
           <view>活动开始：{{item.startTime}}</view>
         </view>
       </view>
@@ -91,7 +91,7 @@
         <view class="time-item">
           <image src="../../picture/endTime.png"></image>
           <view>报名截止：{{item.endTime}}</view>
-          <image style="margin-left:1rpx" src="../../picture/startTime.png"></image>
+          <image src="../../picture/startTime.png"></image>
           <view>活动开始：{{item.startTime}}</view>
         </view>
       </view>

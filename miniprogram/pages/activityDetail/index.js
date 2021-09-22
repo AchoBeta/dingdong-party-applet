@@ -5,7 +5,8 @@ const {
   applyParticipation,
   getActivityPeopleNum,
   updateExperience,
-  getComments
+  getComments,
+  FirstPublishExperience,
 } = require("../../utils/api.js")
 Page({
 
@@ -106,7 +107,7 @@ Page({
         console.log(err)
         wx.showToast({
           title: '提交失败',
-          icon : "error"
+          icon: "error"
         })
       })
     }
@@ -120,12 +121,12 @@ Page({
       page: 1,
       size: 20
     }
-    getComments(activityId, params).then(res=>{
+    getComments(activityId, params).then(res => {
       that.setData({
         commentList: res.data.data.list.items
       })
       that.checkUpdateExperience()
-    }).catch(err=>{
+    }).catch(err => {
       wx.showToast({
         title: '请重新加入页面',
         icon: "loading"
@@ -160,7 +161,7 @@ Page({
   },
 
   //首次提交心得评论
-  async PublishExperience() {
+  async publishExperience() {
     var that = this
 
     var comment = {
@@ -219,13 +220,13 @@ Page({
     // console.log(options.partStatus)
     this.ActivityDetail(options.activityId)
     this.NumOfPeople(options.activityId)
-    this.Comments(options.activityId)//改为已完成再发请求
+    this.Comments(options.activityId) //改为已完成再发请求
 
     this.setData({
       partStatus: options.partStatus,
       activityId: options.activityId,
       TabIndex: options.TabIndex,
-      apply : options.apply
+      apply: options.apply
     })
 
     // console.log(options.apply)
